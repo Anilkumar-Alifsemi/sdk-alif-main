@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Broadcast Source &mdash; Alif SDK Documentation - v1.1</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=56dcb7b8"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ROM Code ABI" href="rom_abi.html" />
+    <link rel="prev" title="Broadcast Sink" href="sample_audiosink.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Connectivity</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth - Ceva-Waves™ BLE</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="audio.html">BLE Audio</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="audio_presentation_layer.html">Presentation Layer</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="audio_samples.html">Samples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rom_abi.html">ROM Code ABI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_basic_profile.html">Basic Profile Samples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/index.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SDK documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Connectivity</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth - Ceva-Waves™ BLE</a></li>
+          <li class="breadcrumb-item"><a href="audio.html">BLE Audio</a></li>
+          <li class="breadcrumb-item"><a href="audio_samples.html">Samples</a></li>
+      <li class="breadcrumb-item active">Broadcast Source</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/connectivity/bluetooth/sample_audiosource.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="broadcast-source">
+<span id="zas-connection-ble-audiosource"></span><h1>Broadcast Source<a class="headerlink" href="#broadcast-source" title="Link to this heading"></a></h1>
+<p>Bluetooth Low Energy (BLE) broadcast enables high-quality audio streaming to multiple devices.
+The two key roles in broadcast mode are Source and Sink. This sample demonstrates a source device.</p>
+<p>All the audio samples share the same basic structure with all the other <a class="reference internal" href="sample_basic_profile.html#zas-connection-ble-sample"><span class="std std-ref">BLE profile samples</span></a>.
+The forementioned samples follow standard connection procedures defined in the Generic Access Profile(GAP).
+Basic Audio Profile(BAP) API is used to configure and broadcast audio.</p>
+<figure class="align-default">
+<img alt="../../_images/alif_ble_source_flowchart.drawio.png" src="../../_images/alif_ble_source_flowchart.drawio.png" />
+</figure>
+<section id="kconfig">
+<h2>Kconfig<a class="headerlink" href="#kconfig" title="Link to this heading"></a></h2>
+<p>The sink sample chooces <strong>Ceva-Waves™ BLE</strong> and <strong>Ceva-Waves™ LC3</strong> by setting a configuration flag on their <em>prj.conf</em> file.
+Additionally there is need to set:</p>
+<ul class="simple">
+<li><p>Presentation compensation configuration</p></li>
+<li><p>I²S configuration</p></li>
+<li><p>BAP configuration</p></li>
+</ul>
+<div class="highlight-kconfig notranslate"><div class="highlight"><pre><span></span>CONFIG_BT=y
+CONFIG_BT_CUSTOM=y
+CONFIG_ALIF_ROM_LC3_CODEC=y
+CONFIG_ALIF_BLE_AUDIO=y
+
+CONFIG_PRESENTATION_COMPENSATION_DIRECTION_SOURCE=y
+
+<span class="c1"># Should be replaced by TRNG when support is available</span>
+CONFIG_TEST_RANDOM_GENERATOR=y
+
+<span class="c1"># malloc support is required, simplest way is using newlib although it would also</span>
+<span class="c1"># be possible to configure heap for picolibc</span>
+CONFIG_NEWLIB_LIBC=y
+
+<span class="c1"># Driver support for audio</span>
+CONFIG_I2S=y
+CONFIG_I2S_SYNC_BUFFER_FORMAT_SEQUENTIAL=n
+
+CONFIG_BROADCAST_NAME=&quot;ALIF_LE_AUDIO&quot;
+</pre></div>
+</div>
+</section>
+<section id="pre-main">
+<h2>Pre-Main<a class="headerlink" href="#pre-main" title="Link to this heading"></a></h2>
+<p>Before entering main the sample will initialize datapath, which means:</p>
+<ul class="simple">
+<li><p>Initializing the I²S device</p></li>
+<li><p>Initializing the LC3 codec</p></li>
+</ul>
+</section>
+<section id="main">
+<h2>Main<a class="headerlink" href="#main" title="Link to this heading"></a></h2>
+<p>Where the things start to deviate from the basic profile setup is when we define the role of the device during GAPM configuration phase.
+The role is set to be an <em>broadcaster</em> to be able to advertise and broadcast audio for other devices without a connection process.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">gapm_config_t</span><span class="w"> </span><span class="n">gapm_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_ROLE_LE_BROADCASTER</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong> All the other members of the configuration structure are assumed to be be the same as with the basic profile config.</p>
+<p>You don’t need to set GAPM callbacks when acting as a <em>broadcaster</em>, except the error callbacks.</p>
+</section>
+<section id="audio-source-start">
+<h2>Audio Source Start<a class="headerlink" href="#audio-source-start" title="Link to this heading"></a></h2>
+<p>Once GAPM configuration is complete broadcast source is configured and started.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">bap_bc_src_cb_t</span><span class="w"> </span><span class="n">bap_bc_src_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_cmp_evt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_src_cmp_evt</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_src_info</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">broadcast_source_start</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">bap_bc_src_configure</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bap_bc_src_cbs</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">broadcast_source_configure_group</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">broadcast_source_enable</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Configure use of BAP Broadcast Source module</p></li>
+<li><p>Configure Advertising</p></li>
+<li><p>Fill the BIG, group and subgroup info, known as the Broadcast Audio Source Endpoint(BASE) structure</p></li>
+<li><p>Configure and enable streams</p></li>
+<li><p>Enable Periodic advertising</p></li>
+</ol>
+<section id="configure">
+<h3>Configure<a class="headerlink" href="#configure" title="Link to this heading"></a></h3>
+<p>Configuring Broadcast Source module:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">bap_bc_src_configure</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bap_bc_src_cbs</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>BAP Broadcast Source Callbacks</strong>: All the different events originating from the Broadcast Source module:</p>
+<ul>
+<li><p><strong>Command Complete</strong>: Called each time a Broadcast Source command has been completed. This is triggered when PA is enabled, broadcast group is enabled or streaming is started.</p></li>
+<li><p><strong>Broadcast Source Info</strong>: Called when a group has been created</p></li>
+</ul>
+</li>
+</ul>
+<p>Configure Advertising, fill the BASE structure and enable left and right streams:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">broadcast_source_configure_group</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">bap_bc_grp_param_t</span><span class="w"> </span><span class="n">grp_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{.</span><span class="n">sdu_intv_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">.</span><span class="n">max_sdu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONFIG_ALIF_BLE_AUDIO_OCTETS_PER_CODEC_FRAME</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">.</span><span class="n">max_tlatency_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONFIG_ALIF_BLE_AUDIO_MAX_TLATENCY</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">.</span><span class="n">packing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">.</span><span class="n">framing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO_UNFRAMED_MODE</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">.</span><span class="n">phy_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_PHY_TYPE_LE_2M</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">.</span><span class="n">rtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONFIG_ALIF_BLE_AUDIO_RTN</span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">gaf_codec_id_t</span><span class="w"> </span><span class="n">codec_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAF_CODEC_ID_LC3</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">bap_bc_adv_param_t</span><span class="w"> </span><span class="n">adv_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">adv_intv_min_slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">adv_intv_max_slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">ch_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ADV_ALL_CHNLS_EN</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">phy_prim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_PHY_TYPE_LE_1M</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">phy_second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_PHY_TYPE_LE_2M</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">adv_sid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">max_tx_pwr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">bap_bc_per_adv_param_t</span><span class="w"> </span><span class="n">per_adv_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">adv_intv_min_frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">adv_intv_max_frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">bap_bcast_id_t</span><span class="w"> </span><span class="n">bcast_id</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">sys_rand_get</span><span class="p">(</span><span class="n">bcast_id</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">bcast_id</span><span class="p">.</span><span class="n">id</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">bap_bc_src_add_group</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcast_id</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">grp_param</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">adv_param</span><span class="p">,</span>
+<span class="w">                                        </span><span class="o">&amp;</span><span class="n">per_adv_param</span><span class="p">,</span><span class="w"> </span><span class="n">PRESENTATION_DELAY_US</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bcast_grp_lid</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/* Must be accessible to the BLE stack for the lifetime of the BIG -&gt; statically allocated */</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">bap_cfg_t</span><span class="w"> </span><span class="n">sgrp_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">location_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Location is unspecified at subgroup level */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frame_octet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONFIG_ALIF_BLE_AUDIO_OCTETS_PER_CODEC_FRAME</span><span class="p">,</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frame_dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BAP_FRAME_DUR_10MS</span><span class="p">,</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frames_sdu</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                                        </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="cm">/* 0 is unspecified, data will not be placed in BASE */</span>
+<span class="w">                        </span><span class="p">},</span>
+<span class="w">                </span><span class="p">.</span><span class="n">add_cfg</span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">sgrp_cfg</span><span class="p">.</span><span class="n">param</span><span class="p">.</span><span class="n">sampling_freq</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                </span><span class="n">bap_sampling_freq_from_hz</span><span class="p">(</span><span class="n">CONFIG_ALIF_BLE_AUDIO_FS_HZ</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/* Must be accessible to the BLE stack for the lifetime of the BIG -&gt; statically allocated */</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">bap_cfg_metadata_t</span><span class="w"> </span><span class="n">sgrp_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">param</span><span class="p">.</span><span class="n">context_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BAP_CONTEXT_TYPE_UNSPECIFIED_BIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BAP_CONTEXT_TYPE_MEDIA_BIT</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">add_metadata</span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">bap_bc_src_set_subgroup</span><span class="p">(</span><span class="n">bcast_grp_lid</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">codec_id</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sgrp_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sgrp_meta</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">dp_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPI_DP_ISOOSHM</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* Must be accessible to the BLE stack for the lifetime of the BIG -&gt; statically allocated */</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">bap_cfg_t</span><span class="w"> </span><span class="n">stream_cfg_l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">sampling_freq</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                                        </span><span class="n">BAP_SAMPLING_FREQ_UNKNOWN</span><span class="p">,</span><span class="w">  </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frame_dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BAP_FRAME_DUR_UNKNOWN</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frames_sdu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                    </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frame_octet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                   </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">location_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAF_LOC_FRONT_LEFT_BIT</span><span class="p">,</span>
+<span class="w">                        </span><span class="p">},</span>
+<span class="w">                </span><span class="p">.</span><span class="n">add_cfg</span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">bap_cfg_t</span><span class="w"> </span><span class="n">stream_cfg_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">sampling_freq</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                                        </span><span class="n">BAP_SAMPLING_FREQ_UNKNOWN</span><span class="p">,</span><span class="w">  </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frame_dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BAP_FRAME_DUR_UNKNOWN</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frames_sdu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                    </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">frame_octet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                   </span><span class="cm">/* Inherited from subgroup */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">location_bf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAF_LOC_FRONT_RIGHT_BIT</span><span class="p">,</span>
+<span class="w">                        </span><span class="p">},</span>
+<span class="w">                </span><span class="p">.</span><span class="n">add_cfg</span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">bap_bc_src_set_stream</span><span class="p">(</span><span class="n">bcast_grp_lid</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">dp_id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">stream_cfg_l</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bap_bc_src_set_stream</span><span class="p">(</span><span class="n">bcast_grp_lid</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">dp_id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">stream_cfg_r</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="periodic-advertising">
+<h3>Periodic advertising<a class="headerlink" href="#periodic-advertising" title="Link to this heading"></a></h3>
+<p>Enable Periodic Advertising. This will set the device name and the broadcast name:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">broadcast_source_enable</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ad_data</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">CONFIG_BLE_DEVICE_NAME</span><span class="p">)];</span>
+
+<span class="w">        </span><span class="n">ad_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ad_data</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Size of data following the size byte */</span>
+<span class="w">        </span><span class="n">ad_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x09</span><span class="p">;</span><span class="w">                </span><span class="cm">/* Complete local name */</span>
+
+<span class="w">        </span><span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ad_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">CONFIG_BLE_DEVICE_NAME</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ad_data</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">bap_bc_src_enable_pa</span><span class="p">(</span><span class="n">bcast_grp_lid</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ad_data</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ad_data</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                                        </span><span class="k">sizeof</span><span class="p">(</span><span class="n">CONFIG_BROADCAST_NAME</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                                        </span><span class="n">CONFIG_BROADCAST_NAME</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

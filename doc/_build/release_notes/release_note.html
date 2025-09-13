@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Release Notes &mdash; Zephyr Alif SDK Release Notes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Release Notes of Zephyr Alif SDK" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-sdk-and-building-the-application">Installing the SDK and Building the Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#host-requirements">Host Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#toolchains">Toolchains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-components">Software Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-of-supported-peripheral-devices-and-features">List of Supported Peripheral Devices and Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#improvements-and-fixes">Improvements and Fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#external-references">External References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#copyright-trademark">Copyright/Trademark</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Release Notes of Zephyr Alif SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/release_note.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="release-notes">
+<span id="id1"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The <strong>Zephyr Alif SDK (ZAS)</strong> is a comprehensive suite of tools that makes it possible to configure, build, and deploy applications for Alif’s microcontrollers.</p>
+<p>The Alif DevKit is a development board featuring an Alif multi-core SoC, offering both high-performance and low-power execution.</p>
+<p>The <strong>Ensemble DevKit (DK-E7)</strong>  allows you to configure the E7 MCU to operate like other Ensemble MCUs with fewer cores, enabling exploration of the E5, E3, and E1 series devices using a single kit.</p>
+<p>The <strong>Ensemble DevKit (DK-E8)</strong>  allows you to configure the E8 MCU to operate like other Ensemble MCUs with fewer cores, enabling exploration of the E6, and E4 series devices using a single kit.</p>
+<p>The <strong>Ensemble E1C DevKit (DK-E1C)</strong> is designed to explore the Compact series of Ensemble devices.</p>
+<p>The <strong>Balletto DevKit (DK-B1)</strong> introduces the Balletto B1 series, a wireless MCU with integrated hardware acceleration for AI/ML workloads. It combines Bluetooth Low Energy 5.3 and 802.15.4 based Thread protocols, an Ethos-U55 microNPU for AI acceleration, and a Cortex-M55 MCU core.</p>
+</section>
+<section id="installing-the-sdk-and-building-the-application">
+<h2>Installing the SDK and Building the Application<a class="headerlink" href="#installing-the-sdk-and-building-the-application" title="Link to this heading"></a></h2>
+<p>For detailed instructions, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p>
+</section>
+<section id="host-requirements">
+<h2>Host Requirements<a class="headerlink" href="#host-requirements" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Personal Computer (PC) with an x86-64 based processor</p></li>
+<li><p>Minimum 4GB RAM</p></li>
+<li><p>At least 256GB of disk space</p></li>
+</ul>
+</section>
+<section id="software-requirements">
+<h3>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h3>
+<p>Ubuntu 20.04 64-bit or later</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While other Linux distributions may work, they have not been thoroughly tested.</p>
+</div>
+</section>
+</section>
+<section id="toolchains">
+<h2>Toolchains<a class="headerlink" href="#toolchains" title="Link to this heading"></a></h2>
+<p>The following toolchains have been tested for the SDK application:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Compiler</p></th>
+<th class="head"><p>Version</p></th>
+<th class="head"><p>Link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GCC (GNU Compiler Collection)</p></td>
+<td><p>v12.2.0</p></td>
+<td><p><a class="reference external" href="https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/toolchain_linux-x86_64_arm-zephyr-eabi.tar.xz">GCC Download</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>ArmCLang</p></td>
+<td><p>v6.18</p></td>
+<td><p><a class="reference external" href="https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded">ArmCLang Download</a></p></td>
+</tr>
+<tr class="row-even"><td><p>LLVM (Low-Level Virtual Machine)</p></td>
+<td><p>v17.0.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases">LLVM Download</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="software-components">
+<h2>Software Components<a class="headerlink" href="#software-components" title="Link to this heading"></a></h2>
+<p>The following are the software components used in the latest release.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Component</strong></p></th>
+<th class="head"><p><strong>Source</strong></p></th>
+<th class="head"><p><strong>Version</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zephyr OS</p></td>
+<td><p><a class="reference external" href="https://github.com/zephyrproject-rtos/zephyr">Zephyr OS GitHub</a></p></td>
+<td><p>v3.6-branch</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="list-of-supported-peripheral-devices-and-features">
+<h2>List of Supported Peripheral Devices and Features<a class="headerlink" href="#list-of-supported-peripheral-devices-and-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>UART (Universal Asynchronous Receiver/Transmitter)</strong>:
+Synopsys DW_apb_uart is a programmable Universal Asynchronous Receiver/Transmitter. This AMBA 2.0-compliant Advanced Peripheral Bus (APB) component supports up to 8 ports. DW UART2 and UART4 are enabled in Zephyr for the RTSS-HP and RTSS-HE subsystems, respectively.</p></li>
+<li><p><strong>MHU (Message Handling Unit)</strong>:
+MHUs enable interrupt-driven communication between subsystems. Each MHU pair consists of a Sender in one subsystem and a Receiver in another. The SoC provides 12 MHUs for Secure access and 12 for Non-Secure access.</p></li>
+<li><p><strong>HWSEM (Hardware Semaphore)</strong>:
+HWSEM provides synchronization for shared resources (memory or peripherals) across independent subsystems, preventing race conditions, deadlocks, and abnormal behavior. Supported in the E7 series.</p></li>
+<li><p><strong>CDC-200 (Customizable Display Controller-200)</strong>:
+The TES CDC-200 is a configurable VHDL IP for driving pixel displays, supporting multiple layers and composition (blending).</p></li>
+<li><p><strong>GPIO (General-Purpose Input/Output)</strong>:
+Uncommitted digital signal pins controllable by software, usable as inputs, outputs, or both.</p></li>
+<li><p><strong>LPSPI (Low Power Serial Peripheral Interface)</strong>:
+Synopsys DW_apb_ssi, an AMBA 2.0-compliant component, operates in master mode only on RTSS-HE.</p></li>
+<li><p><strong>SPI (Serial Peripheral Interface)</strong>:
+Synopsys DWC_ssi is a full-duplex, configurable synchronous serial interface supporting 4 instances on RTSS-HE and RTSS-HP. SPI1 is configured as master; SPI0, SPI2, and SPI3 are slaves.</p></li>
+<li><p><strong>LPI2C (Low Power Inter-Integrated Circuit)</strong>:
+A power-efficient controller in the Ensemble series for communication with peripherals in low-power applications.</p></li>
+<li><p><strong>I2C (Inter-Integrated Circuit)</strong>:
+DW_apb_i2c supports master or slave mode with two enabled instances (i2c0 and i2c1) on RTSS-HE and RTSS-HP.</p></li>
+<li><p><strong>LPI2S (Low Power Inter-IC Sound)</strong>:
+DW_apb_lpi2s processes digital audio signals on M55 HE.</p></li>
+<li><p><strong>I2S (Inter-IC Sound)</strong>:
+DW_apb_i2s supports four instances for digital audio processing; I2S3_b connects internally to a microphone.</p></li>
+<li><p><strong>MIPI-DSI</strong>:
+The DesignWare MIPI DSI Host Controller interfaces with DSI-compliant displays via the MIPI D-PHY layer.</p></li>
+<li><p><strong>MIPI-CSI2</strong>:
+Uses MIPI D-PHY to transmit captured images to the SoC in individual frames.</p></li>
+<li><p><strong>RTC (Real-Time Counter)</strong>:
+The Low-Power Real-Time Counter (LPRTC) in PD-0 operates in low-power states, supporting a 32-bit counter and interrupt generation.</p></li>
+<li><p><strong>DMA (Direct Memory Access)</strong>:
+Three controllers (DMA0: general-purpose, DMA1: RTSS-HP private, DMA2: RTSS-HE private) offload data transfers, with a MUX for peripheral mapping to DMA0.</p></li>
+<li><p><strong>PWM (Pulse Width Modulation)</strong>:
+Alif UTIMER IP generates up to 24 simultaneous PWM signals across 12 channels.</p></li>
+<li><p><strong>Quadrature Decoder (QDEC)</strong>:
+Alif UTIMER IP on Ensemble Devkit supports QDEC mode for precise rotary encoder position tracking.</p></li>
+<li><p><strong>UTimer Counter</strong>:
+Alif UTIMER IP on Ensemble Devkit supports counter mode for precise event or clock pulse counting, enabling frequency measurement, event counting, and timer-based scheduling.</p></li>
+<li><p><strong>LPPDM (Low Power Pulse Density Modulation)</strong>:
+Supports up to eight PDM microphones, converting 1-bit PDM to 16-bit PCM audio.</p></li>
+<li><p><strong>PDM (Pulse Density Modulation)</strong>:
+Enhances audio with support for eight PDM microphones, converting 1-bit PDM to 16-bit PCM.</p></li>
+<li><p><strong>CRC (Cyclic Redundancy Check)</strong>:
+Supports CRC-8-CCITT, CRC-16-CCITT, CRC-32, and CRC-32C with flexible data processing via AHB.</p></li>
+<li><p><strong>WDT (Watchdog Timer)</strong>:
+Integrates Zephyr’s WDT for fault detection.</p></li>
+<li><p><strong>OSPI Flash (Octal SPI Flash)</strong>:
+The Alif DevKit-E7 includes a 32MB ISSI Flash (IS25WX256) with Zephyr flash APIs for erase, read, and write operations.</p></li>
+<li><p><strong>AES (Advanced Encryption Standard)</strong>:
+Enables on-the-fly decryption of XIP data from external memory.</p></li>
+<li><p><strong>ADC (Analog-to-Digital Converter)</strong>:
+Features ADC12 (12-bit, 8 channels) and ADC24 (24-bit, 4 differential channels) for analog-to-digital conversion.</p></li>
+<li><p><strong>DAC 12 (Digital to Analog Converter)</strong>:
+Features a DAC12 module that converts 12-bit digital values to analog voltages, with a 0 V to 1.8 V output range in Low-Power mode.</p></li>
+<li><p><strong>LPTimer (Low-Power Timer)</strong>:
+A 32-bit timer in the M55 core for precise low-power timing.</p></li>
+<li><p><strong>Parallel Camera</strong>:
+Supports frame capture via LPCAM/CAM with sensors like MT9M114.</p></li>
+<li><p><strong>AiPM (Advanced Intelligent Power Management)</strong>:
+Optimizes power modes (STOP, OFF) with autonomous transitions and wake-up sources.</p></li>
+<li><p><strong>Ethos U55</strong>:
+Pairs with Cortex-M55 for AI/ML acceleration using Arm v8.1 and Helium MVE.</p></li>
+<li><p><strong>Ethos U85</strong>:
+Support for Arm Ethos-U85 enables scalable, energy-efficient edge AI with native transformer model acceleration.</p></li>
+<li><p><strong>MCU-BOOT</strong>:
+A secure bootloader for firmware upgrades, leveraging Zephyr’s HAL.</p></li>
+<li><p><strong>BLE (Bluetooth Low Energy)</strong>:
+Supported in Balletto B1 with a host stack in ROM.</p></li>
+<li><p><strong>LC3 (Low Complexity Communication Codec)</strong>:
+In Balletto B1 ROM for BLE isochronous audio.</p></li>
+<li><p><strong>CANFD (Controller Area Network Flexible Data-Rate)</strong>:
+Supports ECU communication with error detection and higher data rates.</p></li>
+<li><p><strong>Touch Screen</strong>:
+GT911 touch screen supports 5-point touch via I2C for 7”-8” displays.</p></li>
+<li><p><strong>I3C (Improved Inter-Integrated Circuit)</strong>:
+A next-gen interface with dynamic addressing and multi-master support.</p></li>
+<li><p><strong>SDMMC (Secure Digital Multimedia Card)</strong>:
+Alif SDMMC driver supports eMMC/SD interfaces.</p></li>
+</ul>
+</section>
+<section id="improvements-and-fixes">
+<h2>Improvements and Fixes<a class="headerlink" href="#improvements-and-fixes" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Linker Workarounds for LLVM/Clang</strong>:</p>
+<p>Added a new linker module that addresses several issues when building with LLVM/Clang:</p>
+<ul class="simple">
+<li><p>Fixes linker errors caused by exception tables when code spans memory regions far apart in the address space (e.g., MRAM and TCM)</p></li>
+<li><p>Provides options to discard unwanted exception tables</p></li>
+<li><p>Eliminates symbol table placement warnings from LLVM’s linker</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>The Zephyr CDC200 driver supports only ARGB8888, RGB888, and RGB565 formats (subset of CDC200 IP capabilities).</p></li>
+<li><p>Demo application restricts Layer 2 to ARGB8888; Layer 1 formats are configurable.</p></li>
+<li><p>Building from DTCM fails with open-source Clang (LLVM).</p></li>
+<li><p>Ethos-U application untested with ArmClang and Clang.</p></li>
+<li><p>Ethos-U lacks MRAM/ITCM support; runs from SRAM0 (0x0200 0000).</p></li>
+<li><p>I2S applications on RTSS-HE/HP run from SRAM0/DTCM in non-XIP mode.</p></li>
+<li><p>I2S compilation fails with Clang.</p></li>
+<li><p>Camera:
+- Non-standard video buffer allocations to SRAM1.
+- RGB format support pending.
+- CMOS/CSI configured for RAW10, but Camera controller uses RAW8; RAW8 rework needed.
+- Untested with LLVM.</p></li>
+<li><p>No LPCMP sample application.</p></li>
+</ol>
+</section>
+<section id="external-references">
+<h2>External References<a class="headerlink" href="#external-references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>ZAS User Guide <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+</ul>
+</section>
+<section id="copyright-trademark">
+<h2>Copyright/Trademark<a class="headerlink" href="#copyright-trademark" title="Link to this heading"></a></h2>
+<p>The Alif logo is a trademark of Alif Semiconductor. please refer to <a class="reference external" href="https://alifsemi.com/legal">Alif Trademarks</a>.
+Arm, Cortex, CoreSight, and Ethos are trademarks of Arm Limited (or its subsidiaries).
+Zephyr is an open-source RTOS under the Apache License 2.0, maintained by the Zephyr Project &lt;<a class="reference external" href="https://www.zephyrproject.org/">https://www.zephyrproject.org/</a>&gt;.
+The Zephyr logo is a trademark of The Linux Foundation, subject to its Trademark Usage Guidelines &lt;<a class="reference external" href="https://www.linuxfoundation.org/trademark-usage/">https://www.linuxfoundation.org/trademark-usage/</a>&gt;.
+All other names are property of their respective owners.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Release Notes of Zephyr Alif SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

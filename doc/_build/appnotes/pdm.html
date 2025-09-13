@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDM &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MIPI Camera" href="mipi_camera.html" />
+    <link rel="prev" title="SPI" href="spi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PDM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-connections-and-setup-for-pdm">Hardware Connections and Setup for PDM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-setup-for-multiple-pdm-channels">Hardware Setup for Multiple PDM Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-setup-for-multiple-lppdm-channels">Hardware Setup for Multiple LPPDM Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-setup-for-low-power-pdm-lppdm">Hardware Setup for Low-Power PDM (LPPDM)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-pdm-application-in-zephyr">Building PDM Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-lppdm-application-in-zephyr">Building LPPDM Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#procedure-to-test-pdm-and-lppdm">Procedure to Test PDM and LPPDM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alternative-method-using-audacity-player">Alternative Method Using Audacity Player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pdm-modes">PDM Modes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PDM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pdm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pdm">
+<span id="id1"></span><h1>PDM<a class="headerlink" href="#pdm" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This document explains how to create, compile, and run a demo application for the Pulse Density Modulation (PDM) controller IP provided by Alif Semiconductor” and integrated into Ensemble” devices. Key features include:</p>
+<ul class="simple">
+<li><p>A PDM (Pulse Density Modulation) microphone produces 1-bit digital data streams in Pulse Density Modulated format.</p></li>
+<li><p>The PDM Audio module supports eight audio channels, with each channel connecting to one microphone.</p></li>
+<li><p>PDM Audio converts each 1-bit PDM audio input into 16-bit PCM (Pulse Code Modulated) format.</p></li>
+<li><p>The host reads the 16-bit PCM data for each microphone through a set of APB registers.</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<p>To run the PDM and LPPDM application, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif DevKit</strong></p></li>
+<li><p><strong>Debugger: JLink (optional)</strong></p></li>
+</ul>
+<figure class="align-center" id="id2">
+<img alt="PDM Hardware" src="_images/pdm_hardware.png" />
+<figcaption>
+<p><span class="caption-number">Figure 57 </span><span class="caption-text">PDM Hardware</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<p>To run the PDM and LPPDM application, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif Zephyr PDM driver</strong></p></li>
+</ul>
+<section id="hardware-connections-and-setup-for-pdm">
+<h3>Hardware Connections and Setup for PDM<a class="headerlink" href="#hardware-connections-and-setup-for-pdm" title="Link to this heading"></a></h3>
+<p>The DevKit board has internal PDM microphones connected to channels 4 and 5, requiring no additional hardware connections for these channels.</p>
+<figure class="align-center" id="id3">
+<img alt="PDM Microphone on B0 Flat Board" src="_images/pdm_microphone_b0.png" />
+<figcaption>
+<p><span class="caption-number">Figure 58 </span><span class="caption-text">PDM Microphone on B0 Flat Board</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>For Channels 4 and 5</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line Configuration</strong>:
+- Connect the data line from <cite>PDM_D2_B</cite> on the flat board to <cite>P5_4</cite>.</p></li>
+<li><p><strong>Clock Line Configuration</strong>:
+- Connect the clock line from <cite>PDM_C2_A</cite> on the flat board to <cite>P6_7</cite>.</p></li>
+</ul>
+<p><strong>For Channels 0 and 1</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line Configuration</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P0_4</cite> on Flat board J11.</p></li>
+<li><p><strong>Clock Line Configuration</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P0_5</cite> on Flat board J11.</p></li>
+</ul>
+<p><strong>For Channels 2 and 3</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line Configuration</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P0_6</cite> on Flat board J11.</p></li>
+<li><p><strong>Clock Line Configuration</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P0_7</cite> on Flat board J11.</p></li>
+</ul>
+<p><strong>For Channels 6 and 7</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line Configuration</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P5_1</cite> on Flat board J12.</p></li>
+<li><p><strong>Clock Line Configuration</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P5_2</cite> on Flat board J12.</p></li>
+</ul>
+<p><strong>PDM Channel Configurations</strong>:</p>
+<p>Use the following channel configurations in the application before building:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* PDM Channel 0 configurations */</span>
+<span class="cp">#define CH0_PHASE             0x00000003</span>
+<span class="cp">#define CH0_GAIN              0x00000013</span>
+<span class="cp">#define CH0_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH0_PEAK_DETECT_ITV   0x00020027</span>
+
+<span class="cm">/* PDM Channel 1 configurations */</span>
+<span class="cp">#define CH1_PHASE             0x0000001F</span>
+<span class="cp">#define CH1_GAIN              0x0000000D</span>
+<span class="cp">#define CH1_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH1_PEAK_DETECT_ITV   0x0004002D</span>
+
+<span class="cm">/* PDM Channel 2 configurations */</span>
+<span class="cp">#define CH2_PHASE             0x00000003</span>
+<span class="cp">#define CH2_GAIN              0x00000013</span>
+<span class="cp">#define CH2_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH2_PEAK_DETECT_ITV   0x00020027</span>
+
+<span class="cm">/* PDM Channel 3 configurations */</span>
+<span class="cp">#define CH3_PHASE             0x0000001F</span>
+<span class="cp">#define CH3_GAIN              0x0000000D</span>
+<span class="cp">#define CH3_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH3_PEAK_DETECT_ITV   0x0004002D</span>
+
+<span class="cm">/* PDM Channel 4 configurations */</span>
+<span class="cp">#define CH4_PHASE             0x0000001F</span>
+<span class="cp">#define CH4_GAIN              0x0000000D</span>
+<span class="cp">#define CH4_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH4_PEAK_DETECT_ITV   0x0004002D</span>
+
+<span class="cm">/* PDM Channel 5 configurations */</span>
+<span class="cp">#define CH5_PHASE             0x00000003</span>
+<span class="cp">#define CH5_GAIN              0x00000013</span>
+<span class="cp">#define CH5_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH5_PEAK_DETECT_ITV   0x00020027</span>
+
+<span class="cm">/* PDM Channel 6 configurations */</span>
+<span class="cp">#define CH6_PHASE             0x0000001F</span>
+<span class="cp">#define CH6_GAIN              0x0000000D</span>
+<span class="cp">#define CH6_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH6_PEAK_DETECT_ITV   0x0004002D</span>
+
+<span class="cm">/* PDM Channel 7 configurations */</span>
+<span class="cp">#define CH7_PHASE             0x00000003</span>
+<span class="cp">#define CH7_GAIN              0x00000013</span>
+<span class="cp">#define CH7_PEAK_DETECT_TH    0x00060002</span>
+<span class="cp">#define CH7_PEAK_DETECT_ITV   0x00020027</span>
+</pre></div>
+</div>
+<p><strong>FIR Coefficients</strong>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Channel 0 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch0_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FF</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FB</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E4</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000002B</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000009</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000016</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000049</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000006F8</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000045</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000178</span><span class="p">};</span>
+
+<span class="cm">/* Channel 1 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch1_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000001</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007ED</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D3</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x000007FE</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007BC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000029</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000072C</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000072</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000002FD</span><span class="p">};</span>
+
+<span class="cm">/* Channel 2 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch2_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FF</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FB</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E4</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000002B</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000009</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000016</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000049</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000006F8</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000045</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000178</span><span class="p">};</span>
+
+<span class="cm">/* Channel 3 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch3_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000001</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007ED</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D3</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x000007FE</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007BC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000029</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000072C</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000072</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000002FD</span><span class="p">};</span>
+
+<span class="cm">/* Channel 4 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch4_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000001</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007ED</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D3</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x000007FE</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007BC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000029</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000072C</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000072</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000002FD</span><span class="p">};</span>
+
+<span class="cm">/* Channel 5 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch5_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FF</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FB</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E4</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000002B</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000009</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000016</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000049</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000006F8</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000045</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000178</span><span class="p">};</span>
+
+<span class="cm">/* Channel 6 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch6_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000001</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000003</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007ED</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007F4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D3</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x000007FE</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007BC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E5</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007D9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000029</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000072C</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000072</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000002FD</span><span class="p">};</span>
+
+<span class="cm">/* Channel 7 FIR coefficient */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ch7_fir</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FF</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000004</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FC</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007FB</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000007E4</span><span class="p">,</span>
+<span class="w">                        </span><span class="mh">0x00000000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0000002B</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000009</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000016</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000049</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000793</span><span class="p">,</span><span class="w"> </span><span class="mh">0x000006F8</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000045</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000178</span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="hardware-setup-for-multiple-pdm-channels">
+<h3>Hardware Setup for Multiple PDM Channels<a class="headerlink" href="#hardware-setup-for-multiple-pdm-channels" title="Link to this heading"></a></h3>
+<p>The DevKit board has internal PDM microphones. To test PDM channels 0, 1, 2, and 3, two flat boards are required, as each board contains a pair of microphones sufficient for channels 0 and 1. For channels 2 and 3, an additional pair of microphones is needed, requiring another board with PDM microphones connected to channels 2 and 3. The same configuration applies to other channels.</p>
+<p><strong>For Channels 0 and 1</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line Configuration</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P0_4</cite> on Flat board J11.</p></li>
+<li><p><strong>Clock Line Configuration</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P0_5</cite> on Flat board J11.</p></li>
+</ul>
+<p><strong>For Channels 2 and 3</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line Configuration</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P0_6</cite> on Flat board J11.</p></li>
+<li><p><strong>Clock Line Configuration</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P0_7</cite> on Flat board J11.</p></li>
+</ul>
+</section>
+<section id="hardware-setup-for-multiple-lppdm-channels">
+<h3>Hardware Setup for Multiple LPPDM Channels<a class="headerlink" href="#hardware-setup-for-multiple-lppdm-channels" title="Link to this heading"></a></h3>
+<p>The DevKit has internal PDM microphones. To test LPPDM channels 0, 1, 2, and 3, two flat boards are required, as each board contains a pair of microphones sufficient for channels 0 and 1. For channels 2 and 3, an additional pair of microphones is needed, requiring another board with PDM microphones connected to channels 2 and 3. The same configuration applies to other channels.</p>
+<p><strong>For Channels 0 and 1</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line (LPPDM_D0_B)</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P3_5</cite> on Flat board J11.</p></li>
+<li><p><strong>Clock Line (LPPDM_C0_B)</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P3_4</cite> on Flat board J11.</p></li>
+</ul>
+<p><strong>For Channels 2 and 3</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line (LPPDM_D1_B)</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P3_7</cite> on Flat board J11.</p></li>
+<li><p><strong>Clock Line (LPPDM_C1_B)</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P3_6</cite> on Flat board J11.</p></li>
+</ul>
+</section>
+<section id="hardware-setup-for-low-power-pdm-lppdm">
+<h3>Hardware Setup for Low-Power PDM (LPPDM)<a class="headerlink" href="#hardware-setup-for-low-power-pdm-lppdm" title="Link to this heading"></a></h3>
+<p>The DevKit has internal PDM microphones. To test LPPDM channels 0 and 1, connect the PDM data line of the flat board’s PDM microphone to the LPPDM data line of <cite>P3_5</cite> (J11 on the flat board).</p>
+<p><strong>For Channels 0 and 1</strong>:</p>
+<ul class="simple">
+<li><p><strong>Data Line (LPPDM_D0_B)</strong>:
+- Connect pin <cite>P5_4</cite> on Flat board J14 to pin <cite>P3_5</cite> on Flat board J11.</p></li>
+<li><p><strong>Clock Line (LPPDM_C0_B)</strong>:
+- Connect pin <cite>P6_7</cite> on Flat board J15 to pin <cite>P3_4</cite> on Flat board J11.</p></li>
+</ul>
+</section>
+</section>
+<section id="building-pdm-application-in-zephyr">
+<h2>Building PDM Application in Zephyr<a class="headerlink" href="#building-pdm-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to build your Zephyr-based PDM application using the GCC compiler and the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/audio/dmic_alif/
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Build commands for applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/audio/dmic_alif/
+</pre></div>
+</div>
+</section>
+<section id="building-lppdm-application-in-zephyr">
+<h2>Building LPPDM Application in Zephyr<a class="headerlink" href="#building-lppdm-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Both PDM and LPPDM use similar applications. To build the LPPDM application, modify the PDM sample application code from <cite>DT_NODELABEL(pdm)</cite> to <cite>DT_NODELABEL(lppdm)</cite>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>const<span class="w"> </span>struct<span class="w"> </span>device<span class="w"> </span>*pcmj_device<span class="w"> </span><span class="o">=</span><span class="w"> </span>DEVICE_DT_NODELABEL<span class="o">(</span>lppdm<span class="o">)</span>
+</pre></div>
+</div>
+<p>Follow these steps to build your Zephyr-based LPPDM application using the GCC compiler and the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>Fetch the Alif Zephyr SDK source at the desired revision:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>sdk-alif
+<span class="nb">cd</span><span class="w"> </span>sdk-alif
+west<span class="w"> </span>init<span class="w"> </span>-m<span class="w"> </span>https://github.com/alifsemi/sdk-alif.git<span class="w"> </span>--mr<span class="w"> </span><span class="si">${</span><span class="nv">revision</span><span class="si">}</span>
+west<span class="w"> </span>update
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">${revision}</span></code> with any SDK revision (branch/tag/commit SHA) you wish to achieve.
+This can be <code class="docutils literal notranslate"><span class="pre">main</span></code> if you want the latest state, or any commit SHA or tag (e.g., <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">init</span> <span class="pre">-m</span> <span class="pre">https://github.com/alifsemi/sdk-alif.git</span> <span class="pre">--mr</span> <span class="pre">v1.2.0</span></code>).</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Navigate to the Zephyr directory:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>zephyr
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Remove the existing build directory and build the application:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/audio/dmic_alif/
+</pre></div>
+</div>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="procedure-to-test-pdm-and-lppdm">
+<h2>Procedure to Test PDM and LPPDM<a class="headerlink" href="#procedure-to-test-pdm-and-lppdm" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Select PDM channels 4 and 5 in the test application.</p></li>
+</ol>
+<figure class="align-center" id="id4">
+<img alt="Selecting Channels 4 and 5 in Test Application" src="_images/test_pdm_channels_4_5.png" />
+<figcaption>
+<p><span class="caption-number">Figure 59 </span><span class="caption-text">Selecting Channels 4 and 5 in Test Application</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>For multiple channels, consider enabling channels 0, 1, 2, and 3.</p>
+<figure class="align-center" id="id5">
+<img alt="Selecting Multiple Channels in Test Application" src="_images/test_multiple_channels_pdm.png" />
+<figcaption>
+<p><span class="caption-number">Figure 60 </span><span class="caption-text">Selecting Multiple Channels in Test Application</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>Specify the block size to store the PCM data.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#define PCMJ BlockSize &gt;&gt; &gt;&gt;   50000</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Specify the number of samples to store the captured PCM data.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>/*<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>blocks<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>slab<span class="w"> </span>*/
+<span class="c1">#define MEM_SLAB_NUM_BLOCKS &gt;&gt; &gt;&gt;   1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If <cite>PCMJ_BLOCK_SIZE</cite> is 50000 and <cite>MEM_SLAB_NUM_BLOCKS</cite> is 1, 50000 PCM samples can be stored in the <cite>pcmj_data</cite> buffer.</p></li>
+<li><p>If <cite>PCMJ_BLOCK_SIZE</cite> is 50000 and <cite>MEM_SLAB_NUM_BLOCKS</cite> is 2, 100000 PCM samples can be stored in the <cite>pcmj_data</cite> buffer.</p></li>
+</ul>
+<ol class="arabic" start="4">
+<li><p>Choose the mode of operation in the <cite>pdm_mode</cite> API.</p></li>
+<li><p>Set the FIFO watermark value in the DTS file.</p></li>
+<li><p>Store the channel status configuration values for each channel.</p></li>
+<li><p>Build the project and flash the generated <cite>.elf</cite> file onto the target.</p></li>
+<li><p>Once all hardware connections are completed, power on the DevKit.</p></li>
+<li><p>Start playing audio or speak near the PDM microphone on the DevKit.</p></li>
+<li><p>When the sample count reaches the maximum value, the IRQ will be disabled, and audio capture will stop.</p></li>
+<li><p>Stop the application code.</p></li>
+<li><p>The PCM samples will be stored in the <cite>pcmj_data</cite> buffer. Print the base address of the <cite>pcmj_data</cite> buffer.</p>
+<p>The screenshot below shows channels 4 and 5 enabled, with the buffer address at <cite>0x20000c3c</cite>. 50,000 PCM samples are stored in the <cite>pcmj_data</cite> buffer, and the stored PCM samples are being printed.</p>
+<figure class="align-center" id="id6">
+<img alt="PCM Samples Buffer" src="_images/pdm_buffer_samples.png" />
+<figcaption>
+<p><span class="caption-number">Figure 61 </span><span class="caption-text">PCM Samples Buffer (Channels 4 and 5, Address 0x20000c3c)</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Copy the buffer address for channels 4 and 5.</p></li>
+<li><p>Open the memory section, paste the buffer address, and press Enter.</p></li>
+<li><p>In the buffer memory section, view the converted PCM samples stored in the buffer.</p>
+<p>The screenshot below shows the PCM samples stored at the specified buffer address.</p>
+<figure class="align-center" id="id7">
+<img alt="PCM Samples in Memory Section" src="_images/pdm_memory_section.png" />
+<figcaption>
+<p><span class="caption-number">Figure 62 </span><span class="caption-text">PCM Samples in Memory Section</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>To export the memory:
+- Go to the right-most corner.
+- Click on the <strong>View</strong> menu.
+- Select the <strong>Export Memory</strong> option.</p>
+<figure class="align-center" id="id8">
+<img alt="Export Memory Option" src="_images/pdm_memory_export.png" />
+<figcaption>
+<p><span class="caption-number">Figure 63 </span><span class="caption-text">Export Memory Option</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>By default, the start and end address will be present in the memory bounds.</p></li>
+<li><p>Specify the length in bytes, corresponding to the buffer size.
+For example, if the number of samples is 50,000, the length in bytes will be 50,000 bytes.</p></li>
+<li><p>Store the PCM samples in binary format with the filename <cite>memory.bin</cite>.</p>
+<figure class="align-center" id="id9">
+<img alt="Storing PCM Samples" src="_images/storing_pcm_samples.png" />
+<figcaption>
+<p><span class="caption-number">Figure 64 </span><span class="caption-text">Storing PCM Samples</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>To play the PCM data, use the <cite>pcmplay.c</cite> file, which includes resources such as the <cite>memory.bin</cite> file, channel number, data types of the memory buffer, sampling rate, frequency, and generates the <cite>pcm_samples.pcm</cite> audio file.</p></li>
+<li><p>Compile the <cite>pcmplay.c</cite> file using <cite>gcc</cite> to generate the <cite>pcm_samples.pcm</cite> file in the same directory.</p></li>
+<li><p>Use the <cite>ffplay</cite> command to play the audio:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ffplay<span class="w"> </span>-f<span class="w"> </span>s16le<span class="w"> </span>-ac<span class="w"> </span><span class="m">2</span><span class="w"> </span>-ar<span class="w"> </span>8k<span class="w"> </span>pcm_samples.pcm
+</pre></div>
+</div>
+<p>Where:
+- <cite>s16le</cite>: 16-bit little-endian system.
+- <cite>-ac</cite>: Specifies the number of channels.
+- <cite>-ar</cite>: Specifies the frequency.</p>
+</li>
+</ol>
+<p>23. After entering the command, press Enter and connect the microphone to the NUC. The user will hear recorded audio (approximately 3-4 seconds) using any speaker.
+For better quality, use earphones.</p>
+<blockquote>
+<div><figure class="align-center" id="id10">
+<img alt="Playing Audio" src="_images/playing_audio_pdm.png" />
+<figcaption>
+<p><span class="caption-number">Figure 65 </span><span class="caption-text">Playing Audio</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<ol class="arabic simple" start="24">
+<li><p>For LPPDM, follow the same procedure, selecting channels 0 and 1 instead of channels 4 and 5.</p></li>
+<li><p>Select the mode of operation in the <cite>pdm_mode</cite> API.</p></li>
+<li><p>Store the channel status configuration values for channels 0 and 1.</p></li>
+<li><p>Build the project and flash the generated <cite>.elf</cite> file onto the target.</p></li>
+<li><p>Follow the same PDM procedure to obtain PCM samples for LPPDM and play the recorded audio using the <cite>ffplay</cite> command.</p></li>
+</ol>
+</section>
+<section id="alternative-method-using-audacity-player">
+<h2>Alternative Method Using Audacity Player<a class="headerlink" href="#alternative-method-using-audacity-player" title="Link to this heading"></a></h2>
+<p>An alternative to <cite>ffplay</cite> is to use the Audacity player. Download and install Audacity, then follow these steps:</p>
+<ol class="arabic">
+<li><p>Go to <strong>File</strong> -&gt; <strong>Import</strong> -&gt; <strong>Raw Data</strong> and load the <cite>memory.bin</cite> file.</p>
+<blockquote>
+<div><figure class="align-center" id="id11">
+<img alt="Using Audacity Player" src="_images/using_audacity_player.png" />
+<figcaption>
+<p><span class="caption-number">Figure 66 </span><span class="caption-text">Using Audacity Player</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>Select 16-bit PCM with little-endian byte order.</p></li>
+<li><p>Specify the number of channels used by your application (e.g., 2 channels for the sample application; select 4 channels if using 4 channels).</p></li>
+<li><p>Set the sample rate according to the PDM mode used in your application:</p>
+<ul class="simple">
+<li><p>For standard voice with a baseband sampling rate of 8 kHz, use 8000.</p></li>
+<li><p>For high-quality voice with a 512 PDM clock frequency, use 16000.</p></li>
+</ul>
+<figure class="align-center" id="id12">
+<img alt="Audacity Settings for PDM" src="_images/audacity_settings.png" />
+<figcaption>
+<p><span class="caption-number">Figure 67 </span><span class="caption-text">Audacity Settings for PDM</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+</section>
+<section id="pdm-modes">
+<h2>PDM Modes<a class="headerlink" href="#pdm-modes" title="Link to this heading"></a></h2>
+<blockquote>
+<div><figure class="align-center" id="id13">
+<img alt="PDM Modes" src="_images/pdm_modes.png" />
+<figcaption>
+<p><span class="caption-number">Figure 68 </span><span class="caption-text">PDM Modes</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

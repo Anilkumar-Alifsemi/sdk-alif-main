@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Broadcast Sink &mdash; Alif SDK Documentation - v1.1</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=56dcb7b8"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Broadcast Source" href="sample_audiosource.html" />
+    <link rel="prev" title="Samples" href="audio_samples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Connectivity</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth - Ceva-Waves™ BLE</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="audio.html">BLE Audio</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="audio_presentation_layer.html">Presentation Layer</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="audio_samples.html">Samples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rom_abi.html">ROM Code ABI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_basic_profile.html">Basic Profile Samples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/index.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SDK documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Connectivity</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth - Ceva-Waves™ BLE</a></li>
+          <li class="breadcrumb-item"><a href="audio.html">BLE Audio</a></li>
+          <li class="breadcrumb-item"><a href="audio_samples.html">Samples</a></li>
+      <li class="breadcrumb-item active">Broadcast Sink</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/connectivity/bluetooth/sample_audiosink.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="broadcast-sink">
+<span id="zas-connection-ble-audiosink"></span><h1>Broadcast Sink<a class="headerlink" href="#broadcast-sink" title="Link to this heading"></a></h1>
+<p>Bluetooth Low Energy (BLE) broadcast enables high-quality audio streaming to multiple devices.
+The two key roles in broadcast mode are Source and Sink. This sample demonstrates a sink device.</p>
+<p>All the audio samples share the same basic structure with all the other <a class="reference internal" href="sample_basic_profile.html#zas-connection-ble-sample"><span class="std std-ref">BLE profile samples</span></a>.
+The forementioned samples follow standard connection procedures defined in the Generic Access Profile(GAP).
+Basic Audio Profile(BAP) API is used to configure, discover and playback broadcast audio.</p>
+<figure class="align-default">
+<img alt="../../_images/alif_ble_sink_flowchart.drawio.png" src="../../_images/alif_ble_sink_flowchart.drawio.png" />
+</figure>
+<section id="kconfig">
+<h2>Kconfig<a class="headerlink" href="#kconfig" title="Link to this heading"></a></h2>
+<p>The sink sample chooces <strong>Ceva-Waves™ BLE</strong> and  <strong>Ceva-Waves™ LC3</strong> by setting a configuration flag on their <em>prj.conf</em> file.
+Additionally there is need to set:</p>
+<ul class="simple">
+<li><p>Presentation compensation configuration</p></li>
+<li><p>I²S configuration</p></li>
+<li><p>GAF configuration</p></li>
+</ul>
+<div class="highlight-kconfig notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alif&#39;s BLE stack</span>
+CONFIG_BT=y
+CONFIG_BT_CUSTOM=y
+
+<span class="c1"># Audio</span>
+CONFIG_ALIF_ROM_LC3_CODEC=y
+CONFIG_ALIF_BLE_AUDIO=y
+
+CONFIG_PRESENTATION_COMPENSATION_DIRECTION_SINK=y
+CONFIG_PRESENTATION_COMPENSATION_CORRECTION_FACTOR=2
+
+<span class="c1"># Should be replaced by TRNG when support is available</span>
+CONFIG_TEST_RANDOM_GENERATOR=y
+
+<span class="c1"># malloc support is required, simplest way is using newlib although it would also</span>
+<span class="c1"># be possible to configure heap for picolibc</span>
+CONFIG_NEWLIB_LIBC=y
+
+<span class="c1"># Driver support for audio</span>
+CONFIG_I2S=y
+CONFIG_I2S_SYNC_BUFFER_FORMAT_SEQUENTIAL=y
+
+<span class="c1"># Determine left and right channels by index, not GAF</span>
+CONFIG_AUDIO_LOCATION_IMPLICIT=y
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="../../_images/alif_ble_audio_presentation_layer_sink.drawio.png" src="../../_images/alif_ble_audio_presentation_layer_sink.drawio.png" />
+</figure>
+</section>
+<section id="pre-main">
+<h2>Pre-Main<a class="headerlink" href="#pre-main" title="Link to this heading"></a></h2>
+<p>Before entering main the sample will</p>
+<ul class="simple">
+<li><p>Initialize the I²S device</p></li>
+<li><p>Initialize the LC3 codec</p></li>
+</ul>
+</section>
+<section id="main">
+<h2>Main<a class="headerlink" href="#main" title="Link to this heading"></a></h2>
+<p>Where the things start to deviate from the basic profile setup is when we define the role of the device during GAPM configuration phase.
+The role is set to be an <em>observer</em> to be able to listen for advertisements from other devices without actively participating in the connection process.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">gapm_config_t</span><span class="w"> </span><span class="n">gapm_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_ROLE_LE_OBSERVER</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong> All the other members of the configuration structure are assumed to be be the same as with the basic profile config.</p>
+<p>You don’t need to set GAPM callbacks when acting as a <em>observer</em>, except the error callbacks.</p>
+</section>
+<section id="audio-sink-setup">
+<h2>Audio Sink setup<a class="headerlink" href="#audio-sink-setup" title="Link to this heading"></a></h2>
+<p>Steps to take to be able to listen a broadcast</p>
+<ol class="arabic simple">
+<li><p>Set scan configuration</p></li>
+<li><p>Set audio sink configuration</p></li>
+<li><p>Start scanning</p></li>
+</ol>
+<p><strong>NOTE</strong> All the API functions taking the BAP role as a parameter expects to have a bit set for each role that the device supports.
+The information is used to check that all the required callbacks are set.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">broadcast_sink_start</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bap_bc_scan_configure</span><span class="p">(</span><span class="n">BAP_ROLE_SUPP_BC_SINK_BIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BAP_ROLE_SUPP_BC_SCAN_BIT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">scan_cbs</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">bap_bc_sink_configure</span><span class="p">(</span><span class="n">BAP_ROLE_SUPP_BC_SINK_BIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BAP_ROLE_SUPP_BC_SCAN_BIT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sink_cbs</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">start_scanning</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="scan-configuration">
+<h3>Scan configuration<a class="headerlink" href="#scan-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">bap_bc_scan_cb_t</span><span class="w"> </span><span class="n">scan_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_cmp_evt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_cmp_evt</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_timeout</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_report</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_public_bcast_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_public_bcast</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_pa_established</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_pa_established</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_pa_terminated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_pa_terminated</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_pa_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_pa_report</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_big_info_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_big_info_report</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_group_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_group_report</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_subgroup_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_subgroup_report</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_stream_report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_scan_stream_report</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kt">uint16_t</span><span class="w"> </span><span class="nf">bap_bc_scan_configure</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">role_bf</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">bap_bc_scan_cb_t</span><span class="o">*</span><span class="w"> </span><span class="n">scan_cbs</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>BAP Role</strong>: All supported roles should be set here</p></li>
+<li><p><strong>BAP Broadcast Scan Callbacks</strong>: All the different events that can occur during a scan:</p>
+<ul>
+<li><p><strong>Scan Complete</strong>: Called when a scan command is complete</p></li>
+<li><p><strong>Scan Timeout</strong>: Called when a scan times out</p></li>
+<li><p><strong>Broadcast Source Discovered</strong>: Called when a Broadcast Source device is discovered</p></li>
+<li><p><strong>Public Broadcast Discovered</strong>: Called when a Public Broadcast is discovered</p></li>
+<li><p><strong>Periodic Advertising Synchronisation Complete</strong>: Called when a PA synchronisation is established</p></li>
+<li><p><strong>Periodic Advertising Synchronisation Terminated</strong>: Called when a PA synchronisation is terminated</p></li>
+<li><p><strong>Periodic Advertising Report Received</strong>: Called when a PA report is received</p></li>
+<li><p><strong>BIG Info Report Received</strong>: Called when a BIG Info report is received</p></li>
+<li><p><strong>Group Report Received</strong>: Called when a group report is received</p></li>
+<li><p><strong>Subgroup Report Received</strong>: Called when a subgroup report is received</p></li>
+<li><p><strong>Stream Report Received</strong>: Called when a stream report is received</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="sink-configuration">
+<h3>Sink configuration<a class="headerlink" href="#sink-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">bap_bc_sink_cb_t</span><span class="w"> </span><span class="n">sink_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_cmp_evt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_sink_cmp_evt</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_quality_cmp_evt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_sink_quality_cmp_evt</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cb_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_bap_bc_sink_status</span><span class="p">,</span>
+<span class="p">};</span>
+
+
+<span class="kt">uint16_t</span><span class="w"> </span><span class="nf">bap_bc_sink_configure</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">role_bf</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">bap_bc_sink_cb_t</span><span class="o">*</span><span class="w"> </span><span class="n">sink_cbs</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul>
+<li><p><strong>BAP Role</strong>: All supported roles should be set here</p></li>
+<li><p><strong>BAP Broadcast Sink Callbacks</strong>: All the different events that can occur during a broadcast sink:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Command Complete</strong>: Called when a command has been completed</p></li>
+<li><p><strong>Get Quality Complete</strong>: Called when BAP_BC_SINK_GET_QUALITY command has been completed</p></li>
+<li><p><strong>Synchronisation Status</strong>: Called when status of synchronization with a Broadcast Group has changed</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="scanning">
+<h3>Scanning<a class="headerlink" href="#scanning" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">start_scanning</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="cm">/* Zero timeout value causes it to scan until explicitly stopped */</span>
+<span class="w">        </span><span class="n">bap_bc_scan_start</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">reset_sink_config</span><span class="p">();</span>
+<span class="w">        </span><span class="n">public_broadcast_found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Start the scan operation</p></li>
+<li><p>Reset the sink configuration which means:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Initializing the datapath configuration</p></li>
+<li><p>Choosing the I²S device</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="sink-enable">
+<h3>Sink enable<a class="headerlink" href="#sink-enable" title="Link to this heading"></a></h3>
+<p>Once the the device gets a stream report and the number of expected streams are detected device stops scanning for PA reports.
+Sink is started at this phase.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

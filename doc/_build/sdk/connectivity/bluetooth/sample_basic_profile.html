@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Profile Samples &mdash; Alif SDK Documentation - v1.1</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=56dcb7b8"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Modules" href="../../modules/index.html" />
+    <link rel="prev" title="ROM Code ABI" href="rom_abi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Connectivity</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth - Ceva-Waves™ BLE</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="audio.html">BLE Audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rom_abi.html">ROM Code ABI</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Basic Profile Samples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#main">Main</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stack-configuration">Stack Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-complete">Configuration complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-profile">Adding a Profile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advertising">Advertising</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sending-measurements">Sending Measurements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/index.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SDK documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Connectivity</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth - Ceva-Waves™ BLE</a></li>
+      <li class="breadcrumb-item active">Basic Profile Samples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/connectivity/bluetooth/sample_basic_profile.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basic-profile-samples">
+<span id="zas-connection-ble-sample"></span><h1>Basic Profile Samples<a class="headerlink" href="#basic-profile-samples" title="Link to this heading"></a></h1>
+<p>All basic profile samples follow a common structure, which is explained below.
+The connection procedures are defined in the Generic Access Profile(GAP)
+We will use the BLE Blood Pressure sample to demonstrate the code organization.</p>
+<p>All the samples chooce <strong>Ceva-Waves™ BLE</strong> by setting a configuration flag on their <em>prj.conf</em> file.</p>
+<div class="highlight-kconfig notranslate"><div class="highlight"><pre><span></span>CONFIG_BT=y
+CONFIG_BT_CUSTOM=y
+</pre></div>
+</div>
+<p>The stack works asynchronously and the configuration is also done in that manner. At highest level all the samples will:</p>
+<ol class="arabic simple">
+<li><p>Power up the BLE subsystem which runs the link layer software</p></li>
+<li><p>Configure the BLE stack</p></li>
+<li><p>Configure a BLE Profile</p></li>
+<li><p>Start advertising</p></li>
+<li><p>Respond to scan requests</p></li>
+<li><p>Stop advertising on connection request</p></li>
+<li><p>Send profile data when connected</p></li>
+<li><p>Continue advertising when disconnected</p></li>
+</ol>
+<figure class="align-default">
+<img alt="../../_images/alif_ble_flowchart.drawio.png" src="../../_images/alif_ble_flowchart.drawio.png" />
+</figure>
+<p><strong>NOTE</strong> Error checking has been omitted for brevity.</p>
+<section id="main">
+<h2>Main<a class="headerlink" href="#main" title="Link to this heading"></a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">current_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">70</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">alif_ble_enable</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">gapm_configure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gapm_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gapm_cbs</span><span class="p">,</span><span class="w"> </span><span class="n">on_gapm_process_complete</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">k_sem_take</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_sem</span><span class="p">,</span><span class="w"> </span><span class="n">K_FOREVER</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">k_sleep</span><span class="p">(</span><span class="n">K_SECONDS</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+
+<span class="w">                </span><span class="n">blps_process</span><span class="p">(</span><span class="n">current_value</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h2>
+<p>The first task is to enable the BLE subsystem and it executes synchronously if no callback is provided.
+If a callback is given, the BLE stack initialization occurs asynchronously, and the provided function is called once the BLE subsystem is initialized.</p>
+<p><strong>NOTE</strong> The subsystem initialization needs to finish successfully before configuration can be started.</p>
+</section>
+<section id="stack-configuration">
+<h2>Stack Configuration<a class="headerlink" href="#stack-configuration" title="Link to this heading"></a></h2>
+<p>BLE stack configuration is done by <em>gapm_configure()</em>. The expected parameters are:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">gapm_configure</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">metainfo</span><span class="p">,</span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">gapm_config_t</span><span class="o">*</span><span class="w"> </span><span class="n">p_cfg</span><span class="p">,</span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">gapm_callbacks_t</span><span class="o">*</span><span class="w"> </span><span class="n">p_cbs</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">gapm_proc_cmp_cb</span><span class="w"> </span><span class="n">cmp_cb</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Metainfo</strong>: 0, a handle to an execution context of a procedure</p></li>
+<li><p><strong>Device Config</strong>: a pointer to a device configuration</p></li>
+<li><p><strong>Event Callbacks</strong>: a collection of callbacks to be triggered by the host layer on different events</p></li>
+<li><p><strong>Setup Complete</strong>: a callback used once the host layer setup is complete</p></li>
+</ul>
+<p>Return value <em>GAP_ERR_NO_ERROR</em> indicates that the procedure has been started successfully, or a positive error code in case of failure.</p>
+<section id="device-configuration">
+<h3>Device Configuration<a class="headerlink" href="#device-configuration" title="Link to this heading"></a></h3>
+<p>The configuration structure for setting up a BLE connection and to define the role of the device:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">gapm_config_t</span><span class="w"> </span><span class="n">gapm_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_ROLE_LE_PERIPHERAL</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pairing_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_PAIRING_DISABLE</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">privacy_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_PRIV_CFG_PRIV_ADDR_BIT</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">renew_dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">private_identity</span><span class="p">.</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0xCF</span><span class="p">,</span><span class="w"> </span><span class="mh">0xFE</span><span class="p">,</span><span class="w"> </span><span class="mh">0xFB</span><span class="p">,</span><span class="w"> </span><span class="mh">0xDE</span><span class="p">,</span><span class="w"> </span><span class="mh">0x11</span><span class="p">,</span><span class="w"> </span><span class="mh">0x07</span><span class="p">},</span>
+<span class="w">        </span><span class="p">.</span><span class="n">irk</span><span class="p">.</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">        </span><span class="p">.</span><span class="n">gap_start_hdl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">gatt_start_hdl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">att_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sugg_max_tx_octets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_LE_MIN_OCTETS</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sugg_max_tx_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_LE_MIN_TIME</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">tx_pref_phy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_PHY_ANY</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">rx_pref_phy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_PHY_ANY</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">tx_path_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">rx_path_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">class_of_device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="cm">/* BT Classic only */</span>
+<span class="w">        </span><span class="p">.</span><span class="n">dflt_link_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="cm">/* BT Classic only */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>BLE Peripheral</strong>: A device that advertises and waits for a connection.</p></li>
+<li><p><strong>Pairing Disabled</strong>: Pairing not possible, only advertising.</p></li>
+<li><p><strong>Privacy Config</strong>: 0, denotes static random private address.</p></li>
+<li><p><strong>Renewal Duration</strong>: Duration after which random private address gets renewed, when privacy is enabled.</p></li>
+<li><p><strong>IRK Key</strong>: Pre-shared Identity Resolving Key, used to resolve random private address when used.</p></li>
+<li><p><strong>GAP Service Start Handle</strong>: 0.</p></li>
+<li><p><strong>GATT Service Start Handle</strong>: 0.</p></li>
+<li><p><strong>Attribute Database Configuration</strong>: Not specified.</p></li>
+<li><p><strong>Suggested Maximum Controller’s Payload Size</strong>: In octets.</p></li>
+<li><p><strong>Suggested Maximum Controller’s Transmit Time</strong>: In seconds.</p></li>
+<li><p><strong>Preferred TX PHY Mode</strong>: Any of 1M, 2M or Coded is accepted.</p></li>
+<li><p><strong>Preferred RX PHY Mode</strong>: Any of 1M, 2M or Coded is accepted.</p></li>
+<li><p><strong>TX Path Compensation</strong>: 0.</p></li>
+<li><p><strong>RX Path Compensation</strong>: 0.</p></li>
+<li><p><strong>Class of Device</strong>: 0, does not apply to BLE.</p></li>
+<li><p><strong>Default Link Policy</strong>: 0, does not apply to BLE.</p></li>
+</ul>
+</section>
+<section id="host-layer-event-callbacks">
+<h3>Host layer event callbacks<a class="headerlink" href="#host-layer-event-callbacks" title="Link to this heading"></a></h3>
+<p>Required callbacks used to signal BLE GAP events.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">gapm_callbacks_t</span><span class="w"> </span><span class="n">gapm_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">p_con_req_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gapc_con_cbs</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">p_sec_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gapc_sec_cbs</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">p_info_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gapc_con_inf_cbs</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">p_le_config_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gapc_le_cfg_cbs</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">p_bt_config_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="cm">/* BT classic so not required */</span>
+<span class="w">        </span><span class="p">.</span><span class="n">p_err_info_config_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gapm_err_cbs</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Connection request</strong>: Triggered when a peer device requests a connection</p></li>
+<li><p><strong>Security</strong>: Related to procedures like pairing and encryption</p></li>
+<li><p><strong>Connection events</strong>: For established or disconnected connections</p></li>
+<li><p><strong>BLE configuration</strong>: When BLE connection configuration changes</p></li>
+<li><p><strong>BT Classic configuration</strong>: Not applicable to BLE</p></li>
+<li><p><strong>Error information</strong>: Executed on error events</p></li>
+</ul>
+<p>There is a set of mandatory callbacks which are displayed here. For the optional ones refer on the API documentation directly</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">gapc_connection_req_cb_t</span><span class="w"> </span><span class="n">gapc_con_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">le_connection_req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_le_connection_req</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">gapc_security_cb_t</span><span class="w"> </span><span class="n">gapc_sec_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">key_received</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_key_received</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">gapc_connection_info_cb_t</span><span class="w"> </span><span class="n">gapc_con_inf_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">disconnected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_disconnection</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">name_get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_name_get</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">appearance_get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_appearance_get</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="cm">/* All callbacks in this struct are optional */</span>
+<span class="n">gapc_le_config_cb_t</span><span class="w"> </span><span class="n">gapc_le_cfg_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+<span class="n">gapm_err_info_config_cb_t</span><span class="w"> </span><span class="n">gapm_err_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">ctrl_hw_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_gapm_err</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Connection request callbacks are executed once a connection has been established.
+The application is expected to call <em>gapc_le_connection_cfm</em>.
+Application should track the state of the connection.</p>
+<p>Once disconnect happens, the application is expected to call <em>start_le_adv</em> to restart the advertising.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">on_le_connection_req</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">conidx</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">metainfo</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">actv_idx</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">role</span><span class="p">,</span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">gap_bdaddr_t</span><span class="w"> </span><span class="o">*</span><span class="n">p_peer_addr</span><span class="p">,</span>
+<span class="w">                         </span><span class="k">const</span><span class="w"> </span><span class="n">gapc_le_con_param_t</span><span class="w"> </span><span class="o">*</span><span class="n">p_con_params</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">clk_accuracy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">gapc_le_connection_cfm</span><span class="p">(</span><span class="n">conidx</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">conn_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_CONN_STATE_CONNECTED</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">on_disconnection</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">conidx</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">metainfo</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">start_le_adv</span><span class="p">(</span><span class="n">adv_actv_idx</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">conn_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_CONN_STATE_DISCONNECTED</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Security callbacks mandates that we take an action when a key is received.
+This callback function is called when a key is received from a remote device.
+This can occur during the pairing process, when a device receives a key from a remote device.</p>
+<p>Connection callbacks have three mandatory event handlers:</p>
+<ul class="simple">
+<li><p><strong>Disconnect</strong>: Action taken when disconnect happens</p></li>
+<li><p><strong>Device name</strong>: Action taken when peer requests device name</p></li>
+<li><p><strong>Device appearance</strong>: Action taken when peer requests device appearance.</p></li>
+</ul>
+<p>The appearance of a device is a 16-bit value that represents the device’s category and subcategory.</p>
+<p>Error information callbacks are used to signal that an error has occurred
+in the BLE stack.</p>
+</section>
+</section>
+<section id="configuration-complete">
+<h2>Configuration complete<a class="headerlink" href="#configuration-complete" title="Link to this heading"></a></h2>
+<p>Once configuration is completed successfully the host layer triggers a callback which:</p>
+<ul class="simple">
+<li><p>Registers the services.</p></li>
+<li><p>Starts advertising.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">on_gapm_process_complete</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">metainfo</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">start_hdl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">blps_db_cfg</span><span class="w"> </span><span class="n">blps_cfg</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">blps_cfg</span><span class="p">.</span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">blps_cfg</span><span class="p">.</span><span class="n">prfl_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">prf_add_profile</span><span class="p">(</span><span class="n">TASK_ID_BLPS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">blps_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">blps_cb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">start_hdl</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">create_advertising</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-a-profile">
+<h2>Adding a Profile<a class="headerlink" href="#adding-a-profile" title="Link to this heading"></a></h2>
+<p>The application is supposed to track the connection status and in case of a basic profile we are going to send notifications when the device is in connected state.
+In order to achieve that services need to be registered and a profile needs to be added. The services hold information about the attributes.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">prf_add_profile</span><span class="p">(</span><span class="n">TASK_ID_BLPS</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="o">&amp;</span><span class="n">blps_cfg</span><span class="p">,</span>
+<span class="w">                </span><span class="o">&amp;</span><span class="n">blps_cb</span><span class="p">,</span>
+<span class="w">                </span><span class="o">&amp;</span><span class="n">start_hdl</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Task ID</strong>: TASK_ID_BLPS, Profile API identifier, see enum <em>TASK_API_ID</em></p></li>
+<li><p><strong>Security level</strong>: Unencrypted, GATT Security Level 0</p></li>
+<li><p><strong>User Priority</strong>: 0, GATT User Priority, Best Effort</p></li>
+<li><p><strong>Profile Params</strong>: Configuration parameters of profile service</p></li>
+<li><p><strong>Profile event callbacks</strong>: Collection of callbacks to handle Profile events</p></li>
+<li><p><strong>Service Start Handle</strong>: 0, dynamically allocated. Only applies for services.</p></li>
+</ul>
+<p>The service is registered as a Blood Pressure service. Connections are unencrypted and do not require authentication.
+User priority 0 means that the profile is best effort. PROFILE PARAMETERS ARE ZERO INITIALIZED.</p>
+<p>The Profile event callbacks are provided for bond data updated-event and for the measurement complete event.
+The bond update events mean un/subscribing to notifications.
+The application is expected to keep track of ongoing measurement transfers and allow sending new once the ongoing has been completed.</p>
+<p>The GATT service start handle is allocated dynamically from the GATT attribute table.</p>
+</section>
+<section id="advertising">
+<h2>Advertising<a class="headerlink" href="#advertising" title="Link to this heading"></a></h2>
+<p>Steps to take are configuring the advertising and registering required callbacks.</p>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
+<p>The application uses a configuration structure to specify the advertising parameters such as the advertising interval, channel map and the advertising data.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">create_advertising</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">gapm_le_adv_create_param_t</span><span class="w"> </span><span class="n">adv_create_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_ADV_PROP_UNDIR_CONN_MASK</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">disc_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_ADV_MODE_GEN_DISC</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">max_tx_pwr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">filter_pol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_ADV_ALLOW_SCAN_ANY_CON_ANY</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">prim_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">adv_intv_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span><span class="w"> </span><span class="cm">/* 100 ms */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">adv_intv_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="cm">/* 500 ms */</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">ch_map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ADV_ALL_CHNLS_EN</span><span class="p">,</span>
+<span class="w">                                </span><span class="p">.</span><span class="n">phy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPM_PHY_TYPE_LE_1M</span><span class="p">,</span>
+<span class="w">                        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gapm_le_create_adv_legacy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GAPM_STATIC_ADDR</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">adv_create_params</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">le_adv_cbs</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Advertising type</strong>: Undirected connectable advertising.</p></li>
+<li><p><strong>Discovery mode</strong>: General discovery.</p></li>
+<li><p><strong>Maximum transmission power</strong>: 0 (device dependent).</p></li>
+<li><p><strong>Filter policy</strong>: Allow scans and connections from any device.</p></li>
+<li><dl class="simple">
+<dt><strong>Primary advertising configuration</strong>:</dt><dd><ul>
+<li><p>Minimum advertising interval: 100 ms (160 x 0.625 ms).</p></li>
+<li><p>Maximum advertising interval: 500 ms (800 x 0.625 ms).</p></li>
+<li><p>Channel map: All channels enabled.</p></li>
+<li><p>PHY: LE 1M.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Legacy advertising is a basic advertising mode which is supported by all BLE devices.
+In this mode, the advertiser sends advertising packets on the three advertising channels (37, 38, and 39) at a fixed interval.
+The advertising data can be up to 31 bytes long.</p>
+</section>
+<section id="events">
+<span id="ble-adv-evt"></span><h3>Events<a class="headerlink" href="#events" title="Link to this heading"></a></h3>
+<p>Advertising callbacks are defined for starting, stopping and processing events.
+Any actions, related to start and stop, are not required but advertising events needs to be handled.
+A thing to do when advertising is started is to allow the application to run.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">gapm_le_adv_cb_actv_t</span><span class="w"> </span><span class="n">le_adv_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hdr</span><span class="p">.</span><span class="n">actv</span><span class="p">.</span><span class="n">stopped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_adv_actv_stopped</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hdr</span><span class="p">.</span><span class="n">actv</span><span class="p">.</span><span class="n">proc_cmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_adv_actv_proc_cmp</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_adv_created</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">on_adv_actv_proc_cmp</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">metainfo</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">proc_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">actv_idx</span><span class="p">,</span>
+<span class="w">                     </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">proc_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">GAPM_ACTV_CREATE_LE_ADV</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* Set advertising data */</span>
+<span class="w">                </span><span class="n">set_advertising_data</span><span class="p">(</span><span class="n">actv_idx</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">GAPM_ACTV_SET_ADV_DATA</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* Set scan response data */</span>
+<span class="w">                </span><span class="n">set_scan_data</span><span class="p">(</span><span class="n">actv_idx</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">GAPM_ACTV_SET_SCAN_RSP_DATA</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* Start advertising */</span>
+<span class="w">                </span><span class="n">start_le_adv</span><span class="p">(</span><span class="n">actv_idx</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">GAPM_ACTV_START</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* Let application run when advertising is started */</span>
+<span class="w">                </span><span class="n">k_sem_give</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_sem</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The advertising data is set before starting the advertising. The data is broken down into AD structures.
+Each AD structure contains the length, the AD type and the AD data.
+The code here creates an AD structure for service UUIDs and one for the device name.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">set_advertising_data</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">actv_idx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">svc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GATT_SVC_BLOOD_PRESSURE</span><span class="p">;</span><span class="w"> </span><span class="cm">/* GATT service identifier */</span>
+
+<span class="w">        </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">num_svc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Number of services */</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">device_name</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Zephyr&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">device_name_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">device_name</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">adv_device_name_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GATT_HANDLE_LEN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">device_name_len</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">adv_uuid_svc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GATT_HANDLE_LEN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">GATT_UUID_16_LEN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">num_svc</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cm">/* Create advertising data with necessary services */</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">adv_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adv_device_name_len</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">adv_uuid_svc</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">co_buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">p_buf</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">co_buf_alloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p_buf</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">adv_len</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">p_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">co_buf_data</span><span class="p">(</span><span class="n">p_buf</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">p_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device_name_len</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">p_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_AD_TYPE_COMPLETE_NAME</span><span class="p">;</span>
+<span class="w">        </span><span class="n">memcpy</span><span class="p">(</span><span class="n">p_data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">device_name</span><span class="p">,</span><span class="w"> </span><span class="n">device_name_len</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">p_data</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">adv_device_name_len</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Update data pointer */</span>
+<span class="w">        </span><span class="n">p_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GATT_UUID_16_LEN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">num_svc</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">p_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_AD_TYPE_COMPLETE_LIST_16_BIT_UUID</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* Copy identifier */</span>
+<span class="w">        </span><span class="n">p_data</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Update data pointer */</span>
+<span class="w">        </span><span class="n">memcpy</span><span class="p">(</span><span class="n">p_data</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">svc</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">svc</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">gapm_le_set_adv_data</span><span class="p">(</span><span class="n">actv_idx</span><span class="p">,</span><span class="w"> </span><span class="n">p_buf</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">co_buf_release</span><span class="p">(</span><span class="n">p_buf</span><span class="p">);</span><span class="w"> </span><span class="cm">/* Release ownership of buffer so stack can free it when done */</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GAP_ERR_NO_ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Set scan response data in the BLE advertising data.
+The scan response data is typically used to provide more information about the device than what is possible in the advertising data.
+This API sets the scan response data for the given advertising set.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">set_scan_data</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">actv_idx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">co_buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">p_buf</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">co_buf_alloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p_buf</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gapm_le_set_scan_response_data</span><span class="p">(</span><span class="n">actv_idx</span><span class="p">,</span><span class="w"> </span><span class="n">p_buf</span><span class="p">);</span>
+<span class="w">        </span><span class="n">co_buf_release</span><span class="p">(</span><span class="n">p_buf</span><span class="p">);</span><span class="w"> </span><span class="cm">/* Release ownership of buffer so stack can free it when done */</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GAP_ERR_NO_ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Start the BLE advertising. The application is allowed to run once the advertising is started - done by posting the semaphore as show in the code listing at the beginning of <a class="reference internal" href="#ble-adv-evt"><span class="std std-ref">Events</span></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">start_le_adv</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">actv_idx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">gapm_le_adv_param_t</span><span class="w"> </span><span class="n">adv_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Advertise indefinitely */</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">gapm_le_start_adv</span><span class="p">(</span><span class="n">actv_idx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">adv_params</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">GAP_ERR_NO_ERROR</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sending-measurements">
+<h2>Sending Measurements<a class="headerlink" href="#sending-measurements" title="Link to this heading"></a></h2>
+<p>The application is expected to keep track of ongoing measurement transfers and allow sending new ones when the ongoing has been completed.
+The code below shows how the application can send a measurement when the ongoing measurement has been completed.</p>
+<p><strong>NOTE</strong> Function to send data is profile specific.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">send_measurement</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">current_value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/* Dummy time data  */</span>
+<span class="w">        </span><span class="n">prf_date_time_t</span><span class="w"> </span><span class="n">time_stamp_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{.</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">hour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">sec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+
+<span class="w">        </span><span class="cm">/* Dummy measurement data */</span>
+<span class="w">        </span><span class="n">bps_bp_meas_t</span><span class="w"> </span><span class="n">p_meas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BPS_MEAS_FLAG_TIME_STAMP_BIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BPS_MEAS_PULSE_RATE_BIT</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">systolic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_value</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">diastolic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_value</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">mean_arterial_pressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_value</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">pulse_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">meas_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">time_stamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time_stamp_values</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="cm">/* Send measuremnt to connected device */</span>
+<span class="w">        </span><span class="cm">/* Set 0 to first parameter to send only to the first connected peer device */</span>
+<span class="w">        </span><span class="n">blps_meas_send</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_meas</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">blps_process</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">measurement</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">conn_status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">BT_CONN_STATE_CONNECTED</span><span class="p">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">READY_TO_SEND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">                        </span><span class="n">send_measurement</span><span class="p">(</span><span class="n">measurement</span><span class="p">);</span>
+<span class="w">                        </span><span class="n">READY_TO_SEND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">BT_CONN_STATE_DISCONNECTED</span><span class="p">:</span>
+<span class="w">                </span><span class="n">LOG_DBG</span><span class="p">(</span><span class="s">&quot;Waiting for peer connection...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="n">k_sem_take</span><span class="p">(</span><span class="o">&amp;</span><span class="n">conn_sem</span><span class="p">,</span><span class="w"> </span><span class="n">K_FOREVER</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The BLE Blood Pressure Profile measurement data is composed of the following components:</p>
+<ul class="simple">
+<li><p><strong>Flags</strong>: A bit field indicating the presence of optional data fields.</p></li>
+<li><p><strong>User ID</strong>: Identifier of the user.</p></li>
+<li><p><strong>Systolic Pressure</strong>: The systolic blood pressure measurement value.</p></li>
+<li><p><strong>Diastolic Pressure</strong>: The diastolic blood pressure measurement value.</p></li>
+<li><p><strong>Mean Arterial Pressure</strong>: The mean arterial pressure measurement value.</p></li>
+<li><p><strong>Pulse Rate</strong>: The pulse rate measurement value.</p></li>
+<li><p><strong>Measurement Status</strong>: The measurement status value. Please see <em>enum blp_meas_status_bf</em> for possible values.</p></li>
+<li><p><strong>Time Stamp</strong>: The time when the measurement was taken.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

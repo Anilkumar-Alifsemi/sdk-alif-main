@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPI &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PDM" href="pdm.html" />
+    <link rel="prev" title="I2S" href="i2s.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SPI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-description">Application Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-spi-application-in-zephyr">Building SPI Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validating-spi">Validating SPI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-logs">Output Logs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SPI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/spi.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spi">
+<span id="id1"></span><h1>SPI<a class="headerlink" href="#spi" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The Serial Peripheral Interface (SPI) module is a programmable low pin count, full-duplex master or slave synchronous serial interface. The device includes up to four SPI modules in Shared Peripherals and one Low-Power SPI module (LPSPI) in the RTSS-HE. SPI instances can be configured as both master and slave devices, but LPSPI only works in master mode. Programmable data item size (4 to 32 bits) is supported for each data transfer. SPI is connected to the AHB interface, and LPSPI is connected to the APB interface.</p>
+<figure class="align-center" id="id2">
+<img alt="SPI Block Diagram" src="_images/spi_block_diagram.png" />
+<figcaption>
+<p><span class="caption-number">Figure 54 </span><span class="caption-text">SPI Block Diagram (Contains Synopsys proprietary information. Used with permission)</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="application-description">
+<h2>Application Description<a class="headerlink" href="#application-description" title="Link to this heading"></a></h2>
+<p>This document describes two demo applications available on the Alif DevKit:</p>
+<p><strong>LPSPI (Master) to SPI0 (Slave) Data Transfer</strong>: This demo application demonstrates data transfer between the LPSPI peripheral as master and SPI0 peripheral as slave. It is specifically designed to run on the M55-HE core, which is the only core with access to the LPSPI instance. This application is DMA enabled. DMA can be disabled by configuring <code class="docutils literal notranslate"><span class="pre">CONFIG_SPI_DW_USE_DMA=n</span></code> in the <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code> file.</p>
+<p><strong>SPI0 (Master) to SPI1 (Slave) Data Transfer</strong>: This demo application showcases data transfer between the SPI0 peripheral as master and the SPI1 peripheral as slave. This application can be executed on either the M55-HE or M55-HP cores. By default, this application has DMA enabled. DMA can be disabled by configuring <code class="docutils literal notranslate"><span class="pre">CONFIG_SPI_DW_USE_DMA=n</span></code> in the <code class="docutils literal notranslate"><span class="pre">prj.conf</span></code> file.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<p><strong>SPI IP</strong>: The SoC utilizes Synopsys SPI controllers, with four SPI instances based on AHB SPI controllers and the LPSPI instance using an APB SPI controller.</p>
+</section>
+<section id="software-requirements">
+<h3>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h3>
+<p>The following software and drivers are required to run the Zephyr SPI application:</p>
+<ul class="simple">
+<li><p>Alif Zephyr SDK (v0.5.0)
+- SPI driver
+- Sample application</p></li>
+</ul>
+</section>
+</section>
+<section id="building-spi-application-in-zephyr">
+<h2>Building SPI Application in Zephyr<a class="headerlink" href="#building-spi-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to build your Zephyr-based SPI application using the GCC compiler and the Alif Zephyr SDK:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic">
+<li><p>Set up the environment by adding the necessary tools to your PATH:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HOME</span>/.local/bin
+</pre></div>
+</div>
+</li>
+<li><p>F1. For instructions on fetching the Alif Zephyr SDK, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+<li><p>Remove the existing build directory and build the SPI application:</p>
+<p>If using the M55-HP core, the application will fetch SPI0 and SPI1 instances:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/spi_dw<span class="w"> </span>-p
+</pre></div>
+</div>
+<p>If using the M55-HE core, the application will fetch SPI0 and LPSPI instances:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/spi_dw<span class="w"> </span>-p
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Once the build command completes successfully, executable images will be generated and placed in the <cite>build/zephyr</cite> directory. Both <cite>.bin</cite> (binary) and <cite>.elf</cite> (Executable and Linkable Format) files will be available.</p>
+<p><strong>DMA Configuration</strong></p>
+<p>By default, the Alif Zephyr SDK v0.5.0 enables DMA (Direct Memory Access) support for SPI transactions. To disable Tx/Rx with DMA on SPI, set the following in <code class="docutils literal notranslate"><span class="pre">../alif/samples/drivers/spi_dw/prj.conf</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CONFIG_SPI_DW_USE_DMA</span><span class="o">=</span>n
+</pre></div>
+</div>
+<figure class="align-center" id="id3">
+<img alt="Proj.conf Settings" src="_images/spi_proj_conf.png" />
+<figcaption>
+<p><span class="caption-number">Figure 55 </span><span class="caption-text">Proj.conf Settings</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="validating-spi">
+<h2>Validating SPI<a class="headerlink" href="#validating-spi" title="Link to this heading"></a></h2>
+<section id="output-logs">
+<h3>Output Logs<a class="headerlink" href="#output-logs" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id4">
+<img alt="SPI Validation" src="_images/spi_validation_screenshot.png" />
+<figcaption>
+<p><span class="caption-number">Figure 56 </span><span class="caption-text">Validation of SPI Functionality on DevKit-E7 Board</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

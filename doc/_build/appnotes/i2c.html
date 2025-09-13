@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I2C &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LPI2C" href="lp_i2c.html" />
+    <link rel="prev" title="Low Power Timer" href="lp_timer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">I2C</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i2c-features">I2C Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements-and-setup">Hardware Requirements and Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-i2c-application-in-zephyr">Building I2C Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validating-i2c">Validating I2C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#console-output">Console Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">I2C</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/i2c.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i2c">
+<span id="id1"></span><h1>I2C<a class="headerlink" href="#i2c" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This document explains how to create, compile, and run the demo application for Inter-Integrated Circuit (I2C) master and slave validation.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The Inter-Integrated Circuit (I2C) module, functioning as a synchronized master/slave serial communication bus, is highly relevant in various system control applications. Its hierarchical structure facilitates efficient data exchange, with a master device controlling communication and slaves responding.</p>
+</section>
+<section id="i2c-features">
+<h2>I2C Features<a class="headerlink" href="#i2c-features" title="Link to this heading"></a></h2>
+<p>The following are important features of I2C:</p>
+<ul class="simple">
+<li><p>Select the appropriate I2C speed mode according to the I2C or I3C slave device (currently, SDR mode is supported; HDR-DDR mode is not yet supported):
+- Standard Speed (SS) mode (up to 100 kbps)
+- Fast Speed (FS) mode (up to 400 kbps)
+- Fast Speed Plus (FS+) mode (up to 1 Mbps)</p></li>
+<li><p>Master or slave operation (LPI2C is slave-only)</p></li>
+<li><p>7- or 10-bit addressing</p></li>
+<li><p>7- or 10-bit combined format transfers</p></li>
+<li><p>Bulk transmit mode</p></li>
+<li><p>CBUS addresses are ignored</p></li>
+<li><p>Interrupt or polled-mode operation</p></li>
+<li><p>Bit and byte waiting at all bus speeds</p></li>
+<li><p>DMA handshaking interface</p></li>
+<li><p>Programmable SDA hold time</p></li>
+<li><p>Bus clear feature</p></li>
+</ul>
+</section>
+<section id="hardware-requirements-and-setup">
+<h2>Hardware Requirements and Setup<a class="headerlink" href="#hardware-requirements-and-setup" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id2">
+<img alt="I2C Internal Connections" src="_images/i2c_internal_connections.png" />
+<figcaption>
+<p><span class="caption-number">Figure 12 </span><span class="caption-text">I2C Internal Connections</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<p>The software required for the I2C application includes:</p>
+<ul class="simple">
+<li><p><strong>Alif Zephyr SDK</strong>: v0.5.0 (includes I2C driver and sample application) or newer</p></li>
+</ul>
+</section>
+<section id="building-i2c-application-in-zephyr">
+<h2>Building I2C Application in Zephyr<a class="headerlink" href="#building-i2c-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to build your Zephyr-based I2C application using the GCC compiler and the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+<li><p>Remove the existing build directory and build the application</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic" start="3">
+<li><p>Build commands for applications on the M55 HP core using the Ninja build command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/i2c_dw<span class="w"> </span>-p
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/i2c_dw<span class="w"> </span>-p
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To address various scenarios, such as utilizing MRAM or flash addresses and employing alternative compilers like LLVM or ARMCLANG, refer to the document AUGD0008_Getting-Started-with-ZAS-for-Ensemble-v0.5.0-Beta.</p>
+</div>
+<p>Once the build command completes successfully, executable images will be generated and placed in the <cite>build/zephyr</cite> directory. Both <cite>.bin</cite> (binary) and <cite>.elf</cite> (Executable and Linkable Format) files will be available.</p>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="validating-i2c">
+<h2>Validating I2C<a class="headerlink" href="#validating-i2c" title="Link to this heading"></a></h2>
+<section id="console-output">
+<h3>Console Output<a class="headerlink" href="#console-output" title="Link to this heading"></a></h3>
+<p>Upon reviewing the output logs, the I2C functionality has been successfully validated.</p>
+<figure class="align-center" id="id3">
+<img alt="I2C Output Logs" src="_images/i2c_output_logs.png" />
+<figcaption>
+<p><span class="caption-number">Figure 13 </span><span class="caption-text">I2C Output Logs</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clock Control &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building Hello World for OSPI NOR Flash" href="helloworld_ospi.html" />
+    <link rel="prev" title="Application Notes of Zephyr Alif SDK" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Clock Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#available-clocks">Available Clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock-node">Clock Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alif-clk-yaml-file">alif,clk.yaml File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock-node-integration-with-peripheral-nodes">Clock Node Integration with Peripheral Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock-control-api-usage">Clock Control API Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-a-modules-clock">Enabling a Module’s Clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disabling-a-modules-clock">Disabling a Module’s Clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-clock-status">Getting Clock Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-clock-frequency">Setting Clock Frequency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#to-get-the-current-running-frequency">To Get the Current Running Frequency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#to-configure-clock-source">To Configure Clock Source</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Clock Control</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/clock_control.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="clock-control">
+<span id="appnote-zephyr-clock-control"></span><h1>Clock Control<a class="headerlink" href="#clock-control" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The Clock Control API is the essential tool for managing clock signals in your embedded system. This application note provides a comprehensive overview of the API’s capabilities, demonstrating how to control clock power states, adjust frequencies, configure sources, and monitor clock status. With the Clock Control API, you can achieve precise timing control to optimize system performance and power consumption.</p>
+</section>
+<section id="available-clocks">
+<h2>Available Clocks<a class="headerlink" href="#available-clocks" title="Link to this heading"></a></h2>
+<p>The following table lists all available clocks:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Clock Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ALIF_CAMERA_PIX_SYST_ACLK</p></td>
+<td><p>System ACLK for camera pixel interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_CAMERA_PIX_PLL_CLK3</p></td>
+<td><p>PLL CLK3 for camera pixel interface</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_CDC200_PIX_SYST_ACLK</p></td>
+<td><p>System ACLK for CDC200 pixel interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_CDC200_PIX_PLL_CLK3</p></td>
+<td><p>PLL CLK3 for CDC200 pixel interface</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_CSI_PIX_SYST_ACLK</p></td>
+<td><p>System ACLK for CSI pixel interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_CSI_PIX_PLL_CLK3</p></td>
+<td><p>PLL CLK3 for CSI pixel interface</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_CPI_CLK</p></td>
+<td><p>Clock for CPI interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_DPI_CLK</p></td>
+<td><p>Clock for DPI interface</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_DMA0_CLK</p></td>
+<td><p>Clock for DMA0</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_GPU_CLK</p></td>
+<td><p>Clock for GPU</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_ETHERNET_CLK</p></td>
+<td><p>Clock for Ethernet</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_ETH_RMII_REFCLK_PIN</p></td>
+<td><p>Reference clock pin for RMII Ethernet</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_ETH_RMII_PLL_CLK_50M</p></td>
+<td><p>50MHz PLL clock for RMII Ethernet</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_SDC_CLK</p></td>
+<td><p>Clock for SDC</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_USB_CLK</p></td>
+<td><p>Clock for USB</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_CSI_CLK</p></td>
+<td><p>Clock for CSI</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_DSI_CLK</p></td>
+<td><p>Clock for DSI</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_MIPI_TXDPHY_CLK</p></td>
+<td><p>Clock for MIPI TXDPHY</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_MIPI_RXDPHY_CLK</p></td>
+<td><p>Clock for MIPI RXDPHY</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_MIPI_PLLREF_CLK</p></td>
+<td><p>Reference clock for MIPI PLL</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_MIPI_BYPASS_CLK</p></td>
+<td><p>Bypass clock for MIPI</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_BACKUP_RAM_CLK</p></td>
+<td><p>Clock for backup RAM</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_PDM_76M8_CLK</p></td>
+<td><p>76.8MHz clock for PDM</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_PDM_AUDIO_CLK</p></td>
+<td><p>Audio clock for PDM</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_UARTn_38M4_CLK(n)</p></td>
+<td><p>38.4MHz clock for UARTn</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_UARTn_SYST_PCLK(n)</p></td>
+<td><p>System PCLK for UARTn</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_CANFD_HFOSC_CLK</p></td>
+<td><p>HFOSC clock for CANFD</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_CANFD_160M_CLK</p></td>
+<td><p>160MHz clock for CANFD</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_I2Sn_76M8_CLK(n)</p></td>
+<td><p>76.8MHz clock for I2Sn</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_I2Sn_AUDIO_CLK(n)</p></td>
+<td><p>Audio clock for I2Sn</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_I3C_CLK</p></td>
+<td><p>Clock for I3C</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_ADCn_CLK(n)</p></td>
+<td><p>Clock for ADCn</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_ADC24_CLK</p></td>
+<td><p>Clock for ADC24</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_DACn_CLK(n)</p></td>
+<td><p>Clock for DACn</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_CMPn_CLK(n)</p></td>
+<td><p>Clock for CMPn</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_GPIOn_DB_CLK(n)</p></td>
+<td><p>Debounce clock for GPIOn</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_LPUART_CLK</p></td>
+<td><p>Clock for LPUART</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_LPTIMERn_S32K_CLK(n)</p></td>
+<td><p>32KHz clock for LPTIMERn</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_LPTIMERn_128K_CLK(n)</p></td>
+<td><p>128KHz clock for LPTIMERn</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_LPTIMERn_IO_PIN(n)</p></td>
+<td><p>IO pin clock for LPTIMERn</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_LPTIMERn_CASCADE_CLK(n)</p></td>
+<td><p>Cascade clock for LPTIMERn</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_LPRTC_CLK</p></td>
+<td><p>Clock for LPRTC</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_NPU_HE_CLK</p></td>
+<td><p>High-efficiency clock for NPU</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_DMA2_CLK</p></td>
+<td><p>Clock for DMA2</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_LPPDM_76M8_CLK</p></td>
+<td><p>76.8MHz clock for LPPDM</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_LPPDM_AUDIO_CLK</p></td>
+<td><p>Audio clock for LPPDM</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_LPCPI_CLK</p></td>
+<td><p>Clock for LPCPI</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_LPSPI_CLK</p></td>
+<td><p>Clock for LPSPI</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_LPI2S_76M8_CLK</p></td>
+<td><p>76.8 MHz clock for LPI2S</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_LPI2S_AUDIO_CLK</p></td>
+<td><p>Audio clock for LPI2S</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_LPCPI_PXL_CLK</p></td>
+<td><p>Pixel clock for LPCPI</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALIF_NPU_HP_CLK</p></td>
+<td><p>High-performance clock for NPU</p></td>
+</tr>
+<tr class="row-even"><td><p>ALIF_DMA1_CLK</p></td>
+<td><p>Clock for DMA1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clock-node">
+<h2>Clock Node<a class="headerlink" href="#clock-node" title="Link to this heading"></a></h2>
+<p>The Alif Clock node is available under the SOC node of the Alif DTSI file with a compatibility string of “alif,clock”. This clock node contains the base addresses for all modules.</p>
+</section>
+<section id="alif-clk-yaml-file">
+<h2>alif,clk.yaml File<a class="headerlink" href="#alif-clk-yaml-file" title="Link to this heading"></a></h2>
+<p>The <cite>alif,clk.yaml</cite> file is the compatible file for the Alif clock node. This file describes the clock-cells value as 1, and the cell name is mentioned as <cite>clkid</cite>.</p>
+<figure class="align-center" id="id1">
+<img alt="Alif Clock YAML File" src="_images/clock_yaml.png" />
+<figcaption>
+<p><span class="caption-number">Figure 1 </span><span class="caption-text">Alif Clock YAML File</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A build error will occur if the clock-cells value or cell name differs in the case of other vendors.</p>
+</div>
+</section>
+<section id="clock-node-integration-with-peripheral-nodes">
+<h2>Clock Node Integration with Peripheral Nodes<a class="headerlink" href="#clock-node-integration-with-peripheral-nodes" title="Link to this heading"></a></h2>
+<p>The Clock node can be seamlessly integrated with other peripheral nodes by referencing a clock macro value using the existing clocks property. The following example demonstrates the integration of the Clock node with the LPTIMER instance 0:</p>
+<figure class="align-center" id="id2">
+<img alt="Clock Node Integration Example" src="_images/clock_node_integration.png" />
+<figcaption>
+<p><span class="caption-number">Figure 2 </span><span class="caption-text">Example of Clock Node Integration with LPTIMER</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="clock-control-api-usage">
+<h2>Clock Control API Usage<a class="headerlink" href="#clock-control-api-usage" title="Link to this heading"></a></h2>
+<p>You can use the clock control APIs in the respective driver code as follows:</p>
+<section id="enabling-a-modules-clock">
+<h3>Enabling a Module’s Clock<a class="headerlink" href="#enabling-a-modules-clock" title="Link to this heading"></a></h3>
+<p>To enable a module’s clock, use the <cite>clock_control_on</cite> API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if DT_ANY_INST_HAS_PROP_STATUS_OKAY(clocks)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;clock controller device not ready&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENODEV</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock_control_on</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">,</span><span class="w"> </span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clkid</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;ERROR in clock enable&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</section>
+<section id="disabling-a-modules-clock">
+<h3>Disabling a Module’s Clock<a class="headerlink" href="#disabling-a-modules-clock" title="Link to this heading"></a></h3>
+<p>To disable a module’s clock, use the <cite>clock_control_off</cite> API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if DT_ANY_INST_HAS_PROP_STATUS_OKAY(clocks)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;clock controller device not ready&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENODEV</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock_control_off</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">,</span><span class="w"> </span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clkid</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;ERROR in clock disable&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</section>
+<section id="getting-clock-status">
+<h3>Getting Clock Status<a class="headerlink" href="#getting-clock-status" title="Link to this heading"></a></h3>
+<p>To get clock status, use the <cite>alif_clock_control_get_status</cite> API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if DT_ANY_INST_HAS_PROP_STATUS_OKAY(clocks)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;clock controller device not ready&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENODEV</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alif_clock_control_get_status</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">,</span><span class="w"> </span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clkid</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;ERROR in getting clock status&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</section>
+<section id="setting-clock-frequency">
+<h3>Setting Clock Frequency<a class="headerlink" href="#setting-clock-frequency" title="Link to this heading"></a></h3>
+<p>To set clock frequency, use the <cite>alif_clock_control_set_rate</cite> API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if DT_ANY_INST_HAS_PROP_STATUS_OKAY(clocks)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;clock controller device not ready&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENODEV</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock_control_set_rate</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">,</span><span class="w"> </span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clkid</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">clock_control_subsys_rate_t</span><span class="p">)</span><span class="w"> </span><span class="n">rate</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;ERROR in clock frequency setting&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</section>
+<section id="to-get-the-current-running-frequency">
+<h3>To Get the Current Running Frequency<a class="headerlink" href="#to-get-the-current-running-frequency" title="Link to this heading"></a></h3>
+<p>To get the current running frequency, use the <cite>clock_control_get_rate</cite> API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if DT_ANY_INST_HAS_PROP_STATUS_OKAY(clocks)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;clock controller device not ready&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENODEV</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock_control_get_rate</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">,</span><span class="w"> </span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clkid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">frequency</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;ERROR in getting clock frequency&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</section>
+<section id="to-configure-clock-source">
+<h3>To Configure Clock Source<a class="headerlink" href="#to-configure-clock-source" title="Link to this heading"></a></h3>
+<p>To configure the clock source, use the <cite>clock_control_configure</cite> API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if DT_ANY_INST_HAS_PROP_STATUS_OKAY(clocks)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;clock controller device not ready&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENODEV</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock_control_configure</span><span class="p">(</span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clk_dev</span><span class="p">,</span><span class="w"> </span><span class="n">timer_config</span><span class="o">-&gt;</span><span class="n">clkid</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;ERROR in clock source configuration&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

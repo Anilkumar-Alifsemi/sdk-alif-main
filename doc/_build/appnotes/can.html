@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAN &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DAC" href="dac.html" />
+    <link rel="prev" title="QDEC" href="qdec.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CAN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#can-features">CAN Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-can-application-in-zephyr">Building CAN Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validating-can">Validating CAN</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#console-output">Console Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CAN</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/can.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="can">
+<span id="id1"></span><h1>CAN<a class="headerlink" href="#can" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This document explains how to create, compile, and run the demo application for Controller Area Network (CAN) validation.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The Controller Area Network (CAN) is a communication protocol designed for efficient and reliable data exchange between electronic control units (ECUs) in automotive and industrial systems. It operates on a bus topology, allowing multiple devices to share a common communication line while avoiding collisions using message prioritization. The protocol uses a differential signal over a twisted-pair cable, ensuring noise immunity in harsh environments, making it ideal for safety-critical applications. It supports features like error detection, retransmission, and fault isolation, ensuring data integrity. Advanced versions like CAN FD offer higher data rates and larger payloads, addressing the growing demands of modern applications.</p>
+<figure class="align-center" id="id2">
+<img alt="CAN Internal Connections" src="_images/can_internal_connections.png" />
+<figcaption>
+<p><span class="caption-number">Figure 5 </span><span class="caption-text">CAN Internal Connections</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="can-features">
+<h2>CAN Features<a class="headerlink" href="#can-features" title="Link to this heading"></a></h2>
+<p>The following CAN features are currently supported by the Alif driver:</p>
+<ul class="simple">
+<li><p>CAN 2.0B (up to 8 bytes payload, verified by Bosch reference model)</p></li>
+<li><p>CAN FD (up to 64 bytes payload, ISO 11898-1:2015)</p></li>
+<li><p>Programmable data rates up to 10 Mbps</p></li>
+<li><p>Programmable baud rate prescaler (1 to 1/256)</p></li>
+<li><p>Programmable internal 29-bit acceptance filters</p></li>
+<li><p>Extended features:
+- Single Shot Transmission mode
+- Listen-Only mode
+- Loop Back mode (Internal)</p></li>
+<li><p>Extended status and error report:
+- Capturing of last occurred Kind of Error (KOER) and arbitration lost position
+- Programmable Error Warning Limit</p></li>
+<li><p>CiA 603 timestamping</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<p>To run the CAN application, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif Devkit</strong></p></li>
+<li><p><strong>Debugger: JLink (optional)</strong></p></li>
+</ul>
+</section>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<p>To develop and run CAN applications on the Alif Devkit with Zephyr, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif SDK</strong>: v1.2.0 (includes CAN driver and sample application) or newer</p></li>
+<li><p><strong>Arm GCC Compiler</strong>: For compiling the application (part of the Zephyr SDK)</p></li>
+<li><p><strong>SE Tools (optional)</strong>: For loading binaries (refer to Alif documentation)</p></li>
+</ul>
+</section>
+<section id="building-can-application-in-zephyr">
+<h2>Building CAN Application in Zephyr<a class="headerlink" href="#building-can-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to build the CAN application using the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Build commands for loopback applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/can/loopback<span class="w"> </span>-p
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Build commands for loopback applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/can/loopback<span class="w"> </span>-p
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Build commands for CAN counter applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>samples/drivers/can/counter/<span class="w"> </span>-p
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Build commands for CAN counter applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>samples/drivers/can/counter/<span class="w"> </span>-p
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To address various scenarios, such as utilizing MRAM or flash addresses and employing alternative compilers like LLVM or ARMCLANG, refer to the document AUGD0008_Getting-Started-with-ZAS-for-Ensemble-v0.5.0-Beta.</p>
+</div>
+<p>Once the build command completes successfully, executable images will be generated and placed in the <cite>build/zephyr</cite> directory. Both <cite>.bin</cite> (binary) and <cite>.elf</cite> (Executable and Linkable Format) files will be available.</p>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="validating-can">
+<h2>Validating CAN<a class="headerlink" href="#validating-can" title="Link to this heading"></a></h2>
+<section id="console-output">
+<h3>Console Output<a class="headerlink" href="#console-output" title="Link to this heading"></a></h3>
+<p>Upon reviewing the output logs, the CAN functionality has been successfully validated for Loopback mode.</p>
+<figure class="align-center" id="id3">
+<img alt="CAN Output Logs" src="_images/can_output_logs.png" />
+<figcaption>
+<p><span class="caption-number">Figure 6 </span><span class="caption-text">CAN Output Logs</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The console output depends on the CAN application configuration (e.g., loopback mode, message transmission). Refer to the CAN sample application (<code class="docutils literal notranslate"><span class="pre">../alif/samples/drivers/can/loopback/</span></code>) for specific output details. Typically, the output includes status messages indicating successful message transmission and reception in loopback mode.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

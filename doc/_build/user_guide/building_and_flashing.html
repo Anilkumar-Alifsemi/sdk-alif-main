@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting Up and Building Zephyr Applications &mdash; Alif SDK Documentation - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=063d7963" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Overview of Zephyr Alif SDK" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html"><strong>Introduction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html"><strong>Overview of Zephyr Alif SDK</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting Up and Building Zephyr Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-host-system">Setting Up the Host System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fetching-the-alif-zephyr-sdk">Fetching the Alif Zephyr SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-an-application">Building an Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flashing-the-application">Flashing the Application</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Getting Started with Zephyr Alif SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setting Up and Building Zephyr Applications</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/building_and_flashing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-up-and-building-zephyr-applications">
+<span id="setting-up-and-building-zephyr"></span><h1>Setting Up and Building Zephyr Applications<a class="headerlink" href="#setting-up-and-building-zephyr-applications" title="Link to this heading"></a></h1>
+<p>This guide covers:</p>
+<ul class="simple">
+<li><p>Setting up the host system on Ubuntu 20.04 LTS or later.</p></li>
+<li><p>Building a sample application.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Examples in this document use the Ensemble E7 Devkit unless otherwise specified.</p>
+</div>
+<section id="setting-up-the-host-system">
+<h2>Setting Up the Host System<a class="headerlink" href="#setting-up-the-host-system" title="Link to this heading"></a></h2>
+<p>Follow these steps to install dependencies and configure the environment for the Alif SDK.</p>
+<ol class="arabic">
+<li><p>Update the package list:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt update -y</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install required dependencies using <code class="docutils literal notranslate"><span class="pre">apt</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt install -y --no-install-recommends python3-dev python3-pip python3-venv \</span>
+<span class="go">   git wget xz-utils file make python3-setuptools python3-wheel ninja-build \</span>
+<span class="go">   build-essential cmake libmagic1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create and activate a Python virtual environment:</p>
+<ol class="loweralpha">
+<li><p>Create the virtual environment if not already set up:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python3 -m venv ~/zephyrproject/.venv</span>
+</pre></div>
+</div>
+</li>
+<li><p>Activate the virtual environment:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source ~/zephyrproject/.venv/bin/activate</span>
+</pre></div>
+</div>
+<p>Your shell prompt will show <code class="docutils literal notranslate"><span class="pre">(.venv)</span></code> when activated.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Activate the virtual environment in every new terminal session before running
+Python or <code class="docutils literal notranslate"><span class="pre">west</span></code> commands. Deactivate with <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> when done.</p>
+</div>
+</li>
+</ol>
+</li>
+<li><p>Install Python packages:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install west pyelftools</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="fetching-the-alif-zephyr-sdk">
+<h2>Fetching the Alif Zephyr SDK<a class="headerlink" href="#fetching-the-alif-zephyr-sdk" title="Link to this heading"></a></h2>
+<p>This section explains how to build Zephyr using the GCC toolchain. For details on
+toolchain selection, refer to Zephyr’s documentation:
+<a class="reference external" href="https://docs.zephyrproject.org/latest/develop/toolchains/index.html">Toolchain Selection</a>.</p>
+<p>Fetch the SDK source from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mkdir sdk-alif</span>
+<span class="go">cd sdk-alif</span>
+<span class="go">west init -m https://github.com/alifsemi/sdk-alif.git --mr ${revision}</span>
+<span class="go">west update</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">${revision}</span></code> with the desired SDK revision (branch, tag, or commit SHA).
+Use <code class="docutils literal notranslate"><span class="pre">main</span></code> for the latest state, or specify a commit SHA or tag (e.g., <code class="docutils literal notranslate"><span class="pre">v1.2.0</span></code>).</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>init<span class="w"> </span>-m<span class="w"> </span>&lt;URL&gt;<span class="w"> </span>--mr<span class="w"> </span>&lt;REVISION&gt;
+</pre></div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>init<span class="w"> </span>-m<span class="w"> </span>https://github.com/alifsemi/sdk-alif.git<span class="w"> </span>--mr<span class="w"> </span>v1.2.0
+</pre></div>
+</div>
+</section>
+<section id="building-an-application">
+<span id="id1"></span><h2>Building an Application<a class="headerlink" href="#building-an-application" title="Link to this heading"></a></h2>
+<p>Supported Targets:</p>
+<ul class="simple">
+<li><p>alif_e3_dk_rtss_he</p></li>
+<li><p>alif_e3_dk_rtss_hp</p></li>
+<li><p>alif_e4_dk_rtss_he</p></li>
+<li><p>alif_e4_dk_rtss_hp</p></li>
+<li><p>alif_e7_dk_rtss_he</p></li>
+<li><p>alif_e7_dk_rtss_hp</p></li>
+<li><p>alif_e8_dk_rtss_he</p></li>
+<li><p>alif_e8_dk_rtss_hp</p></li>
+<li><p>alif_e1c_dk_rtss_he</p></li>
+<li><p>alif_b1_dk_rtss_he</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">alif_e7_dk_rtss_he</span></code> and <code class="docutils literal notranslate"><span class="pre">alif_e7_dk_rtss_hp</span></code> targets can also be run on
+the Devkit E5.</p>
+</div>
+<ol class="loweralpha">
+<li><p>Navigate to the Zephyr directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd zephyr</span>
+</pre></div>
+</div>
+</li>
+<li><p>Build the Hello World application:</p>
+<p>An application that prints a “Hello World” message along with the board name.
+By default, code execution takes place from MRAM.</p>
+</li>
+</ol>
+<p><strong>RTSS-HE</strong></p>
+<ul>
+<li><p>Build for MRAM (Address: 0x80000000):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b alif_e7_dk_rtss_he samples/hello_world</span>
+</pre></div>
+</div>
+</li>
+<li><p>Build for ITCM:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b alif_e7_dk_rtss_he samples/hello_world -DCONFIG_FLASH_BASE_ADDRESS=0 -DCONFIG_FLASH_LOAD_OFFSET=0 -DCONFIG_FLASH_SIZE=256</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>RTSS-HP</strong></p>
+<ul>
+<li><p>Build for MRAM (Address: 0x80200000):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b alif_e7_dk_rtss_hp samples/hello_world</span>
+</pre></div>
+</div>
+</li>
+<li><p>Build for ITCM:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b alif_e7_dk_rtss_hp samples/hello_world -DCONFIG_FLASH_BASE_ADDRESS=0 -DCONFIG_FLASH_LOAD_OFFSET=0 -DCONFIG_FLASH_SIZE=256</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, Ninja is used. To switch to Unix Makefiles, add the following option:
+<code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">-G</span> <span class="pre">&quot;Unix</span> <span class="pre">Makefiles&quot;</span></code></p>
+</div>
+<ol class="loweralpha simple" start="3">
+<li><p>Save the binaries:</p></li>
+</ol>
+<p><strong>RTSS-HE</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cp build/zephyr/zephyr.bin YOUR_WORKSPACE/app-release-exec-linux/build/images/zephyr_e7_rtsshe_helloworld.bin</span>
+</pre></div>
+</div>
+<p><strong>RTSS-HP</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cp build/zephyr/zephyr.bin YOUR_WORKSPACE/app-release-exec-linux/build/images/zephyr_e7_rtsshp_helloworld.bin</span>
+</pre></div>
+</div>
+</section>
+<section id="flashing-the-application">
+<h2>Flashing the Application<a class="headerlink" href="#flashing-the-application" title="Link to this heading"></a></h2>
+<p id="id2">The Alif Security Toolkit provides tools to merge Zephyr images and binaries from
+different cores. Ensure your user has sufficient access to the <code class="docutils literal notranslate"><span class="pre">dialout</span></code> group
+for SE-UART device communication.</p>
+<ol class="arabic">
+<li><p>Verify <code class="docutils literal notranslate"><span class="pre">dialout</span></code> group membership:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">groups</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">dialout</span></code> or <code class="docutils literal notranslate"><span class="pre">tty</span></code> is not listed, add the user to the <code class="docutils literal notranslate"><span class="pre">dialout</span></code> group:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo usermod -a -G dialout $USER</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the device is still not recognized, check for loose connections or try a
+different USB port.</p>
+</div>
+</li>
+<li><p>Install the <code class="docutils literal notranslate"><span class="pre">fdt</span></code> Python module:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install fdt</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set up the Alif Security Toolkit:</p>
+<p>Extract the toolkit and export its directory before running <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">flash</span></code>.
+Ensure the toolkit is properly configured for your DevKit.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">export ALIF_SE_TOOLS_DIR=path/of/extracted/directory</span>
+</pre></div>
+</div>
+</li>
+<li><p>Flash the application:</p>
+<p>From the Zephyr build directory, rebuild the binary and flash it to your board:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west flash</span>
+</pre></div>
+</div>
+</li>
+<li><p>The application boots automatically:</p>
+<ol class="loweralpha">
+<li><p>Open a serial console application on the host PC with a baud rate of 115200.</p></li>
+<li><p>Select the appropriate tty port:</p>
+<ul class="simple">
+<li><p>For RTSS-HE: Example: <code class="docutils literal notranslate"><span class="pre">/dev/ttyACM1</span></code></p></li>
+<li><p>For RTSS-HP: Example: <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code></p></li>
+</ul>
+</li>
+<li><p>Observe the greeting on the serial console:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">*** Booting Zephyr OS build 4b48dd532761 ****</span>
+<span class="go">Hello World! alif_e7_devkit</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

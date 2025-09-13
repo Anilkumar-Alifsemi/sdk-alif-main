@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIPI Camera &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Parallel Camera" href="parallel_camera.html" />
+    <link rel="prev" title="PDM" href="pdm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MIPI Camera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements-and-setup">Hardware Requirements and Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpi-camera-parallel-interface">CPI (Camera Parallel Interface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i2c-controller">I2C Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mipi-dphy">MIPI DPHY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mipi-csi2">MIPI CSI2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arx3a0-camera-sensor">ARX3A0 Camera Sensor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-configuration-features">Required Configuration Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selected-arx3a0-camera-sensor-configurations">Selected ARX3A0 Camera Sensor Configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-and-converting-captured-images">Exporting and Converting Captured Images</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-conversion-from-bayer-to-rgb">Image Conversion from Bayer to RGB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-mipi-camera-application-in-zephyr">Building MIPI Camera Application in Zephyr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#console-output">Console Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interpretation">Interpretation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references-and-dependencies">References and Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MIPI Camera</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mipi_camera.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mipi-camera">
+<span id="id1"></span><h1>MIPI Camera<a class="headerlink" href="#mipi-camera" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The MIPI camera is utilized for transmitting pixel data in a serial format. The camera sensor (ARX3A0) transmits pixel data to the DPHY-RX, which transfers it through the PHY Protocol Interface (PPI) to the MIPI CSI2 host. MIPI CSI2 unpacks the pixel data and forwards it through the Image Pixel Interface (IPI). The Camera Pixel Interface (CPI) receives the pixel data from IPI and stores it in memory via the AXI bus.</p>
+<figure class="align-center" id="id2">
+<img alt="Data Flow from MIPI CSI2 to the system" src="_images/data_flow_mipi_csi2_to_system.png" />
+<figcaption>
+<p><span class="caption-number">Figure 69 </span><span class="caption-text">Data Flow from MIPI CSI2 to the system</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Image Data Path</strong>: External Camera → MIPI DPHY RX → MIPI CSI → CPI → Memory</p>
+<figure class="align-center" id="id3">
+<img alt="MIPI Block Diagram" src="_images/mipi_block_diagram.png" />
+<figcaption>
+<p><span class="caption-number">Figure 70 </span><span class="caption-text">MIPI Block Diagram</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h3>
+<p>This document explains how to create, compile, and run a demo application for the MIPI Camera interface provided by Alif Semiconductor™ and integrated into Ensemble™ devices.</p>
+</section>
+<section id="hardware-requirements-and-setup">
+<h3>Hardware Requirements and Setup<a class="headerlink" href="#hardware-requirements-and-setup" title="Link to this heading"></a></h3>
+</section>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Alif DevKit (B0 Flat Board, E7)</strong></p></li>
+<li><p><strong>ARX3A0 Camera Sensor (IAS1MOD-ARX3A0CSSC090110-GEVB)</strong></p></li>
+<li><p>Support on E7 only.</p></li>
+</ul>
+</section>
+<section id="cpi-camera-parallel-interface">
+<h2>CPI (Camera Parallel Interface)<a class="headerlink" href="#cpi-camera-parallel-interface" title="Link to this heading"></a></h2>
+<p>The CPI IP, provided by Alif Semiconductor, captures frames and stores them in the allocated memory area, facilitating efficient data transfer between the camera sensor and memory.</p>
+</section>
+<section id="i2c-controller">
+<h2>I2C Controller<a class="headerlink" href="#i2c-controller" title="Link to this heading"></a></h2>
+<p>The I2C IP enables communication between the system-on-chip (SoC) and the ARX3A0 Camera Sensor.</p>
+</section>
+<section id="mipi-dphy">
+<h2>MIPI DPHY<a class="headerlink" href="#mipi-dphy" title="Link to this heading"></a></h2>
+<p>The MIPI DPHY Physical layer receives serial input data from the camera sensor and transfers it to the MIPI CSI2 host. Key features include:</p>
+<ul class="simple">
+<li><p>Flexible clock configuration: 17 MHz to 52 MHz.</p></li>
+<li><p>Lane Operation: Data rates from 80 Mbps to 2.5 Gbps per lane in the forward direction.</p></li>
+<li><p>Aggregate throughput: Up to 10 Gbps with four data lanes in the forward direction.</p></li>
+<li><p>Maximum low-power (LP) data rate: 10 Mbps.</p></li>
+<li><p>PHY-Protocol Interface (PPI): Used for clock and data lanes.</p></li>
+<li><p>Low-power Modes: Supports low power escape modes and Ultra Low Power state.</p></li>
+<li><p>HS TX and RX Features: Programmable HS TX amplitude levels, automatic de-skew calibration, equalization, and offset cancellation.</p></li>
+<li><p>Internal Pattern Checker for testing and verification.</p></li>
+</ul>
+</section>
+<section id="mipi-csi2">
+<h2>MIPI CSI2<a class="headerlink" href="#mipi-csi2" title="Link to this heading"></a></h2>
+<p>MIPI CSI2 unpacks serial input data based on the configured pixel data type, conveying pixels and generating timed video synchronization signals via the Image Pixel Interface (IPI). Notable features include:</p>
+<ul class="simple">
+<li><p>Combo PHY Support: Utilizes four RX data lanes on D-PHY.</p></li>
+<li><p>High Data Rate: Up to 2.5 Gbps per lane in D-PHY.</p></li>
+<li><p>Data Format Flexibility: Supports YUV, RGB, RAW, and user-defined byte-based data.</p></li>
+<li><p>Error Detection and Correction: Robust mechanisms at PHY, packet, line, and frame levels.</p></li>
+</ul>
+</section>
+<section id="arx3a0-camera-sensor">
+<h2>ARX3A0 Camera Sensor<a class="headerlink" href="#arx3a0-camera-sensor" title="Link to this heading"></a></h2>
+<p>The ARX3A0 camera sensor, with a 1/10th-inch optical format, is compact and energy-efficient, ideal for IoT devices. It features:</p>
+<ul class="simple">
+<li><p>Active resolution: 560 x 560 pixels.</p></li>
+<li><p>Frame rate: Up to 360 frames per second.</p></li>
+</ul>
+<figure class="align-center" id="id4">
+<img alt="ARX3A0 Sensor" src="_images/arx3a0.png" />
+<figcaption>
+<p><span class="caption-number">Figure 71 </span><span class="caption-text">ARX3A0 Sensor</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id5">
+<img alt="ARX3A0 Sensor and Flat Board Connection" src="_images/arx3a0_connections.png" />
+<figcaption>
+<p><span class="caption-number">Figure 72 </span><span class="caption-text">ARX3A0 Sensor and Flat Board Connection</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<img alt="Flat Board" src="_images/flatboard_for_mipi_camera.png" />
+<figcaption>
+<p><span class="caption-number">Figure 73 </span><span class="caption-text">Flat Board</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="required-configuration-features">
+<h3>Required Configuration Features<a class="headerlink" href="#required-configuration-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_VIDEO=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_VIDEO_MIPI_CSI2_DW=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_LOG=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_PRINTK=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_STDOUT_CONSOLE=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_I2C_TARGET=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_I2C=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_I2C_DW_CLOCK_SPEED=100</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_MT9M114_PARALLEL_INIT=n</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_FB_USES_DTCM_REGION=n</span></code> (needed for E7)</p></li>
+</ul>
+</section>
+<section id="software-requirements">
+<h3>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h3>
+<p>To run the MIPI camera application, the following software components and drivers are required:</p>
+<ol class="arabic simple">
+<li><p><strong>Camera Drivers (MIPI Interface)</strong>:
+- Alif Zephyr MIPI CSI2 Driver
+- Alif Zephyr Video Driver
+- Alif Zephyr MIPI DSI Driver
+- Alif Zephyr MIPI DPHY Driver</p></li>
+<li><p><strong>ARX3A0 Camera Sensor Driver</strong>:
+- Zephyr I2C DesignWare Driver
+- Alif Zephyr ARX3A0 Camera Sensor Driver</p></li>
+</ol>
+</section>
+<section id="selected-arx3a0-camera-sensor-configurations">
+<h3>Selected ARX3A0 Camera Sensor Configurations<a class="headerlink" href="#selected-arx3a0-camera-sensor-configurations" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Interface</strong>: MIPI CSI2</p></li>
+<li><p><strong>Resolution</strong>: 560x560</p></li>
+<li><p><strong>Output Format</strong>: RAW Bayer10</p></li>
+</ul>
+</section>
+<section id="exporting-and-converting-captured-images">
+<h3>Exporting and Converting Captured Images<a class="headerlink" href="#exporting-and-converting-captured-images" title="Link to this heading"></a></h3>
+<p>After capturing images, users must export the raw image data to convert it into a viewable format (e.g., RGB). The raw image data is stored in the capture buffers as shown in the console output. To export the raw image data, use the file paths provided in the console output (e.g., <code class="docutils literal notranslate"><span class="pre">/home/$USER/path/capture_0.bin</span></code>) and transfer them to a system where image conversion can be performed.</p>
+</section>
+</section>
+<section id="image-conversion-from-bayer-to-rgb">
+<h2>Image Conversion from Bayer to RGB<a class="headerlink" href="#image-conversion-from-bayer-to-rgb" title="Link to this heading"></a></h2>
+<p>To convert a Bayer 10 image to RGB format for viewing, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bayer2rgb<span class="w"> </span>-i<span class="w"> </span>image_file.bin<span class="w"> </span>-o<span class="w"> </span>checking_rgb.tiff<span class="w"> </span>-w<span class="w"> </span><span class="m">560</span><span class="w"> </span>-v<span class="w"> </span><span class="m">560</span><span class="w"> </span>-b<span class="w"> </span><span class="m">8</span><span class="w"> </span>-f<span class="w"> </span>GRBG<span class="w"> </span>-m<span class="w"> </span>SIMPLE<span class="w"> </span>-t
+</pre></div>
+</div>
+<section id="building-mipi-camera-application-in-zephyr">
+<h3>Building MIPI Camera Application in Zephyr<a class="headerlink" href="#building-mipi-camera-application-in-zephyr" title="Link to this heading"></a></h3>
+<p>Follow these steps to build your Zephyr-based MIPI camera application using the GCC compiler and the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/video/<span class="w"> </span>-DDTC_OVERLAY_FILE<span class="o">=</span>../alif/samples/drivers/video/boards/serial_camera_arx3a0.overlay<span class="w"> </span>-p<span class="w"> </span>always
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Build commands for applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/video/<span class="w"> </span>-DDTC_OVERLAY_FILE<span class="o">=</span>../alif/samples/drivers/video/boards/serial_camera_arx3a0.overlay<span class="w"> </span>-p<span class="w"> </span>always
+</pre></div>
+</div>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h3>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h3>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="console-output">
+<h3>Console Output<a class="headerlink" href="#console-output" title="Link to this heading"></a></h3>
+<p>The following output is observed in the console:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build 94f6e05fad28 ***
+- Device name: cam@49030000
+- Capabilities:
+  Y10P width (min, max, step)[560; 560; 0] height (min, max, step)[560; 560; 0]
+- format: Y10P 560x560
+Width - 560, Pitch - 560, Height - 560, Buff size - 313600
+- addr - 0x8000000, size - 313600, bytesused - 0
+capture buffer[0]: dump binary memory &quot;/home/$USER/path/capture_0.bin&quot; 0x08000000 0x0804c8ff -r
+- addr - 0x804c900, size - 313600, bytesused - 0
+capture buffer[1]: dump binary memory &quot;/home/$USER/path/capture_1.bin&quot; 0x0804c900 0x080991ff -r
+Capture started
+Got frame 0! size: 313600; timestamp 2285 ms
+Got frame 1! size: 313600; timestamp 2485 ms
+Got frame 2! size: 313600; timestamp 2685 ms
+Got frame 3! size: 313600; timestamp 2885 ms
+Got frame 4! size: 313600; timestamp 3085 ms
+Got frame 5! size: 313600; timestamp 3285 ms
+Got frame 6! size: 313600; timestamp 3485 ms
+Got frame 7! size: 313600; timestamp 3685 ms
+Got frame 8! size: 313600; timestamp 3885 ms
+Got frame 9! size: 313600; timestamp 4085 ms
+[00:00:04.085,000] &lt;inf&gt; video_app: Calling video flush.
+[00:00:04.085,000] &lt;inf&gt; video_app: Calling video stream stop.
+</pre></div>
+</div>
+</section>
+<section id="interpretation">
+<h3>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The device is successfully communicating through the <cite>/dev/ttyACM1</cite> serial port.</p></li>
+<li><p>The Zephyr OS (build 94f6e05fad28) is booting.</p></li>
+<li><p>The <cite>alif_video</cite> driver, <cite>alif_video_csi2</cite> driver, <cite>arx3a0</cite> driver, and <cite>i2c_dw</cite> driver were successfully verified.</p></li>
+<li><p>The video capture process was completed successfully.</p></li>
+</ul>
+</section>
+<section id="references-and-dependencies">
+<h3>References and Dependencies<a class="headerlink" href="#references-and-dependencies" title="Link to this heading"></a></h3>
+<p>The reference image captured using the Camera Controller and ARX3A0 Camera Sensor is shown below:</p>
+<figure class="align-center" id="id7">
+<img alt="Reference Image" src="_images/reference_image_capured_by_mipi_camera.png" />
+<figcaption>
+<p><span class="caption-number">Figure 74 </span><span class="caption-text">Reference Image Captured using the Camera Controller and ARX3A0 Camera Sensor</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

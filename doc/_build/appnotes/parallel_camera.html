@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallel Camera &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="OSPI Flash" href="ospi_flash.html" />
+    <link rel="prev" title="MIPI Camera" href="mipi_camera.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parallel Camera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#image-data-path">Image Data Path</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements-and-setup">Hardware Requirements and Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cpi">CPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i2c-controller">I2C Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mt9m114-camera-sensor">MT9M114 Camera Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-connections-and-setup">Hardware Connections and Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#required-config-features">Required Config Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#required-device-tree-changes">Required Device Tree Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#selected-mt9m114-camera-sensor-configurations">Selected MT9M114 Camera Sensor Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exporting-and-converting-captured-images">Exporting and Converting Captured Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#image-conversion-from-bayer-to-rgb">Image Conversion from Bayer to RGB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-parallel-camera-application-in-zephyr">Building Parallel Camera Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#console-output">Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interpretation">Interpretation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references-and-dependencies">References and Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Parallel Camera</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/parallel_camera.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parallel-camera">
+<span id="id1"></span><h1>Parallel Camera<a class="headerlink" href="#parallel-camera" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This document describes how to capture camera frames using the LPCAM/CAM instances of the video driver (Parallel Interface) along with a camera sensor. The demo application utilizes the MT9M114 camera sensor.</p>
+<section id="image-data-path">
+<h3>Image Data Path<a class="headerlink" href="#image-data-path" title="Link to this heading"></a></h3>
+<p><strong>Image Data Path</strong>: External Parallel Camera Sensor → CPI → Memory</p>
+</section>
+</section>
+<section id="hardware-requirements-and-setup">
+<h2>Hardware Requirements and Setup<a class="headerlink" href="#hardware-requirements-and-setup" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Alif DevKit (B0 Flat Board, E7)</strong></p></li>
+<li><p><strong>MT9M114 Camera Sensor</strong></p></li>
+<li><p><strong>Cypress Interconnect Board (CYUSB3ACC-004A)</strong></p></li>
+<li><p>Supported on E7, E1C, B1DK boards.</p></li>
+</ul>
+</section>
+<section id="cpi">
+<h3>CPI<a class="headerlink" href="#cpi" title="Link to this heading"></a></h3>
+<p>The CPI IP, provided by Alif Semiconductor, captures frames and stores them in the allocated memory area.</p>
+</section>
+<section id="i2c-controller">
+<h3>I2C Controller<a class="headerlink" href="#i2c-controller" title="Link to this heading"></a></h3>
+<p>The I2C IP, provided by Alif Semiconductor, facilitates communication between the SoC and the MT9M114 Camera Sensor.</p>
+</section>
+<section id="mt9m114-camera-sensor">
+<h3>MT9M114 Camera Sensor<a class="headerlink" href="#mt9m114-camera-sensor" title="Link to this heading"></a></h3>
+<p>The ON Semiconductor MT9M114 is a 1/6-inch 1.26 MP CMOS digital image sensor with an active-pixel array of 1296H x 976V. It includes advanced camera functions such as auto exposure control, auto white balance, black level control, flicker avoidance, and defect correction, optimized for low-light conditions. The MT9M114 is a system-on-a-chip (SoC) image sensor, programmable through a serial interface, suitable for embedded notebook, netbook, game consoles, cell phones, mobile devices, and desktop monitor cameras.</p>
+<p><strong>Features</strong>:
+- Superior low-light performance
+- Ultra-low power
+- 720p HD video at 30 fps</p>
+<p><strong>Applications</strong>:
+- Embedded notebook, netbook, and desktop monitor cameras
+- Tethered PC cameras
+- Game consoles
+- Cell phones, mobile devices, and consumer video communications
+- Surveillance, medical, and industrial applications</p>
+</section>
+<section id="hardware-connections-and-setup">
+<h3>Hardware Connections and Setup<a class="headerlink" href="#hardware-connections-and-setup" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id2">
+<img alt="Bottom View of the Board Connector" src="_images/MT9M114_board_bottom_view.png" />
+<figcaption>
+<p><span class="caption-number">Figure 75 </span><span class="caption-text">Bottom View of the Board Connector</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The demo application uses the Cypress Interconnect Board (CYUSB3ACC-004A) to establish connections between the MT9M114 Camera Sensor and the Alif SoC.</p>
+</div>
+<figure class="align-center" id="id3">
+<img alt="Cypress Interconnect Board Connecting MT9M114_Camera_Sensor to Alif SoC" src="_images/parallel_cam_connections1.png" />
+<figcaption>
+<p><span class="caption-number">Figure 76 </span><span class="caption-text">Cypress Interconnect Board Connecting MT9M114_Camera_Sensor to Alif SoC</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Refer to <em>CYUSB3ACC-004A Interconnect Board for ON Semiconductor Image Sensor</em> for jumper and pin connection details.</p>
+<figure class="align-center" id="id4">
+<img alt="Connecting Image Sensor Board to CYUSB3ACC-004A Board" src="_images/parallel_cam_connections2.png" />
+<figcaption>
+<p><span class="caption-number">Figure 77 </span><span class="caption-text">Connecting Image Sensor Board to CYUSB3ACC-004A Board</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Set up the jumper connections as shown below:</p>
+<figure class="align-center" id="id5">
+<img alt="Jumper Connections Table" src="_images/jumper_connections_table_for_parallel_camera.png" />
+<figcaption>
+<p><span class="caption-number">Figure 78 </span><span class="caption-text">Jumper Connections Table</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="required-config-features">
+<h2>Required Config Features<a class="headerlink" href="#required-config-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_VIDEO=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_VIDEO_MIPI_CSI2_DW=n</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_LOG=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_PRINTK=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_STDOUT_CONSOLE=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_I2C_TARGET=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_I2C=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_I2C_DW_CLOCK_SPEED=100</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_MT9M114_PARALLEL_INIT=y</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_FB_USES_DTCM_REGION=y</span></code> (needed for E1C)</p></li>
+</ul>
+</section>
+<section id="required-device-tree-changes">
+<h2>Required Device Tree Changes<a class="headerlink" href="#required-device-tree-changes" title="Link to this heading"></a></h2>
+<p><strong>If testing with LPCAM instance</strong>:
+- Enable the LPCAM node.
+- In the <cite>i2c1</cite> node, enable the <cite>mt9m114</cite> sub-node and uncomment the <cite>lpcam</cite> remote endpoint.
+- Disable the <cite>cam</cite> node.</p>
+<p><strong>If testing with CAM instance</strong>:
+- Enable the <cite>cam</cite> node.
+- In the <cite>i2c1</cite> node, enable the <cite>mt9m114</cite> sub-node and uncomment the <cite>cam</cite> remote endpoint.</p>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<p>Below is a list of required software and drivers needed to run the LPCAM/CAM application:</p>
+<ul class="simple">
+<li><p><strong>Video Drivers (CAM or LPCAM instance)</strong>:
+- Alif Zephyr Video Driver</p></li>
+<li><p><strong>MT9M114 Camera Sensor Driver</strong>:
+- Zephyr I2C DesignWare Driver
+- Standard Zephyr MT9M114 Camera Sensor Driver</p></li>
+</ul>
+</section>
+<section id="selected-mt9m114-camera-sensor-configurations">
+<h2>Selected MT9M114 Camera Sensor Configurations<a class="headerlink" href="#selected-mt9m114-camera-sensor-configurations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Resolution</strong>: 640x480</p></li>
+<li><p><strong>Output Format</strong>: RAW Bayer10</p></li>
+</ul>
+</section>
+<section id="exporting-and-converting-captured-images">
+<h2>Exporting and Converting Captured Images<a class="headerlink" href="#exporting-and-converting-captured-images" title="Link to this heading"></a></h2>
+<p>After capturing images, users must export the raw image data to convert it into a viewable format (e.g., RGB). The raw image data is stored in the capture buffers as shown in the console output. To export the raw image data, use the file paths provided in the console output (e.g., <code class="docutils literal notranslate"><span class="pre">/home/$USER/path/capture_0.bin</span></code>) and transfer them to a system where image conversion can be performed.</p>
+<section id="image-conversion-from-bayer-to-rgb">
+<h3>Image Conversion from Bayer to RGB<a class="headerlink" href="#image-conversion-from-bayer-to-rgb" title="Link to this heading"></a></h3>
+<p>To convert a Bayer 10 image to RGB format for viewing, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bayer2rgb<span class="w"> </span>-i<span class="w"> </span>image_file.bin<span class="w"> </span>-o<span class="w"> </span>checking_rgb.tiff<span class="w"> </span>-w<span class="w"> </span><span class="m">648</span><span class="w"> </span>-v<span class="w"> </span><span class="m">488</span><span class="w"> </span>-b<span class="w"> </span><span class="m">8</span><span class="w"> </span>-f<span class="w"> </span>GRBG<span class="w"> </span>-m<span class="w"> </span>SIMPLE<span class="w"> </span>-t
+</pre></div>
+</div>
+</section>
+</section>
+<section id="building-parallel-camera-application-in-zephyr">
+<h2>Building Parallel Camera Application in Zephyr<a class="headerlink" href="#building-parallel-camera-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to build your Zephyr-based parallel camera application using the GCC compiler and the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/video/<span class="w"> </span>-DDTC_OVERLAY_FILE<span class="o">=</span>../alif/samples/drivers/video/boards/parallel_camera_mt9m114.overlay<span class="w"> </span>-p<span class="w"> </span>always
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Build commands for applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/video/<span class="w"> </span>-DDTC_OVERLAY_FILE<span class="o">=</span>../alif/samples/drivers/video/boards/parallel_camera_mt9m114.overlay<span class="w"> </span>-p<span class="w"> </span>always
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To address various scenarios, such as utilizing MRAM or flash addresses and employing alternative compilers like LLVM or ARMCLANG, refer to the document AUGD0008_Getting-Started-with-ZAS-for-Ensemble-v0.5.0-Beta.</p>
+</div>
+<p>Once the build command completes successfully, executable images will be generated and placed in the <cite>build/zephyr</cite> directory. Both <cite>.bin</cite> (binary) and <cite>.elf</cite> (Executable and Linkable Format) files will be available.</p>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="console-output">
+<h2>Console Output<a class="headerlink" href="#console-output" title="Link to this heading"></a></h2>
+<p>The following output is observed in the console when the MT9M114 camera sensor is tested with the LPCAM instance of the video driver:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build Zephyr-Alif-SDK-v0.5.0-21-g6039114c3b48 ***
+- Device name: lpcam@43003000
+- Capabilities:
+  RGBP width (min, max, step)[480; 480; 0] height (min, max, step)[272; 272; 0]
+  YUYV width (min, max, step)[480; 480; 0] height (min, max, step)[272; 272; 0]
+  RGBP width (min, max, step)[640; 640; 0] height (min, max, step)[480; 480; 0]
+  YUYV width (min, max, step)[640; 640; 0] height (min, max, step)[480; 480; 0]
+  Y10P width (min, max, step)[640; 640; 0] height (min, max, step)[480; 480; 0]
+  RGBP width (min, max, step)[1280; 1280; 0] height (min, max, step)[720; 720; 0]
+  YUYV width (min, max, step)[1280; 1280; 0] height (min, max, step)[720; 720; 0]
+- format: Y10P 640x480
+Width - 640, Pitch - 640, Height - 480, Buff size - 307200
+- addr - 0x8000000, size - 307200, bytesused - 0
+capture buffer[0]: dump binary memory &quot;/home/$USER/path/capture_0.bin&quot; 0x08000000 0x0804afff -r
+Capture started
+Got frame 0! size: 307200; timestamp 7560 ms
+Got frame 1! size: 307200; timestamp 7744 ms
+Got frame 2! size: 307200; timestamp 7929 ms
+Got frame 3! size: 307200; timestamp 8113 ms
+Got frame 4! size: 307200; timestamp 8298 ms
+Got frame 5! size: 307200; timestamp 8482 ms
+Got frame 6! size: 307200; timestamp 8666 ms
+Got frame 7! size: 307200; timestamp 8850 ms
+Got frame 8! size: 307200; timestamp 9034 ms
+Got frame 9! size: 307200; timestamp 9218 ms
+[00:00:09.218,000] &lt;inf&gt; video_app: Calling video flush.
+[00:00:09.218,000] &lt;inf&gt; video_app: Calling video stream stop.
+</pre></div>
+</div>
+<p>The following output is observed when the MT9M114 camera sensor is tested with the CAM instance of the video driver:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build Zephyr-Alif-SDK-v0.5.0-21-g6039114c3b48 ***
+- Device name: cam@49030000
+- Capabilities:
+  RGBP width (min, max, step)[480; 480; 0] height (min, max, step)[272; 272; 0]
+  YUYV width (min, max, step)[480; 480; 0] height (min, max, step)[272; 272; 0]
+  RGBP width (min, max, step)[640; 640; 0] height (min, max, step)[480; 480; 0]
+  YUYV width (min, max, step)[640; 640; 0] height (min, max, step)[480; 480; 0]
+  Y10P width (min, max, step)[640; 640; 0] height (min, max, step)[480; 480; 0]
+  RGBP width (min, max, step)[1280; 1280; 0] height (min, max, step)[720; 720; 0]
+  YUYV width (min, max, step)[1280; 1280; 0] height (min, max, step)[720; 720; 0]
+- format: Y10P 640x480
+Width - 640, Pitch - 640, Height - 480, Buff size - 307200
+- addr - 0x8000000, size - 307200, bytesused - 0
+capture buffer[0]: dump binary memory &quot;/home/$USER/path/capture_0.bin&quot; 0x08000000 0x0804afff -r
+Capture started
+Got frame 0! size: 307200; timestamp 7561 ms
+Got frame 1! size: 307200; timestamp 7745 ms
+Got frame 2! size: 307200; timestamp 7930 ms
+Got frame 3! size: 307200; timestamp 8114 ms
+Got frame 4! size: 307200; timestamp 8299 ms
+Got frame 5! size: 307200; timestamp 8483 ms
+Got frame 6! size: 307200; timestamp 8667 ms
+Got frame 7! size: 307200; timestamp 8851 ms
+Got frame 8! size: 307200; timestamp 9035 ms
+Got frame 9! size: 307200; timestamp 9219 ms
+[00:00:09.219,000] &lt;inf&gt; video_app: Calling video flush.
+[00:00:09.219,000] &lt;inf&gt; video_app: Calling video stream stop.
+</pre></div>
+</div>
+</section>
+<section id="interpretation">
+<h2>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The device is successfully communicating through the <cite>/dev/ttyACM1</cite> serial port.</p></li>
+<li><p>The Zephyr OS (build Zephyr-Alif-SDK-v0.5.0-21-g6039114c3b48) is booting up.</p></li>
+<li><p>The <cite>alif_video</cite> driver (CAM and LPCAM instances), <cite>mt9m114</cite> driver, and <cite>i2c_dw</cite> driver were successfully verified.</p></li>
+<li><p>The video capturing process has been completed successfully.</p></li>
+</ul>
+</section>
+<section id="references-and-dependencies">
+<h2>References and Dependencies<a class="headerlink" href="#references-and-dependencies" title="Link to this heading"></a></h2>
+<p>The reference image captured using the Camera Controller and MT9M114 Camera Sensor is shown below:</p>
+<figure class="align-center" id="id6">
+<img alt="Reference Image Captured using Camera Controller and MT9M114 Camera Sensor" src="_images/ref_img_par_cam.png" />
+<figcaption>
+<p><span class="caption-number">Figure 79 </span><span class="caption-text">Reference Image Captured using Camera Controller and MT9M114 Camera Sensor</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

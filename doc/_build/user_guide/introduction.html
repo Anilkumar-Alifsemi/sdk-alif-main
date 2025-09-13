@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Alif SDK Documentation - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=063d7963" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overview of Zephyr Alif SDK" href="overview.html" />
+    <link rel="prev" title="Getting started with Zephyr Alif SDK" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Introduction</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zephyr-rtos-and-toolchain"><strong>Zephyr RTOS and Toolchain</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-and-software-requirements"><strong>Hardware and Software Requirements</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements"><strong>Hardware Requirements</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements"><strong>Software Requirements</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alif-mcu-families"><strong>Alif MCU Families</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#toolchains"><strong>Toolchains</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#target-reference-board"><strong>Target Reference Board</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-components"><strong>Software Components</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html"><strong>Overview of Zephyr Alif SDK</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="building_and_flashing.html">Setting Up and Building Zephyr Applications</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Getting Started with Zephyr Alif SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><strong>Introduction</strong></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>In this user guide, we cover the following steps:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Prerequisites for Building Zephyr OS:</strong></dt><dd><ul class="simple">
+<li><p>Understand the requirements for building Zephyr OS, a small Real-Time Operating System designed for connected, resource-constrained, and embedded devices for the real-time subsystems in Alif’s devices.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Building an Application Using the West Tool:</strong></dt><dd><ul class="simple">
+<li><p>Learn how to build an application using the West tool. West is Zephyr’s meta tool written in Python, which calls CMake/Make commands on a Linux host—such as Ubuntu.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Programming the Application Binary onto ITCM:</strong></dt><dd><ul class="simple">
+<li><p>Steps to program the application binary onto the ITCM of one of the real-time subsystems and booting the application.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Running the Application from MRAM:</strong></dt><dd><ul class="simple">
+<li><p>Discover how to run applications directly from MRAM. Learn about the supported targets, specific MRAM boot addresses for RTSS-HE and RTSS-HP, and the necessary build commands.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<section id="zephyr-rtos-and-toolchain">
+<h2><strong>Zephyr RTOS and Toolchain</strong><a class="headerlink" href="#zephyr-rtos-and-toolchain" title="Link to this heading"></a></h2>
+<p>The real-time subsystems boot with Zephyr OS, a small RTOS for connected, resource-constrained, and embedded devices. Zephyr supports multiple architectures and is available under the Apache 2.0 license.</p>
+<p>Zephyr uses a meta-tool called <cite>west</cite> to execute Kconfig, CMake, and build system commands (Make or Ninja). CMake builds applications with the Zephyr kernel in two stages:</p>
+<ul class="simple">
+<li><p><strong>Configuration stage:</strong> CMakeLists.txt build scripts are executed to generate host-native build scripts.</p></li>
+<li><p><strong>Build stage:</strong> The generated build scripts are executed to compile the application.</p></li>
+</ul>
+</section>
+<section id="hardware-and-software-requirements">
+<h2><strong>Hardware and Software Requirements</strong><a class="headerlink" href="#hardware-and-software-requirements" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3><strong>Hardware Requirements</strong><a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<p>Ensure you have one of the following development kits to proceed with your project setup:</p>
+<ul class="simple">
+<li><p>Ensemble Devkit (DK-E7)</p></li>
+<li><p>Ensemble Devkit (DK-E8)</p></li>
+<li><p>Ensemble E1C Devkit (DK-E1C)</p></li>
+<li><p>Balletto Devkit (DK-B1)</p></li>
+</ul>
+</section>
+<section id="software-requirements">
+<h3><strong>Software Requirements</strong><a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><dl>
+<dt><strong>For Host PC:</strong></dt><dd><ul class="simple">
+<li><p>Ubuntu 20.04 64-bit or later.</p></li>
+</ul>
+<p><em>Note: While different flavors of Linux distributions may also work, they have not been thoroughly tested.</em></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Alif Security Toolkit:</strong></dt><dd><ul class="simple">
+<li><p>Version 1.98.3 or later.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Available at <a class="reference external" href="https://alifsemi.com/download/APFW0002">Alif Toolkit Download</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="alif-mcu-families">
+<h3><strong>Alif MCU Families</strong><a class="headerlink" href="#alif-mcu-families" title="Link to this heading"></a></h3>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/mcu_families.png"><img alt="Alif MCU Families" src="_images/mcu_families.png" style="width: 500px;" />
+</a>
+</figure>
+<p>The Alif DevKit is a development board featuring an Alif multi-core SoC, offering both high-performance and low-power execution.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>DK-E7:</strong></dt><dd><ul>
+<li><dl class="simple">
+<dt>Features:</dt><dd><ul>
+<li><p>Two Cortex-M55 CPU cores</p></li>
+<li><p>Two Ethos-U55 neural network processor cores</p></li>
+<li><p>Two Cortex-A32 MPU cores</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Allows configuration of the E7 MCU to operate like other Ensemble MCUs with fewer cores, enabling exploration of the E5, E3, and E1 series devices using a single kit.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>DK-E8:</strong></dt><dd><ul>
+<li><dl class="simple">
+<dt>Features:</dt><dd><ul>
+<li><p>Two Cortex-M55 CPU cores</p></li>
+<li><p>Two Ethos-U55 + One Ethos-U85 neural network processor cores</p></li>
+<li><p>Two Cortex-A32 MPU cores</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Allows configuration of the E8 MCU to operate like other Ensemble MCUs with fewer cores, enabling exploration of the E6, and E4 series devices using a single kit.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>DK-E1C:</strong></dt><dd><ul>
+<li><p>Designed to explore the Compact series of Ensemble devices.</p></li>
+<li><dl class="simple">
+<dt>Features:</dt><dd><ul>
+<li><p>A Cortex-M55 CPU core</p></li>
+<li><p>Arm Ethos-U55 micro NPU</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Known for its low power consumption within the Ensemble family.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>DK-B1:</strong></dt><dd><ul>
+<li><p>Introduces the Balletto B1 series, a wireless MCU with integrated hardware acceleration for AI/ML workloads.</p></li>
+<li><dl class="simple">
+<dt>Includes:</dt><dd><ul>
+<li><p>Bluetooth Low Energy 5.3</p></li>
+<li><p>802.15.4 based Thread protocols</p></li>
+<li><p>An Ethos-U55 microNPU for AI acceleration</p></li>
+<li><p>A Cortex-M55 MCU core</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="toolchains">
+<h3><strong>Toolchains</strong><a class="headerlink" href="#toolchains" title="Link to this heading"></a></h3>
+<p>The following toolchains have been tested for the SDK application:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Compiler</p></th>
+<th class="head"><p>Version</p></th>
+<th class="head"><p>Link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GCC (GNU Compiler Collection)</p></td>
+<td><p>v12.2.0</p></td>
+<td><p><a class="reference external" href="https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/toolchain_linux-x86_64_arm-zephyr-eabi.tar.xz">GCC Download</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>ArmCLang</p></td>
+<td><p>v6.18</p></td>
+<td><p><a class="reference external" href="https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded">ArmCLang Download</a></p></td>
+</tr>
+<tr class="row-even"><td><p>LLVM (Low-Level Virtual Machine)</p></td>
+<td><p>v17.0.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases">LLVM Download</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="target-reference-board">
+<h3><strong>Target Reference Board</strong><a class="headerlink" href="#target-reference-board" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Alif Devkit Ensemble E3</p></li>
+<li><p>Alif Devkit Ensemble E7</p></li>
+<li><p>Alif Devkit Ensemble E1C</p></li>
+<li><p>Alif Devkit Balletto B1</p></li>
+</ul>
+</section>
+<section id="software-components">
+<h3><strong>Software Components</strong><a class="headerlink" href="#software-components" title="Link to this heading"></a></h3>
+<p>The following software components are part of the SDK:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Path</p></th>
+<th class="head"><p>Repository</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>zephyr</p></td>
+<td><p>zephyr</p></td>
+<td><p><a class="reference external" href="https://github.com/alifsemi/zephyr_alif">zephyr_alif</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>mcuboot_alif</p></td>
+<td><p>bootloader/mcuboot</p></td>
+<td><p><a class="reference external" href="https://github.com/alifsemi/mcuboot_alif">mcuboot_alif</a></p></td>
+</tr>
+<tr class="row-even"><td><p>cmsis_alif</p></td>
+<td><p>modules/hal/cmsis</p></td>
+<td><p><a class="reference external" href="https://github.com/alifsemi/cmsis_alif">cmsis_alif</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>hal_alif</p></td>
+<td><p>modules/hal/alif</p></td>
+<td><p><a class="reference external" href="https://github.com/alifsemi/hal_alif">hal_alif</a></p></td>
+</tr>
+<tr class="row-even"><td><p>sdk-alif</p></td>
+<td><p>Alif Zephyr SDK</p></td>
+<td><p><a class="reference external" href="https://github.com/alifsemi/sdk-alif">sdk-alif</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

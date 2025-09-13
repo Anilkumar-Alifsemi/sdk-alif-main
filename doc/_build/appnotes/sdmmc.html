@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDMMC &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QDEC" href="qdec.html" />
+    <link rel="prev" title="UTimer Counter" href="utimer_counter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDMMC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alif-sdmmc-features">Alif SDMMC Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-sdmmc-application-in-zephyr">Building SDMMC Application in Zephyr</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-and-flashing-binary-on-devkit">Configuring and Flashing Binary on DevKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-json-configuration">Creating a JSON Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flashing-the-application">Flashing the Application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validating-sdmmc-on-devkit">Validating SDMMC on DevKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-logs">Output Logs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SDMMC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/sdmmc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdmmc">
+<span id="appnote-zephyr-alif-sdmmc"></span><h1>SDMMC<a class="headerlink" href="#sdmmc" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This application note describes the process of creating, compiling, and running a simple FatFS demo application using the Alif SDMMC host stack on the DevKit.</p>
+<figure class="align-center" id="id1">
+<img alt="SDMMC Configuration Diagram" src="_images/sdmmc_diagram.png" />
+<figcaption>
+<p><span class="caption-number">Figure 4 </span><span class="caption-text">Diagram of the SDMMC Configuration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The Alif SDMMC driver, integrated within the Ensemble ROM code, leverages Intel’s eMMC host stack as an alternative to the Zephyr SDMMC host stack. This approach optimizes flash memory usage while maintaining robust SDMMC functionality.</p>
+</section>
+<section id="alif-sdmmc-features">
+<h2>Alif SDMMC Features<a class="headerlink" href="#alif-sdmmc-features" title="Link to this heading"></a></h2>
+<p>The Alif SDMMC driver supports the following features:</p>
+<ul class="simple">
+<li><p><strong>SDMMC v4.1 Compliance</strong>: Ensures compatibility with modern SD card standards.</p></li>
+<li><p><strong>Bus Width</strong>: Supports 1-bit and 4-bit configurations.</p></li>
+<li><p><strong>Voltage</strong>: Operates at 3.3V.</p></li>
+<li><p><strong>ADMA2</strong>: Enables efficient data transfers with Advanced DMA.</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<p>To run the SDMMC application, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif DevKit</strong></p></li>
+<li><p><strong>SD card (formatted with FAT32)</strong></p></li>
+<li><p><strong>Debugger: JLink (optional)</strong></p></li>
+</ul>
+</section>
+<section id="software-requirements">
+<h3>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h3>
+<p>To develop and run SDMMC applications on the Alif Devkit with Zephyr, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif Zephyr SDK</strong>: Version 1.3.0 or later, including:
+- SDMMC APIs
+- Intel eMMC host stack
+- Sample FatFS application</p></li>
+<li><p><strong>Development Environment</strong>: A Linux-based system with the west build tool installed</p></li>
+<li><p><strong>SE Tools (optional)</strong>: For loading binaries (refer to Alif documentation)</p></li>
+</ul>
+</section>
+<section id="building-sdmmc-application-in-zephyr">
+<h3>Building SDMMC Application in Zephyr<a class="headerlink" href="#building-sdmmc-application-in-zephyr" title="Link to this heading"></a></h3>
+<p>Follow these steps to build the SDMMC application using the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+<li><p>Navigate to the SDK directory and build the FatFS sample:</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>alif
+west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>samples/subsys/fs/fs_sample/
+</pre></div>
+</div>
+<p>4 .Build commands for applications on the M55 HP core using the Ninja build command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>alif
+west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>samples/subsys/fs/fs_sample/
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To address various scenarios, such as utilizing MRAM or flash addresses and employing alternative compilers like LLVM or ARMCLANG, refer to the document AUGD0008_Getting-Started-with-ZAS-for-Ensemble-v0.5.0-Beta.</p>
+</div>
+<p>Once the build command completes successfully, executable images will be generated and placed in the <cite>build/zephyr</cite> directory. Both <cite>.bin</cite> (binary) and <cite>.elf</cite> (Executable and Linkable Format) files will be available.</p>
+</section>
+</section>
+<section id="configuring-and-flashing-binary-on-devkit">
+<h2>Configuring and Flashing Binary on DevKit<a class="headerlink" href="#configuring-and-flashing-binary-on-devkit" title="Link to this heading"></a></h2>
+<section id="creating-a-json-configuration">
+<h3>Creating a JSON Configuration<a class="headerlink" href="#creating-a-json-configuration" title="Link to this heading"></a></h3>
+<p>Create a JSON configuration file (e.g., <code class="docutils literal notranslate"><span class="pre">sdmmc_config.json</span></code>) for the SE tool:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;DEVICE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;disabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;binary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;app-device-config.json&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.5.00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;signed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;SDMMC-HP&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;binary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zephyr.bin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;signed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cpu_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;M55_HP&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;mramAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x80200000&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;loadAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x58000000&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;boot&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="flashing-the-application">
+<h3>Flashing the Application<a class="headerlink" href="#flashing-the-application" title="Link to this heading"></a></h3>
+<p>Copy files to the SE tool directory:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zephyr.bin</span></code> → <code class="docutils literal notranslate"><span class="pre">&lt;SE</span> <span class="pre">tool</span> <span class="pre">folder&gt;/build/images</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sdmmc_config.json</span></code> → <code class="docutils literal notranslate"><span class="pre">&lt;SE</span> <span class="pre">tool</span> <span class="pre">folder&gt;/build/config</span></code></p></li>
+</ul>
+<p>Execute the flashing commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;SE<span class="w"> </span>tool<span class="w"> </span>folder&gt;
+python3<span class="w"> </span>app-gen-toc.py<span class="w"> </span>--filename<span class="w"> </span>build/config/sdmmc_config.json
+python3<span class="w"> </span>app-write-mram.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="validating-sdmmc-on-devkit">
+<h2>Validating SDMMC on DevKit<a class="headerlink" href="#validating-sdmmc-on-devkit" title="Link to this heading"></a></h2>
+<section id="output-logs">
+<h3>Output Logs<a class="headerlink" href="#output-logs" title="Link to this heading"></a></h3>
+<p>The application is expected to list all directories and files available on the SD card.</p>
+<p>Sample output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[00:00:01.141,000] &lt;err&gt; emmc_hc: adma err:60
+[00:00:01.141,000] &lt;err&gt; emmc_hc: adma err:60
+[00:00:01.145,000] &lt;err&gt; emmc_hc: adma err:60
+[00:00:01.151,000] &lt;err&gt; emmc_hc: adma err:60
+[00:00:01.156,000] &lt;inf&gt; main: Block count 62333952
+Sector size 512
+Memory Size(MB) 30436
+[00:00:01.164,000] &lt;err&gt; emmc_hc: adma err:60
+[00:00:01.169,000] &lt;err&gt; emmc_hc: adma err:60
+[00:00:01.174,000] &lt;err&gt; emmc_hc: adma err:60
+Disk mounted.
+Listing dir /SD: ...
+[00:00:01.183,000] &lt;err&gt; emmc_hc: adma err:60
+[FILE] Ztest1.txt (size = 5757)
+[FILE] TestFile34.txt (size = 5757)
+[FILE] some.dat (size = 5757)
+[FILE] some9.txt (size = 5757)
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

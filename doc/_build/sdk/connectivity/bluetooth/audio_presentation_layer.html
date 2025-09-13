@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentation Layer &mdash; Alif SDK Documentation - v1.1</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=56dcb7b8"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/js/custom.js"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Samples" href="audio_samples.html" />
+    <link rel="prev" title="BLE Audio" href="audio.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Connectivity</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth - Ceva-Waves™ BLE</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="audio.html">BLE Audio</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Presentation Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="audio_samples.html">Samples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rom_abi.html">ROM Code ABI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sample_basic_profile.html">Basic Profile Samples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/index.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SDK documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Connectivity</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth - Ceva-Waves™ BLE</a></li>
+          <li class="breadcrumb-item"><a href="audio.html">BLE Audio</a></li>
+      <li class="breadcrumb-item active">Presentation Layer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/connectivity/bluetooth/audio_presentation_layer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="presentation-layer">
+<h1>Presentation Layer<a class="headerlink" href="#presentation-layer" title="Link to this heading"></a></h1>
+<p>To distribute and/or consume audio using BLE a presentation layer is
+required between the user application and the ISO data path. The main
+roles of the presentation layer are:</p>
+<ul class="simple">
+<li><p>To encode/decode raw audio data using the LC3 codec.</p></li>
+<li><p>To synchronize the audio playback/recording with the BLE clock.</p></li>
+<li><p>To synchronize the audio playback/recording among all the audio sinks/sources.</p></li>
+</ul>
+<section id="typical-le-audio-applications">
+<h2>Typical LE audio applications<a class="headerlink" href="#typical-le-audio-applications" title="Link to this heading"></a></h2>
+<p>To better understand the responsibilities of the presentation layer,
+this section describes some examples of typical LE audio applications,
+from the simplest to the most intricate.</p>
+<section id="unidirectional-single-source-single-sink">
+<h3>Unidirectional, single source, single sink<a class="headerlink" href="#unidirectional-single-source-single-sink" title="Link to this heading"></a></h3>
+<p>BLE can be used to transmit stereo audio from a source device to a
+headset. The source device and headset are connected using a single
+unidirectional CIS, containing both the left and right audio channels,
+and the audio is retrieved by the source device from a filesystem or
+network. In this scenario, no audio recording is therefore performed and
+no synchronization is needed among multiple audio sinks or sources.</p>
+<p>On the source device, the audio is given to the presentation layer after
+having been converted to PCM audio. Here, the only role of the
+presentation layer is to encode the PCM audio using LC3 codec and to
+provide the encoded audio to the ISO data path. No audio recording is
+performed so there is no need to synchronize any audio clock on the
+audio source with the BLE clock.</p>
+<p>On the headset, the encoded audio is received and is given to the
+presentation layer. The latter decodes the audio and provides the
+obtained PCM audio to the user application that will typically transmit
+it to a hardware audio codec using e.g. I²S. The rate at which audio is
+transmitted over I²S and therefore played is defined by the audio clock.
+Ideally, this audio clock should be perfectly synchronized with the BLE
+clock but in practice, without corrective action, some drift will
+inevitably be observed, which means audio will be played a bit faster or
+slower than it is received, eventually causing underrun or overrun in
+the audio data path. Hence, the presentation layer should make sure the
+audio playback is synchronized with the BLE clock, e.g. by adjusting the
+audio clock frequency if that is possible or by applying some drift
+compensation algorithm on the audio data.</p>
+</section>
+<section id="bidirectional-single-source-single-sink">
+<h3>Bidirectional, single source, single sink<a class="headerlink" href="#bidirectional-single-source-single-sink" title="Link to this heading"></a></h3>
+<p>This scenario is identical to the previous one except that the source
+device is now sending audio that is recorded in real time using a
+microphone. The presentation layer on the headset is exactly the same as
+above. However, for the source device, it is now required to synchronize
+the audio capture with the BLE clock to avoid drift to lead to overrun
+or underrun within the audio data path. Similarly to what has been
+described for the previous scenario, the presentation layer on the
+source device must compensate somehow drift between the audio and BLE
+clocks.</p>
+</section>
+<section id="bidirectional-multiple-sources-multiple-sinks">
+<h3>Bidirectional, multiple sources, multiple sinks<a class="headerlink" href="#bidirectional-multiple-sources-multiple-sinks" title="Link to this heading"></a></h3>
+<p>The most intricate scenario is when more than two devices are involved
+and all devices are producing and consuming audio data. For example,
+let’s consider the case where a phone is streaming stereo audio to
+earbuds and each earbud is recording audio using microphones and sending
+it to the phone. As in the previous cases, the presentation layer is
+responsible for encoding and decoding the audio packets, in addition to
+compensate for any drift between the audio and BLE clocks. However,
+since multiple devices are playing and recording audio it is also
+necessary here to synchronize the playback and recording across all
+devices: the left and right earbuds have to play and capture their
+respective audio data at the exact same time. To do so, the Basic Audio
+Profile (BAP) specifies a <em>presentation delay</em>, identical to all earbuds
+and defining the time at which received audio has to be played and
+recorded audio has to be sent. This delay is the maximum amount of time
+each earbud can take to encode, decode and process audio before it is
+played or sent to the phone. The presentation layer on the earbuds has
+to buffer the audio in order to play the received audio and send the
+recorded audio on time, according to the specified presentation delay.</p>
+</section>
+</section>
+<section id="design">
+<h2>Design<a class="headerlink" href="#design" title="Link to this heading"></a></h2>
+<img alt="../../_images/alif_ble_audio_presentation_layer.drawio.png" src="../../_images/alif_ble_audio_presentation_layer.drawio.png" />
+<section id="timestamp-synchronization">
+<h3>Timestamp synchronization<a class="headerlink" href="#timestamp-synchronization" title="Link to this heading"></a></h3>
+<p>The timestamp synchronization module is responsible for generating
+timestamps in the BLE clock domain. This module is part of the ISO data
+path and is needed by the presentation layer to perform presentation
+compensation and to measure drift between the audio clock and the BLE
+clock. In practice, the timestamp synchronization module uses a
+free-running timer in Application core’s clock domain and synchronizes regularly
+with the controller to determine the current offset between this timer
+and the BLE clock. This offset can then be used at any time to convert
+the current value of the free-running timer to the corresponding value
+in BLE clock domain.</p>
+<p>All timestamps are provided in the domain of the local BLE controller’s
+ISO clock. It is also possible at any time to retrieve the current time
+in this clock domain, for example to measure relative time between now
+and an SDU timestamp.</p>
+</section>
+<section id="audio-sink">
+<h3>Audio sink<a class="headerlink" href="#audio-sink" title="Link to this heading"></a></h3>
+<p>For an audio sink, SDUs containing encoded audio data are regularly
+received and provided to the presentation layer by the ISO data path.
+Every SDU is composed of a single <em>audio frame</em>. Each time a new SDU is
+received, the presentation layer decodes the audio frame, typically
+using the LC3 codec and then determines if some adjustment is needed to
+render the audio at the right time, according to the presentation delay.</p>
+<section id="decoding-processing">
+<h4>Decoding &amp; Processing<a class="headerlink" href="#decoding-processing" title="Link to this heading"></a></h4>
+<p>The user application is responsible for decoding the incoming audio
+data. For most applications, the <strong>Ceva-Waves™ LC3</strong> codec will be used but an
+application-specific codec might also be used. After decoding, some
+audio processing might also be performed by the user application. Doing
+audio processing as the first step in the presentation layer makes it
+possible to accurately take the extra delay it requires into account for
+presentation compensation.</p>
+</section>
+<section id="audio-fifo">
+<h4>Audio FIFO<a class="headerlink" href="#audio-fifo" title="Link to this heading"></a></h4>
+<p>The audio FIFO is a single-producer single-consumer lock free FIFO,
+which can be used to store and retrieve audio data. The audio FIFO
+should be sized depending on the presentation delay and the expected
+time before an SDU reference anchor point that an SDU may arrive.</p>
+<p>When adding data to the FIFO, the user application can request a fixed
+size buffer to be reserved in the FIFO. The buffer is the length of a
+single audio frame, plus some metadata. The buffer pointer can be
+provided as the output buffer to the LC3 codec (or any other codec or
+audio processing function), such that it decodes the audio directly into
+the FIFO, removing the need to copy data after decoding.</p>
+<p>Once decoding and processing is complete, the user application should provide a <em>DesiredRenderTime</em> for the audio block (see <a class="reference internal" href="#presentation-compensation-sink"><span class="std std-ref">Presentation Compensation</span></a> section below).
+The application should then <em>commit</em> the block into the audio FIFO, which makes it available for a consumer to use.</p>
+<p>The consumer may retrieve data from the FIFO either in the same
+fixed-size blocks that were placed into the FIFO, or in audio
+<em>fragments</em> of a different length. An audio fragment may not overlap
+between two audio blocks, but subject to this condition audio fragments
+of any length can be retrieved from the buffer. This may be useful in
+the event that the destination for the audio data cannot accept a buffer
+size as large as a whole audio block, for example if copying data
+directly to the FIFO of an I²S peripheral without using DMA.</p>
+</section>
+<section id="presentation-compensation">
+<span id="presentation-compensation-sink"></span><h4>Presentation Compensation<a class="headerlink" href="#presentation-compensation" title="Link to this heading"></a></h4>
+<p>This module is only useful and enabled when audio is rendered in real
+time.</p>
+<p>Any incoming SDU is timestamped by the controller with the
+synchronization reference point <em>SDUSyncRef</em> of the SDU. This point can
+be used to compute the time <em>DesiredRenderTime</em>, in the BLE clock
+domain, at which the audio frame must be rendered:</p>
+<div class="math notranslate nohighlight">
+\[DesiredRenderTime = SDUSyncRef + PresentationDelay\]</div>
+<p>With <em>PresentationDelay</em> the presentation delay of the audio stream:</p>
+<img alt="../../_images/alif_ble_audio_presentation_delay.drawio.png" src="../../_images/alif_ble_audio_presentation_delay.drawio.png" />
+<p>Each time a new audio fragment must be provided to the audio output, the
+user application can get this fragment from the FIFO via the
+presentation compensation module.</p>
+<p>The presentation compensation module retrieves the next audio fragment
+from the audio FIFO and then calculates the <em>PresentationError</em>, defined
+as:</p>
+<div class="math notranslate nohighlight">
+\[PresentationError = DesiredRenderTime - TimeNow\]</div>
+<p>Where the <em>DesiredRenderTime</em> was stored in the FIFO along with the
+audio block when it was decoded, and the <em>TimeNow</em> is taken from the Time
+Synchronisation module in the clock domain of the local BLE controller.
+In the case of rendering an audio fragment that is not aligned with a
+boundary between audio blocks, the <em>DesiredRenderTime</em> has an offset
+applied depending on the offset of the audio fragment from the start of
+the audio block it is contained within.</p>
+<p>This calculation currently assumes that the fragment retrieved from the
+audio FIFO will be rendered now. If we assume that the next fragment is
+retrieved in the DMA transfer complete ISR of the previous fragment,
+then actually the I²S FIFO still contains data, so the next fragment
+provided will not start to be rendered until all of these samples have
+left the FIFO. The time delay between the DMA transfer complete ISR and
+the start of rendering of the next fragment might vary depending on
+latency to service the interrupt, and variation in how full the FIFO is
+at the point where the DMA transfer completes. This makes estimating the
+presentation error challenging.</p>
+<p>A PresentationThreshold is defined, which determines the maximum
+<em>PresentationError</em> for which an audio fragment will be rendered. If the
+<em>PresentationError</em> would be outside the PresentationThreshold, then
+either silence is inserted (by providing an audio fragment consisting of
+all zeros to the user application) or samples are dropped to
+re-synchronise the playback.</p>
+<p>If the <em>PresentationError</em> is within the PresentationThreshold but is
+still non-zero, then the audio fragment is provided to the output, and
+the presentation compensation module attempts to correct the
+presentation error by calculating an adjustment to the audio clock. A proportional-integral(PI)
+controller is used to calculate the required
+audio clock frequency. Over time this PI controller will correct for
+both the presentation delay, and any drift between the local bluetooth
+clock and the rate at which SDUs are provided by the peer device.</p>
+<p>The user application is responsible for actually adjusting the audio
+clock frequency depending on the demand from the presentation
+compensation module, since the way in which the clock is adjusted will
+be application specific.</p>
+<p>This solution assumes the size of the audio fragment is variable. This
+is useful since this means the presentation compensation block can add
+blocks of silence of any size, and remove part of an audio block to
+adjust finely the rendering time. However a user could still use fixed
+size blocks if desired (e.g. if this is simpler to implement for the
+specific destination the audio is sent to).</p>
+</section>
+</section>
+<section id="audio-source">
+<h3>Audio source<a class="headerlink" href="#audio-source" title="Link to this heading"></a></h3>
+<p>For an audio source, audio data is regularly provided to the
+presentation layer by the user application. Audio data is divided into
+fixed-size frames, which will generally be 10 ms in length for most LE
+audio applications.</p>
+<p>Since the size of audio blocks is fixed, if the audio is not recorded in
+real time, e.g. if read from a file, the user application might have to
+pad the last audio block with silence.</p>
+<section id="timing-info-queue">
+<h4>Timing info queue<a class="headerlink" href="#timing-info-queue" title="Link to this heading"></a></h4>
+<p>In the sink direction, the <em>PresentationError</em> of an audio packet can be
+determined at the point of rendering, by comparing the
+<em>DesiredRenderTime</em> of the packet with the <em>TimeNow</em> at the point of
+rendering. Samples may be dropped or added to compensate for any
+<em>PresentationError</em>.</p>
+<p>On the contrary, for the source direction it is not possible to
+compensate for any <em>PresentationError</em> at the point of sending an SDU to
+the data path, since by this point the SDU is encoded and must be
+treated as a complete unit which may not be split or delayed (one or
+more SDUs must be sent at every ISO event).</p>
+<p>So compensation for any <em>PresentationError</em> must be applied at the point
+of capturing the audio frame. However at the time of capture the
+<em>PresentationError</em> of the current audio frame is unknown, we can only
+know the <em>PresentationError</em> of SDUs that have already been sent over the
+air by the link layer.</p>
+<p>The reference anchor point of the last SDU that was sent over the air
+can be retrieved from the ISO data path, along with the associated SDU
+sequence number. This information is maintained for each individual data
+path instance.</p>
+<p>To be able to calculate the <em>PresentationError</em>, we must therefore store
+the <em>CaptureTime</em> of the last few SDUs captured along with the associated
+sequence number. This information is stored in a FIFO queue after each
+SDU is encoded. Then when the reference anchor point of the last SDU to
+be sent over the air is retrieved from the data path, we can search
+through the queue to find a matching sequence number and use the
+<em>CaptureTime</em> along with the <em>RefAnchor</em> to calculate the
+<em>PresentationError</em>. This queue must store the timing information and
+associated sequence number of the last few SDUs to be captured rather
+than just one, as it is typical for multiple SDUs to be encoded, queued
+and ready to send at the point in time where a previous SDU is sent over
+the air.</p>
+</section>
+<section id="presentation-compensation-source">
+<span id="id1"></span><h4>Presentation Compensation<a class="headerlink" href="#presentation-compensation-source" title="Link to this heading"></a></h4>
+<p>In the audio source direction, the presentation compensation module is
+used at the point of audio capture to achieve the desired presentation
+delay, and to compensate for drift between clocks.</p>
+<p>When it is time to start capture of the next frame of audio data, the
+presentation compensation module is first used to determine if any
+compensation is required. The presentation compensation module takes as
+its inputs the <em>RefAnchor</em> of the last SDU to be sent over the air, and
+the queue of SDU <em>CaptureTime</em>s with associated sequence numbers. It
+finds the <em>CaptureTime</em> of the last SDU to be sent and calculates the
+<em>PresentationError</em>. Then, depending on the presentation error it can
+take one of the following actions:</p>
+<ul class="simple">
+<li><p><strong>No action:</strong> if either the clocks are perfectly synchronised
+already, or if there is not enough information to determine what
+action to take (e.g. we are capturing one of the first few frames and
+nothing has been sent over the air yet, so we have no feedback on
+whether the timing is correct.</p></li>
+<li><p><strong>Add silence:</strong> if the <em>PresentationError</em> is a large negative value,
+which means that audio data is being captured later than desired. In
+practice the silence is inserted by filling part of an audio frame
+with zeros, and then filling the remaining frame from the I²S. Since
+the I²S will be capturing fewer samples than a full frame, this
+results in more frames being generated in a given time, allowing the
+generation of frames to “catch up” with the rate at which they are
+sent out over the air.</p></li>
+<li><p><strong>Drop samples</strong>: if the <em>PresentationError</em> is a large positive
+value, which means that audio data is being captured earlier than
+desired. In practice the samples are dropped by receiving a number of
+samples over I²S into a buffer, but then not sending the buffer to
+the next stage of the presentation layer and instead overwriting the
+samples with the next I²S receive operation. This could also be
+achieved by simply scheduling a timer callback for some time in the
+future to start filling the frame, but this would require a timer
+channel in addition to the I²S peripheral.</p></li>
+<li><p><strong>Adjust audio PLL</strong>: if the <em>PresentationError</em> is within some
+margin. No samples are added or dropped, and any <em>PresentationError</em>
+is compensated for by adjusting the audio PLL to speed up or slow
+down audio capture. The desired frequency of the audio clock is
+determined using a PI controller which aims to minimise
+<em>PresentationError</em> in the same way as for the sink use-case.</p></li>
+</ul>
+</section>
+<section id="audio-fifo-source">
+<span id="id2"></span><h4>Audio FIFO<a class="headerlink" href="#audio-fifo-source" title="Link to this heading"></a></h4>
+<p>Each frame is captured directly into a buffer which is part of the audio
+FIFO. The <em>CaptureTime</em> is also written into the audio FIFO. Once the
+frame capture is complete, the buffer can be committed to the FIFO. A
+semaphore is used to indicate to the thread running the LC3 encoder that
+a new audio frame is ready to be encoded.</p>
+</section>
+<section id="processing-encoding">
+<h4>Processing &amp; Encoding<a class="headerlink" href="#processing-encoding" title="Link to this heading"></a></h4>
+<p>Whenever a new audio frame has been captured, this is encoded using the
+LC3 codec. Any additional audio processing could be performed before the
+encoder is run.</p>
+</section>
+<section id="sdu-fifo">
+<h4>SDU FIFO<a class="headerlink" href="#sdu-fifo" title="Link to this heading"></a></h4>
+<p>After encoding, SDUs are added to a FIFO. When the previous SDU has been
+transferred to the data path, the next SDU can be pulled out of the FIFO
+and sent. If there is no SDU available to be sent at the time when the
+previous SDU has completed transfer to the link layer, then the next SDU
+can be sent later (it can be sent directly as soon as encoding is
+complete, rather than adding to the FIFO). However it must be ensured
+that the SDU has been transferred to the link layer before the next ISO
+event, otherwise the link layer will be forced to send an empty SDU at
+this event.</p>
+<p>It would be possible to operate the presentation layer without an audio
+FIFO in the event that the chosen presentation delay and encoding
+latency mean that it is not required. For example if the presentation
+delay is 20 ms, frames are 10 ms long, and it takes 5 ms to encode a
+frame then it is possible to send each encoded SDU to the link layer 15
+ms after capture, to be sent 20 ms after capture, and the link layer’s
+SDU buffer will be free again before the next SDU is ready at 25 ms
+after the original SDU’s capture time.</p>
+<p>However adding an SDU FIFO allows more flexibility in choosing the
+presentation delay.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

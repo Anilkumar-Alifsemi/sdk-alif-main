@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Hello World for OSPI NOR Flash &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UTimer Counter" href="utimer_counter.html" />
+    <link rel="prev" title="Clock Control" href="clock_control.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building Hello World for OSPI NOR Flash</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#execution-path">Execution Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-connections-and-setup">Hardware Connections and Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-application-binary-executable-from-ospi-region">Building the Application Binary Executable from OSPI Region</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-configuration-settings">Required Configuration Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-defines-for-rtss-he">Additional Defines for RTSS-HE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-defines-for-rtss-hp">Additional Defines for RTSS-HP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kconfig-modifications">Kconfig Modifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-build-commands">Example Build Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypting-the-zas-application-binary-optional">Encrypting the ZAS Application Binary (Optional)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#encrypt-the-binary">Encrypt the Binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save-the-encrypted-binary">Save the Encrypted Binary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-devkit-e7">Executing Binary on DevKit-E7</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#flash-the-binary">Flash the Binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#program-atoc-and-boot">Program ATOC and Boot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-output">Sample Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#observation">Observation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building Hello World for OSPI NOR Flash</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/helloworld_ospi.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-hello-world-for-ospi-nor-flash">
+<span id="appnote-zephyr-hello-world-ospi"></span><h1>Building Hello World for OSPI NOR Flash<a class="headerlink" href="#building-hello-world-for-ospi-nor-flash" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This application note describes how to build and execute a “HelloWorld” application using the Zephyr RTOS, configured to run from OSPI1 NOR flash on the Alif E7 DevKit. The application prints a “Hello World” message along with the board name and targets the Real-Time Subsystem High-Performance (RTSS-HP) and Real-Time Subsystem High-Efficiency (RTSS-HE) cores. Optionally, the Zephyr Application Binary (ZAS) can be encrypted with AES for secure execution.</p>
+</section>
+<section id="execution-path">
+<h2>Execution Path<a class="headerlink" href="#execution-path" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>RTSS-HP</strong>: Runs from OSPI1 NOR flash at 0xC0000000.</p></li>
+<li><p><strong>RTSS-HE</strong>: Runs from OSPI1 NOR flash at 0xC0200000.</p></li>
+</ul>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Alif DevKit</strong>: Provides the hardware platform, including the RTSS-HP (Cortex-M55_0) and RTSS-HE (Cortex-M55_1) cores, with OSPI1 NOR flash for non-volatile storage and execution.</p></li>
+<li><p><strong>OSPI1 NOR Flash</strong>: A non-volatile memory mapped at 0xC0000000, configured in Execute-in-Place (XiP) mode to run the application binary directly.</p></li>
+</ul>
+</section>
+<section id="hardware-connections-and-setup">
+<h2>Hardware Connections and Setup<a class="headerlink" href="#hardware-connections-and-setup" title="Link to this heading"></a></h2>
+<p>No additional hardware connections are required beyond the standard Alif DevKit setup. Ensure the OSPI1 NOR flash is accessible and properly configured in the system firmware.</p>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Zephyr RTOS</strong>: Provides the framework for building and running the application.</p></li>
+<li><p><strong>West Tool</strong>: Used to manage Zephyr builds.</p></li>
+<li><p><strong>GCC Compiler</strong>: Included in the Zephyr SDK for compiling the application.</p></li>
+<li><p><strong>AES Encryption Tool (Optional)</strong>: <code class="docutils literal notranslate"><span class="pre">/home/$USER/ZAS-v1.2.0-Beta/prebuilt-images/CSPI_AES128_ECB</span></code> for encrypting the binary.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the above commands, <cite>v1.2.0</cite> is an example version. Replace <cite>Zephyr-Ensemble-E7-B0-RTSS-v1.2.0-Beta</cite> with the latest version of the Alif Zephyr SDK.</p>
+</div>
+</section>
+<section id="building-the-application-binary-executable-from-ospi-region">
+<h2>Building the Application Binary Executable from OSPI Region<a class="headerlink" href="#building-the-application-binary-executable-from-ospi-region" title="Link to this heading"></a></h2>
+<p>Below are the required configurations for two different setups: RTSS-HE and RTSS-HP.</p>
+<section id="required-configuration-settings">
+<h3>Required Configuration Settings<a class="headerlink" href="#required-configuration-settings" title="Link to this heading"></a></h3>
+<p>Add the following line to disable the ARM MPU (Memory Protection Unit) for both configurations:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CONFIG_ARM_MPU=n
+</pre></div>
+</div>
+</section>
+<section id="additional-defines-for-rtss-he">
+<h3>Additional Defines for RTSS-HE<a class="headerlink" href="#additional-defines-for-rtss-he" title="Link to this heading"></a></h3>
+<p>For the RTSS-HE (High Efficiency) configuration, use these flash memory settings:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CONFIG_FLASH_BASE_ADDRESS=0xC0200000
+</pre></div>
+</div>
+</section>
+<section id="additional-defines-for-rtss-hp">
+<h3>Additional Defines for RTSS-HP<a class="headerlink" href="#additional-defines-for-rtss-hp" title="Link to this heading"></a></h3>
+<p>For the RTSS-HP (High Performance) configuration, use these flash memory settings:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CONFIG_FLASH_BASE_ADDRESS=0xC0000000
+CONFIG_FLASH_LOAD_OFFSET=0x0
+</pre></div>
+</div>
+</section>
+<section id="kconfig-modifications">
+<h3>Kconfig Modifications<a class="headerlink" href="#kconfig-modifications" title="Link to this heading"></a></h3>
+<p>To ensure proper execution from OSPI1 NOR flash, modify the <code class="docutils literal notranslate"><span class="pre">soc/arm/alif_ensemble/e7/Kconfig.series</span></code> file by commenting out the following lines:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># select INIT_ARCH_HW_AT_BOOT
+# select PLATFORM_SPECIFIC_INIT
+</pre></div>
+</div>
+</section>
+<section id="example-build-commands">
+<h3>Example Build Commands<a class="headerlink" href="#example-build-commands" title="Link to this heading"></a></h3>
+<p>Below are example build commands using the west tool for each configuration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The application is designed for the Alif Ensemble E7 DevKit. Modify the sample code as needed for other DevKits.</p>
+</div>
+<p><strong>RTSS-HE Example</strong></p>
+<p>This example builds the hello world sample for the RTSS-HE target on the alif_e7_dk_rtss_he board:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>samples/hello_world<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCONFIG_ARM_MPU<span class="o">=</span>n<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCONFIG_FLASH_BASE_ADDRESS<span class="o">=</span>0xC0200000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span>always
+</pre></div>
+</div>
+<p><strong>RTSS-HP Example</strong></p>
+<p>This command builds the uart/echo_bot driver sample for the RTSS-HP target on the alif_e7_dk_rtss_hp board:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>samples/drivers/uart/echo_bot<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCONFIG_ARM_MPU<span class="o">=</span>n<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCONFIG_FLASH_BASE_ADDRESS<span class="o">=</span>0xC0000000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCONFIG_FLASH_LOAD_OFFSET<span class="o">=</span>0x0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span>always
+</pre></div>
+</div>
+</section>
+</section>
+<section id="encrypting-the-zas-application-binary-optional">
+<h2>Encrypting the ZAS Application Binary (Optional)<a class="headerlink" href="#encrypting-the-zas-application-binary-optional" title="Link to this heading"></a></h2>
+<p>To secure the application, encrypt the ZAS binary using a 16-byte AES key.</p>
+<section id="encrypt-the-binary">
+<h3>Encrypt the Binary<a class="headerlink" href="#encrypt-the-binary" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/<span class="nv">$USER</span>/ZAS-v1.2.0/prebuilt-images/CSPI_AES128_ECB<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-i<span class="w"> </span>build/zephyr/zephyr.bin<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span>build/zephyr/zephyr_en.bin<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-k<span class="w"> </span><span class="s1">&#39;0123456789ABCDEF&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-k</span> <span class="pre">'0123456789ABCDEF'</span></code>: Example 16-byte AES key (replace with your own key).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">1</span></code>: Enables encryption.</p></li>
+</ul>
+</section>
+<section id="save-the-encrypted-binary">
+<h3>Save the Encrypted Binary<a class="headerlink" href="#save-the-encrypted-binary" title="Link to this heading"></a></h3>
+<p><strong>RTSS-HP</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>build/zephyr/zephyr_en.bin<span class="w"> </span>/home/<span class="nv">$USER</span>/app-release-exec-linux/build/images/zephyr_e7_rtsshp_ospi1_en_helloworld.bin
+</pre></div>
+</div>
+<p><strong>RTSS-HE</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>build/zephyr/zephyr_en.bin<span class="w"> </span>/home/<span class="nv">$USER</span>/app-release-exec-linux/build/images/zephyr_e7_rtsshe_ospi1_en_helloworld.bin
+</pre></div>
+</div>
+</section>
+</section>
+<section id="executing-binary-on-devkit-e7">
+<h2>Executing Binary on DevKit-E7<a class="headerlink" href="#executing-binary-on-devkit-e7" title="Link to this heading"></a></h2>
+<section id="flash-the-binary">
+<h3>Flash the Binary<a class="headerlink" href="#flash-the-binary" title="Link to this heading"></a></h3>
+<p>Flash the ZAS binary (encrypted or unencrypted) to OSPI1 NOR flash.</p>
+</section>
+<section id="program-atoc-and-boot">
+<h3>Program ATOC and Boot<a class="headerlink" href="#program-atoc-and-boot" title="Link to this heading"></a></h3>
+<p>Use the appropriate configuration file to program the Application Table of Contents (ATOC) into MRAM and boot the application:</p>
+<ul class="simple">
+<li><p><strong>RTSS-HP (Unencrypted)</strong>: <code class="docutils literal notranslate"><span class="pre">/home/$USER/app-release-exec-linux/build/config/zephyr_e7_rtsshp_ospi1_helloworld.json</span></code></p></li>
+<li><p><strong>RTSS-HE (Unencrypted)</strong>: <code class="docutils literal notranslate"><span class="pre">/home/$USER/app-release-exec-linux/build/config/zephyr_e7_rtsshe_ospi1_helloworld.json</span></code></p></li>
+<li><p><strong>RTSS-HP (Encrypted)</strong>: <code class="docutils literal notranslate"><span class="pre">/home/$USER/app-release-exec-linux/build/config/zephyr_e7_rtsshp_ospi1_en_helloworld.json</span></code></p></li>
+<li><p><strong>RTSS-HE (Encrypted)</strong>: <code class="docutils literal notranslate"><span class="pre">/home/$USER/app-release-exec-linux/build/config/zephyr_e7_rtsshe_ospi1_en_helloworld.json</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="sample-output">
+<h2>Sample Output<a class="headerlink" href="#sample-output" title="Link to this heading"></a></h2>
+<p>Below is the expected console output for RTSS-HP and RTSS-HE:</p>
+<p><strong>RTSS-HP (0xC0000000)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build zas-v1.2-30-g25c1cf9151af ***
+Hello! I&#39;m your echo bot.
+Tell me something and press enter:
+</pre></div>
+</div>
+<p><strong>RTSS-HE (0xC0200000)</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build zas-v1.2-30-g25c1cf9151af ***
+Hello World! alif_e7_dk_rtss_he
+</pre></div>
+</div>
+</section>
+<section id="observation">
+<h2>Observation<a class="headerlink" href="#observation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The application successfully boots from OSPI1 NOR flash.</p></li>
+<li><p>The board name in the output verifies the correct target configuration.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRC &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DMA" href="dma.html" />
+    <link rel="prev" title="ADC12/24" href="adc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CRC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#crc-operation">CRC Operation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculation">Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-the-result">Reading the Result</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-crc-application-in-zephyr">Building CRC Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verifying-crc-algorithm-in-a-web-crc-calculator">Verifying CRC Algorithm in a Web CRC Calculator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#crc-8-ccitt">CRC-8-CCITT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crc-16-ccitt">CRC-16-CCITT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crc-32">CRC-32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-crc32c">Custom CRC32C</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CRC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/crc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="crc">
+<span id="appnote-zephyr-crc"></span><h1>CRC<a class="headerlink" href="#crc" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This application note provides an overview of the Cyclic Redundancy Check (CRC), a powerful method used for error detection and correction. Here are the key features:</p>
+<ul class="simple">
+<li><p><strong>CRC Algorithm Support</strong>: Supports CRC-8-CCITT, CRC-16-CCITT, CRC-32, and CRC-32C standards.</p></li>
+<li><p><strong>Data Processing</strong>: Processes data in 8-bit or 32-bit chunks.</p></li>
+<li><p><strong>Automatic Byte and Bit Swapping</strong>: Optionally performs byte and bit swapping of data.</p></li>
+<li><p><strong>Customized Polynomials</strong>: Allows customization of polynomials for specific applications.</p></li>
+<li><p><strong>AHB Interface</strong>: Interfaces with the Advanced High-performance Bus (AHB).</p></li>
+</ul>
+</section>
+<section id="crc-operation">
+<h2>CRC Operation<a class="headerlink" href="#crc-operation" title="Link to this heading"></a></h2>
+<p>The following steps are involved in CRC operation:</p>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h3>
+<p>Write to the control register (0x00) to set up the operation:</p>
+<ul class="simple">
+<li><p>Choose the desired CRC algorithm and size (8, 16, or 32 bits).</p></li>
+<li><p>Optionally program BIT or BYTE swapping.</p></li>
+<li><p>Optionally program Reflect CRC.</p></li>
+<li><p>Provide a seed value for the selected algorithm.</p></li>
+</ul>
+</section>
+<section id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Set the init[0] bit to load the CRC accumulation register with the seed value.</p></li>
+<li><p>Write the custom polynomial to the poly_custom register (0x14).</p></li>
+</ul>
+</section>
+<section id="calculation">
+<h3>Calculation<a class="headerlink" href="#calculation" title="Link to this heading"></a></h3>
+<p>The CRC output is independent of the input size. If the user selects the 8-bit CRC algorithm, the output will be 8 bits. For the 16-bit CRC algorithm, the output will be 16 bits, and for the 32-bit CRC algorithm, the output will be 32 bits.</p>
+</section>
+<section id="reading-the-result">
+<h3>Reading the Result<a class="headerlink" href="#reading-the-result" title="Link to this heading"></a></h3>
+<p>Once all data has been processed, read the CRC result from the crc_out register (0x18).</p>
+</section>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Alif DevKit</strong></p></li>
+<li><p><strong>Debugger: JLink (optional)</strong></p></li>
+</ul>
+</section>
+<section id="building-crc-application-in-zephyr">
+<h2>Building CRC Application in Zephyr<a class="headerlink" href="#building-crc-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to create your Zephyr-based CRC application using the GCC compiler and the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/crc/
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Build commands for applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/crc/
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To address various scenarios, such as utilizing MRAM or flash addresses and employing alternative compilers like LLVM or ARMCLANG, refer to the document AUGD0008_Getting-Started-with-ZAS-for-Ensemble-v0.5.0-Beta.</p>
+</div>
+<p>Once the build command completes successfully, executable images will be generated and placed in the <cite>build/zephyr</cite> directory. Both <cite>.bin</cite> (binary) and <cite>.elf</cite> (Executable and Linkable Format) files will be available.</p>
+</section>
+<section id="verifying-crc-algorithm-in-a-web-crc-calculator">
+<h2>Verifying CRC Algorithm in a Web CRC Calculator<a class="headerlink" href="#verifying-crc-algorithm-in-a-web-crc-calculator" title="Link to this heading"></a></h2>
+<p>You can verify that the CRC output in a web CRC calculator matches the devKit output. Refer to a web CRC calculator (e.g., <a class="reference external" href="https://crccalc.com/">https://crccalc.com/</a>) for validation.</p>
+<section id="crc-8-ccitt">
+<h3>CRC-8-CCITT<a class="headerlink" href="#crc-8-ccitt" title="Link to this heading"></a></h3>
+<p>To verify the output in a web CRC calculator:</p>
+<ol class="arabic simple">
+<li><p>Select CRC8 and enter the CRC input data.</p></li>
+<li><p>Calculate the CRC output.</p></li>
+</ol>
+<p>To verify the CRC-8-CCITT algorithm in the Alif CRC Hardware module:</p>
+<ol class="arabic simple">
+<li><p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ensemble_rtss_common.dtsi</span></code> file and set <code class="docutils literal notranslate"><span class="pre">crc_algo</span> <span class="pre">=</span> <span class="pre">&quot;CRC_8_BIT_SIZE&quot;</span></code>.</p></li>
+<li><p>Provide the input data in the CRC application.</p></li>
+</ol>
+<p>Example code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x67</span><span class="p">,</span><span class="w"> </span><span class="mh">0x3F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x90</span><span class="p">,</span><span class="w"> </span><span class="mh">0xC9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x25</span><span class="p">,</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">,</span><span class="w"> </span><span class="mh">0x4A</span><span class="p">,</span><span class="w"> </span><span class="mh">0xB1</span><span class="p">,</span><span class="w"> </span><span class="mh">0x12</span><span class="p">};</span><span class="w"> </span><span class="cm">/* CRC8 unaligned input data */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">seed_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Seed value for 8 bit */</span>
+<span class="cm">/* Output: CRC8 output value: 0xCD */</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id1">
+<img alt="Web CRC 8 Output" src="_images/web_crc8_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 33 </span><span class="caption-text">Web CRC 8 Output</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<img alt="Flatboard CRC 8 Output" src="_images/flatboard_crc8_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 34 </span><span class="caption-text">Flatboard CRC 8 Output</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="crc-16-ccitt">
+<h3>CRC-16-CCITT<a class="headerlink" href="#crc-16-ccitt" title="Link to this heading"></a></h3>
+<p>To verify the output in a web CRC calculator:</p>
+<ol class="arabic simple">
+<li><p>Select CRC16_CCITT_ZERO and enter the CRC input data.</p></li>
+<li><p>Calculate the CRC output.</p></li>
+</ol>
+<p>To verify the CRC-16-CCITT algorithm in the Alif CRC Hardware module:</p>
+<ol class="arabic simple">
+<li><p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ensemble_rtss_common.dtsi</span></code> file and set <code class="docutils literal notranslate"><span class="pre">crc_algo</span> <span class="pre">=</span> <span class="pre">&quot;CRC_16_BIT_SIZE&quot;</span></code>.</p></li>
+<li><p>Provide the input data in the CRC application.</p></li>
+</ol>
+<p>Example code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x67</span><span class="p">,</span><span class="w"> </span><span class="mh">0x3F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x90</span><span class="p">,</span><span class="w"> </span><span class="mh">0xC9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x25</span><span class="p">,</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">,</span><span class="w"> </span><span class="mh">0x4A</span><span class="p">,</span><span class="w"> </span><span class="mh">0xB1</span><span class="p">,</span><span class="w"> </span><span class="mh">0x12</span><span class="p">};</span><span class="w"> </span><span class="cm">/* CRC unaligned input data */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">seed_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00000000</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Seed value for 16 bit */</span>
+<span class="cm">/* Output: CRC-16-CCITT output value: 0xCD4D */</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id3">
+<img alt="Web CRC 16 Output" src="_images/web_crc16_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 35 </span><span class="caption-text">Web CRC 16 Output</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<img alt="Flatboard CRC 16 Output" src="_images/flatboard_crc16_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 36 </span><span class="caption-text">Flatboard CRC 16 Output</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="crc-32">
+<h3>CRC-32<a class="headerlink" href="#crc-32" title="Link to this heading"></a></h3>
+<p>To verify the output in a web CRC calculator:</p>
+<ol class="arabic simple">
+<li><p>Select CRC32 and enter the CRC input data.</p></li>
+<li><p>Enable Input reflected and Result reflected.</p></li>
+<li><p>Set the initial value to 0xFFFFFFFF and the final XOR value to 0xFFFFFFFF.</p></li>
+<li><p>Calculate the CRC output.</p></li>
+</ol>
+<p>To verify the CRC32 algorithm in the Alif CRC Hardware module:</p>
+<ol class="arabic simple">
+<li><p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ensemble_rtss_common.dtsi</span></code> file and set <code class="docutils literal notranslate"><span class="pre">crc_algo</span> <span class="pre">=</span> <span class="pre">&quot;CRC_32_BIT_SIZE&quot;</span></code>.</p></li>
+<li><p>In the application code, enable the bit_swap, byte_swap, reflect, and invert options.</p></li>
+<li><p>Provide the input data in the CRC application.</p></li>
+</ol>
+<p>Example code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">input_value</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x67</span><span class="p">,</span><span class="w"> </span><span class="mh">0x3F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x90</span><span class="p">,</span><span class="w"> </span><span class="mh">0xC9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x25</span><span class="p">,</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">,</span><span class="w"> </span><span class="mh">0x4A</span><span class="p">,</span><span class="w"> </span><span class="mh">0xB1</span><span class="p">,</span><span class="w"> </span><span class="mh">0x12</span><span class="p">};</span><span class="w"> </span><span class="cm">/* CRC unaligned input data */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">seed_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFFFFFF</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Seed value for 32 bit */</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id5">
+<img alt="CRC 32 Sample Code" src="_images/sample_code_crc32.png" />
+<figcaption>
+<p><span class="caption-number">Figure 37 </span><span class="caption-text">CRC 32 Sample Code</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<img alt="Web CRC 16 Output" src="_images/web_crc32_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 38 </span><span class="caption-text">Web CRC 32 Output</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id7">
+<img alt="Flatboard CRC 32 Output" src="_images/flatboard_crc32_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 39 </span><span class="caption-text">Flatboard CRC 32 Output</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="custom-crc32c">
+<h3>Custom CRC32C<a class="headerlink" href="#custom-crc32c" title="Link to this heading"></a></h3>
+<p>To verify the output in a web CRC calculator:</p>
+<ol class="arabic simple">
+<li><p>Select the CRC32 custom option.</p></li>
+<li><p>Enter your CRC input data.</p></li>
+<li><p>Change the polynomial to match the application code.</p></li>
+<li><p>Enable Input reflected.</p></li>
+<li><p>Set the initial value to 0xFFFFFFFF and the final XOR value to 0xFFFFFFFF.</p></li>
+<li><p>Calculate the CRC output.</p></li>
+</ol>
+<p>To verify the CRC32C algorithm in the Alif CRC Hardware module:</p>
+<ol class="arabic simple">
+<li><p>Navigate to the <code class="docutils literal notranslate"><span class="pre">ensemble_rtss_common.dtsi</span></code> file and set <code class="docutils literal notranslate"><span class="pre">crc_algo</span> <span class="pre">=</span> <span class="pre">&quot;CRC_32_BIT_SIZE&quot;</span></code>.</p></li>
+<li><p>In the application code, enable the bit_swap, byte_swap, reflect, invert, and custom_poly options.</p></li>
+<li><p>Set the polynomial value to 0x2CEEA6C8 and provide the input data in the CRC application.</p></li>
+<li><p>Call the <code class="docutils literal notranslate"><span class="pre">crc_polycustom</span></code> function (declared in <code class="docutils literal notranslate"><span class="pre">include/zephyr/drivers/crc/alif_crc.h</span></code>) in your application to use the CRC32C algorithm, passing the polynomial variable as a function parameter.</p></li>
+</ol>
+<p>Example code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">arr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x67</span><span class="p">,</span><span class="w"> </span><span class="mh">0x3F</span><span class="p">,</span><span class="w"> </span><span class="mh">0x90</span><span class="p">,</span><span class="w"> </span><span class="mh">0xC9</span><span class="p">,</span><span class="w"> </span><span class="mh">0x25</span><span class="p">,</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">,</span><span class="w"> </span><span class="mh">0x4A</span><span class="p">,</span><span class="w"> </span><span class="mh">0xB1</span><span class="p">,</span><span class="w"> </span><span class="mh">0x12</span><span class="p">};</span><span class="w"> </span><span class="cm">/* CRC unaligned input data */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">seed_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFFFFFF</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Seed value for custom CRC32 */</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">polynomial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2CEEA6C8</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Polynomial value for custom CRC32 */</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id8">
+<img alt="CRC 32 Sample Code" src="_images/sample_code_custom_crc32.png" />
+<figcaption>
+<p><span class="caption-number">Figure 40 </span><span class="caption-text">Custom CRC 32 Sample Code</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id9">
+<img alt="CRC 32 Sample Code Continued" src="_images/sample_code_custom_crc32_cont.png" />
+<figcaption>
+<p><span class="caption-number">Figure 41 </span><span class="caption-text">Custom CRC 32 Sample Code Continued</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id10">
+<img alt="Web Custom CRC 16 Output" src="_images/web_custom_crc32_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 42 </span><span class="caption-text">Web Custom CRC 32 Output</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id11">
+<img alt="Flatboard Custom CRC 32 Output" src="_images/flatboard_custom_crc32_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 43 </span><span class="caption-text">Flatboard Custom CRC 32 Output</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

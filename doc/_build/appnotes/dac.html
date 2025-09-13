@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DAC &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ethos U-55 NPU" href="ethos_u55.html" />
+    <link rel="prev" title="CAN" href="can.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DAC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#output-calculation">Output Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-tree-specification">Device Tree Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-dac-application-in-zephyr">Building DAC Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expected-result">Expected Result</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DAC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dac.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dac">
+<span id="appnote-zephyr-alif-dac"></span><h1>DAC<a class="headerlink" href="#dac" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The Digital-to-Analog Converter (DAC12) module converts 12-bit digital values into analog voltage signals, with an analog output range of 0 V to 1.8 V in Low-Power (LP) mode. The device includes two DAC12 modules, each supporting the following features:</p>
+<ul>
+<li><p><strong>Conversion rate</strong>: Up to 1 kHz at 12-bit resolution</p></li>
+<li><p><strong>Input data</strong>: Unsigned binary or two’s complement signed digital data</p></li>
+<li><p><strong>Programmable output current</strong>: Up to 1.5 mA</p></li>
+<li><p><strong>Programmable load capacitance compensation</strong></p></li>
+<li><p><strong>Internal 1.8 V voltage reference</strong></p></li>
+<li><p><strong>High-frequency Power Supply Rejection Ratio (PSRR)</strong></p></li>
+<li><p><strong>Maximum current output</strong>: 1.5 mA</p></li>
+<li><p><strong>Modes</strong>:
+- <strong>High-Performance (HP)</strong>: Supports larger resistive loads at higher power consumption
+- <strong>Low-Power (LP)</strong>: Supports slower sample rates and light resistive loads for power savings</p>
+<figure class="align-center" id="id1">
+<img alt="DAC Configuration Diagram" src="_images/dac_diagram.png" />
+<figcaption>
+<p><span class="caption-number">Figure 7 </span><span class="caption-text">Diagram of the DAC Configuration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<p>To run the DAC application, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif Devkit</strong></p></li>
+<li><p><strong>Debugger: JLink (optional)</strong></p></li>
+</ul>
+</section>
+<section id="software-requirements">
+<h3>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h3>
+<p>To develop and run DAC applications on the Alif Devkit with Zephyr, you need:</p>
+<ul class="simple">
+<li><p><strong>Alif Zephyr SDK</strong>: Clone from <a class="reference external" href="https://github.com/AlifSemiDev/sdk-alif">https://github.com/AlifSemiDev/sdk-alif</a></p></li>
+<li><p><strong>West Tool</strong>: For building Zephyr applications (installed via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">west</span></code>)</p></li>
+<li><p><strong>Arm GCC Compiler</strong>: For compiling the application (part of the Zephyr SDK)</p></li>
+<li><p><strong>SE Tools (optional)</strong>: For loading binaries (refer to Alif documentation)</p></li>
+</ul>
+</section>
+</section>
+<section id="output-calculation">
+<h2>Output Calculation<a class="headerlink" href="#output-calculation" title="Link to this heading"></a></h2>
+<p><strong>For Positive Input</strong></p>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[DAC_{out} = \frac{DAC_{Input}}{2^{12}} \times V_{ref}\]</div>
+<p>Example:</p>
+<ul class="simple">
+<li><p>Given: ( DAC_{Input} = 4000 ), ( V_{ref} = 1.8 , text{V} )</p></li>
+<li><p>Calculation: ( DAC_{out} = frac{4000}{4096} times 1.8 , text{V} = 1.757 , text{V} )</p></li>
+</ul>
+<p><strong>For Negative Input</strong></p>
+<p>Formula:</p>
+<ul class="simple">
+<li><p>If ( DAC_{Input} &gt; 2047 ):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[DAC_{out} = \frac{DAC_{Input} - 2047}{2^{12}} \times V_{ref}\]</div>
+<ul class="simple">
+<li><p>If ( DAC_{Input} &lt; 2047 ):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[DAC_{out} = \frac{DAC_{Input} + 2047}{2^{12}} \times V_{ref}\]</div>
+<p>Note: If DAC input is <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFFFFFFFFFF</span></code> (-1 in decimal), the lower 12 bits (<code class="docutils literal notranslate"><span class="pre">0xFFF</span></code>, or 4095 in decimal) are considered.</p>
+</section>
+<section id="device-tree-specification">
+<h2>Device Tree Specification<a class="headerlink" href="#device-tree-specification" title="Link to this heading"></a></h2>
+<p>Users can modify parameters to convert two’s complement to unsigned binary data and select the DAC input data source.</p>
+<p><strong>Input MUX:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input_mux_val</span> <span class="pre">=</span> <span class="pre">1</span></code>: DAC input through DAC_REG1 (bypass mode).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input_mux_val</span> <span class="pre">=</span> <span class="pre">0</span></code>: DAC input through DAC_IN register.</p></li>
+</ul>
+<p><strong>Two’s Complement:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dac_twoscomp_in</span> <span class="pre">=</span> <span class="pre">0</span></code>: Positive input.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dac_twoscomp_in</span> <span class="pre">=</span> <span class="pre">1</span></code>: Negative input.</p></li>
+</ul>
+<figure class="align-center" id="id2">
+<img alt="Device Tree Code Snippet" src="_images/device_tree_code_dac.png" />
+<figcaption>
+<p><span class="caption-number">Figure 8 </span><span class="caption-text">Device Tree Code Snippet</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="building-dac-application-in-zephyr">
+<h2>Building DAC Application in Zephyr<a class="headerlink" href="#building-dac-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to build the DAC application using the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build/
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>../alif/samples/drivers/dac<span class="w"> </span>-p<span class="w"> </span>--<span class="w"> </span>-G<span class="s2">&quot;Unix Makefiles&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Build commands for applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build/
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>../alif/samples/drivers/dac<span class="w"> </span>-p<span class="w"> </span>--<span class="w"> </span>-G<span class="s2">&quot;Unix Makefiles&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To address various scenarios, such as utilizing MRAM or flash addresses and employing alternative compilers like LLVM or ARMCLANG, refer to the document AUGD0008_Getting-Started-with-ZAS-for-Ensemble-v0.5.0-Beta.</p>
+</div>
+<p>Once the build command completes successfully, executable images will be generated and placed in the <cite>build/zephyr</cite> directory. Both <cite>.bin</cite> (binary) and <cite>.elf</cite> (Executable and Linkable Format) files will be available.</p>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="expected-result">
+<h2>Expected Result<a class="headerlink" href="#expected-result" title="Link to this heading"></a></h2>
+<p>The sample Output will be as follows</p>
+<blockquote>
+<div><figure class="align-center" id="id3">
+<img alt="DAC Sample Output" src="_images/dac_sample_output.png" />
+<figcaption>
+<p><span class="caption-number">Figure 9 </span><span class="caption-text">DAC Sample Output</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

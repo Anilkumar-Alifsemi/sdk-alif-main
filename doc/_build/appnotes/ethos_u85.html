@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethos-U85 NPU &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Low Power Timer" href="lp_timer.html" />
+    <link rel="prev" title="Ethos U-55 NPU" href="ethos_u55.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ethos-U85 NPU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-with-gcc">Building with GCC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-application">Using the Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#json-configuration-files">JSON Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flashing-the-binary">Flashing the Binary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-output">Sample Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Ethos-U85 NPU</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ethos_u85.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ethos-u85-npu">
+<span id="appnote-zas-ethos-u85"></span><h1>Ethos-U85 NPU<a class="headerlink" href="#ethos-u85-npu" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Alif processors integrate dual-core Arm® Cortex®-A32 Application Processor cores and Cortex-M55 Real-Time Processor cores, implementing the Arm v8.1 instruction set with Helium M-Profile Vector Extension (MVE). Each Real-Time Processor core pairs with an Arm Ethos™-U55 microNPU, while the Arm Ethos-U85 NPU accelerator enhances AI inference efficiency alongside the Cortex-M55.</p>
+<p>The Ethos-U85 delivers high-performance edge AI with transformer-based model support and 20% better energy efficiency than prior Ethos NPUs. Key features include:</p>
+<ul class="simple">
+<li><p><strong>Performance</strong>: 256 GOP/s to 4 TOPs at 1 GHz</p></li>
+<li><p><strong>Scalability</strong>: 128 to 2048 MACs</p></li>
+<li><p><strong>Energy Efficiency</strong>: 20% lower than previous Ethos-U NPUs</p></li>
+<li><p><strong>Transformer Support</strong>: Native compatibility</p></li>
+</ul>
+<p><strong>Real-Time Processor Cores</strong>:</p>
+<ul class="simple">
+<li><p><strong>RTSS-HP (Cortex-M55)</strong>: Up to 400 MHz</p></li>
+<li><p><strong>RTSS-HE (Cortex-M55)</strong>: Up to 160 MHz</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Refer to the <a class="reference external" href="https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85">Arm Ethos-U85 documentation</a> for detailed specifications.</p>
+</div>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Alif Ensemble DevKit (E4 or E8)</p></li>
+<li><p>USB cable (x1)</p></li>
+</ul>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Terminal emulator (e.g., Tera Term)</p></li>
+<li><p>SE tool (for MRAM flashing)</p></li>
+<li><p>Alif Zephyr SDK: <a class="reference external" href="https://github.com/alifsemi/sdk-alif_1.4">GitHub</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Disconnect the debugger during execution to enable the OFF state.</p>
+</div>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>The Alif Zephyr release builds the <code class="docutils literal notranslate"><span class="pre">tflm_ethosu</span></code> application for HE and HP M55 cores, using a Vela-compiled model (Ethos-U85, 256 MACs) embedded as a C array. The application verifies NPU functionality.</p>
+<section id="building-with-gcc">
+<h3>Building with GCC<a class="headerlink" href="#building-with-gcc" title="Link to this heading"></a></h3>
+<p>Build the ZAS Ethos application using the Alif Zephyr SDK. The instructions target E4/E8 DevKits; adapt for other DevKits as needed.</p>
+<ol class="arabic">
+<li><p><strong>Fetch the Alif Zephyr SDK</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>/home/<span class="nv">$USER</span>/Zephyr-Ensemble-E7-B0-RTSS-v0.5.0-Beta/sdk-alif
+<span class="nb">cd</span><span class="w"> </span>/home/<span class="nv">$USER</span>/Zephyr-Ensemble-E7-B0-RTSS-v0.5.0-Beta/sdk-alif
+west<span class="w"> </span>init<span class="w"> </span>-m<span class="w"> </span>https://github.com/AlifSemiDev/sdk-alif.git<span class="w"> </span>--mr<span class="w"> </span>main
+west<span class="w"> </span>config<span class="w"> </span>manifest.project-filter<span class="w"> </span>--<span class="w"> </span>+tflite-micro
+west<span class="w"> </span>update
+</pre></div>
+</div>
+</li>
+<li><p><strong>Navigate to the Zephyr directory</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>zephyr
+</pre></div>
+</div>
+</li>
+<li><p><strong>Clear the build directory</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+</pre></div>
+</div>
+</li>
+<li><p><strong>Build for HE or HP core</strong>:</p>
+<p><strong>HE Core</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e4_dk_rtss_he/alif_e8_dk_rtss_he<span class="w"> </span>../alif/samples/modules/tflite-micro/tflm_ethosu/<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>--<span class="w"> </span>-G<span class="s2">&quot;Unix Makefiles&quot;</span><span class="w"> </span>-DETHOSU_TARGET_NPU_CONFIG<span class="o">=</span>ethos-u85-256<span class="w"> </span>-DCONFIG_SRAM_BASE_ADDRESS<span class="o">=</span>0x02000000<span class="w"> </span>-DCONFIG_SRAM_SIZE<span class="o">=</span><span class="m">4096</span>
+</pre></div>
+</div>
+<p><strong>HP Core</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e4_dk_rtss_hp/alif_e8_dk_rtss_hp<span class="w"> </span>../alif/samples/modules/tflite-micro/tflm_ethosu/<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>--<span class="w"> </span>-G<span class="s2">&quot;Unix Makefiles&quot;</span><span class="w"> </span>-DETHOSU_TARGET_NPU_CONFIG<span class="o">=</span>ethos-u85-256<span class="w"> </span>-DCONFIG_SRAM_BASE_ADDRESS<span class="o">=</span>0x02000000<span class="w"> </span>-DCONFIG_SRAM_SIZE<span class="o">=</span><span class="m">4096</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Alternative build with Ninja</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e4_dk_rtss_he/alif_e8_dk_rtss_he<span class="w"> </span>samples/modules/tflite-micro/tflm_ethosu/
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e4_dk_rtss_hp/alif_e8_dk_rtss_hp<span class="w"> </span>samples/modules/tflite-micro/tflm_ethosu/
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="using-the-application">
+<h2>Using the Application<a class="headerlink" href="#using-the-application" title="Link to this heading"></a></h2>
+<p>The application performs TFLite model inferencing on the Ethos-U85 for supported operators and on the M55 for others, using reference kernels, on the Alif Ensemble DevKit.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Untested with ArmClang or open-source Clang.</p></li>
+<li><p>Supports only 256 MACs; other configurations require additional integration.</p></li>
+</ul>
+</section>
+<section id="json-configuration-files">
+<h2>JSON Configuration Files<a class="headerlink" href="#json-configuration-files" title="Link to this heading"></a></h2>
+<p>For MRAM flashing:</p>
+<ul class="simple">
+<li><p><strong>RTSS-HE</strong>: <a class="reference external" href="http://10.10.10.28/QA/SE_TOOLS/json_files/zephyr_b1/zephyr_rtss_mram_he.json">zephyr_rtss_mram_he.json</a></p></li>
+<li><p><strong>RTSS-HP</strong>: <a class="reference external" href="http://10.10.10.28/QA/SE_TOOLS/json_files/zephyr_b1/zephyr_rtss_mram_hp.json">zephyr_rtss_mram_hp.json</a></p></li>
+</ul>
+</section>
+<section id="flashing-the-binary">
+<h2>Flashing the Binary<a class="headerlink" href="#flashing-the-binary" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Copy the binary (e.g., <code class="docutils literal notranslate"><span class="pre">zephyr_e7_rtsshe_ethosu.bin</span></code> or <code class="docutils literal notranslate"><span class="pre">zephyr_e7_rtsshp_ethosu.bin</span></code>) and the corresponding JSON file to the SE tool directory.</p></li>
+<li><p>Flash to MRAM using the SE tool:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>app-gen-toc.py
+python3<span class="w"> </span>app-write-mram.py
+</pre></div>
+</div>
+</li>
+<li><p>Disconnect the debugger.</p></li>
+<li><p>Reset the DevKit to run the application.</p></li>
+</ol>
+</section>
+<section id="sample-output">
+<h2>Sample Output<a class="headerlink" href="#sample-output" title="Link to this heading"></a></h2>
+<div class="no-copy highlight-text notranslate"><div class="highlight"><pre><span></span>[00:00:00.000,000] &lt;dbg&gt; ethos_u: ethosu_zephyr_init: Ethos-U DTS info. base_address=0x400e1000, secure_enable=1, privilege_enable=1
+[00:00:00.003,000] &lt;dbg&gt; ethos_u: ethosu_zephyr_init: Version. major=0, minor=16, patch=0
+I: Initializing NPU: base_address=0x400e1000, fast_memory=0x0, fast_memory_size=0, secure=1, privileged=1
+E: Failed to initialize device. Driver has not been compiled for this product (ethosu_device_u85.c:96)
+E: Failed to initialize Ethos-U device (ethosu_driver.c:453)
+[00:00:00.012,000] &lt;err&gt; ethos_u: Failed to initialize NPU with ethosu_init().
+[00:00:00.014,000] &lt;dbg&gt; ethos_u: ethosu_zephyr_init: Ethos-U DTS info. base_address=0x49042000, secure_enable=1, privilege_enable=1
+[00:00:00.017,000] &lt;dbg&gt; ethos_u: ethosu_zephyr_init: Version. major=0, minor=16, patch=0
+I: Initializing NPU: base_address=0x49042000, fast_memory=0x0, fast_memory_size=0, secure=1, privileged=1
+I: Soft reset NPU
+I: New NPU driver registered (handle: 0x21e8ea0, NPU: 0x49042000)
+*** Booting Zephyr OS build 5dee35a0f25a ***
+sender 0: Sending inference. job=0x21ea8f0, name=keyword_spotting_cnn_small_int8
+runner 0: Received inference job. job=0x21ea8f0
+I: Acquiring NPU driver handle
+D: ethosu_reserve_driver(): NPU driver handle 0x21e8ea0 reserved
+D: ethosu_invoke_async(): OPTIMIZER_CONFIG
+I: Optimizer release nbr: 0 patch: 1
+I: Optimizer config. product=2, cmd_stream_version=1, macs_per_cc=8, num_axi_ext=1, num_axi_sram=2, custom_dma=0
+I: Optimizer config. arch version=2.0.0
+I: Ethos-U config. product=2, cmd_stream_version=1, macs_per_cc=8, num_axi_ext=1, num_axi_sram=2, custom_dma=0
+I: Ethos-U. arch version=2.0.0
+D: ethosu_invoke_async(): NOP
+D: ethosu_invoke_async(): NOP
+D: ethosu_invoke_async(): NOP
+D: ethosu_invoke_async(): COMMAND_STREAM
+I: handle_command_stream: cmd_stream=0x80026a30, cms_length 1029
+I: Soft reset NPU
+D: ethosu_dev_set_clock_and_power(): CMD=0x00000000
+D: ethosu_dev_run_command_stream(): QBASE=0x0000000080026a30, QSIZE=4116, cmd_stream_ptr=0x80026a30
+D: ethosu_dev_run_command_stream(): BASEP0=0x00000000800153d0
+D: ethosu_dev_run_command_stream(): BASEP1=0x0000000002000a20
+D: ethosu_dev_run_command_stream(): BASEP2=0x0000000002000a20
+D: ethosu_dev_run_command_stream(): BASEP3=0x000000000200c120
+D: ethosu_dev_run_command_stream(): BASEP4=0x0000000002000aa0
+D: ethosu_dev_run_command_stream(): CMD=0x00000001
+D: ethosu_dev_set_clock_and_power(): CMD=0x0000000c
+D: ethosu_wait(): Inference finished successfully...
+D: ethosu_release_driver(): NPU driver handle 0x21e8ea0 released
+runner 0: Sending inference response. job=0x21ea8f0
+[Output continues with similar inference cycles...]
+sender 1: Received job response. job=0x21eb144, status=0
+exit
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

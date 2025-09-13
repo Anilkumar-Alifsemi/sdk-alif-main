@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GT911 Touchscreen &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UART" href="uart.html" />
+    <link rel="prev" title="PWM" href="pwm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GT911 Touchscreen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements-and-setup">Hardware Requirements and Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-connections">Hardware Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-features-required">Configuration Features Required</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-gt911-touchscreen-application-in-zephyr">Building GT911 Touchscreen Application in Zephyr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-binary-on-the-devkit">Executing Binary on the DevKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-output">Sample Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#observations">Observations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">GT911 Touchscreen</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/touchscreen.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gt911-touchscreen">
+<span id="appnote-gt911-touchscreen"></span><h1>GT911 Touchscreen<a class="headerlink" href="#gt911-touchscreen" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The GT911 is a sophisticated 5-point capacitive touch solution tailored for 7” to 8” Mobile Internet Devices (MIDs). It features up to 26 transmitter electrodes and 14 receiver electrodes, which work together to enhance touch accuracy. The controller supports up to 5 concurrent touches, providing real-time tracking of touch position, motion trajectory, and touch area. It efficiently reports this information to the host system when required.</p>
+<figure class="align-center" id="id1">
+<img alt="GT911 Internal Diagram" src="_images/gt911_diagram.png" />
+<figcaption>
+<p><span class="caption-number">Figure 20 </span><span class="caption-text">GT911 Internal Diagram</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The GT911 interfaces with the host through six key pins: VDD, GND, SCL, SDA, INT, and RESET. The INT pin can be triggered by a rising or falling edge, and when set as an input, it should remain floating with no internal pull-up or pull-down. The host controls the RESET pin by outputting high or low levels, with a recommendation to keep the RESET signal low for more than 100 microseconds for a reliable reset.</p>
+<p>Communication with the host occurs via a standard I2C interface, with a maximum transmission rate of 400K bps. For communication speeds exceeding 200K bps, it’s crucial to select an appropriate resistance for the external pull-up resistor on the I2C lines to ensure sharp signal edges on SCL and SDA. As a slave device, the GT911 uses a 7-bit address for identification, complemented by a Read/Write control bit, supporting two slave addresses:</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Address Configuration</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>7-bit Address</p></th>
+<th class="head"><p>8-bit Write Address</p></th>
+<th class="head"><p>8-bit Read Address</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x5D</p></td>
+<td><p>0xBA</p></td>
+<td><p>0xBB</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x14</p></td>
+<td><p>0x28</p></td>
+<td><p>0x29</p></td>
+</tr>
+</tbody>
+</table>
+<p>After each power-on or reset, the I2C address must be set via the INT pin, ensuring proper communication setup.</p>
+<p>The GT911 touch controller is designed to deliver high precision and reliability for touch-based interfaces in MIDs, with straightforward integration into systems via I2C. Its robust performance and multi-touch capabilities make it an excellent choice for enhancing user interaction in various applications.</p>
+</section>
+<section id="hardware-requirements-and-setup">
+<h2>Hardware Requirements and Setup<a class="headerlink" href="#hardware-requirements-and-setup" title="Link to this heading"></a></h2>
+<section id="hardware-requirements">
+<h3>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h3>
+<p><strong>GT911</strong></p>
+<p>The GT911 is a 5-point capacitive touch solution designed for 7” to 8” MIDs. It incorporates up to 26 transmitter electrodes and 14 receiver electrodes to enhance touch accuracy.</p>
+<p>Main features of GT911:</p>
+<ul class="simple">
+<li><p>Utilizes the standard I2C interface.</p></li>
+<li><p>Operates in slave mode.</p></li>
+<li><p>Supports host interface voltage ranging from 1.8 V to 3.3 V.</p></li>
+<li><p>Reports touch coordinates in real time at a rate of 100Hz.</p></li>
+<li><p>Integrated with HotKnot technology.</p></li>
+<li><p>Single power supply with an internal 1.8V LDO.</p></li>
+<li><p>Embedded flash memory, allowing for in-system reprogramming.</p></li>
+<li><p>Unified software that can be applied to capacitive touch screens of various sizes.</p></li>
+<li><p>26 transmitter (Tx) channels and 14 receiver (Rx) channels for precise touch detection.</p></li>
+<li><p>Compatible with capacitive touch screen sizes ranging from 7” to 8”.</p></li>
+</ul>
+<p><strong>I2C Controller</strong></p>
+<p>The I2C Intellectual Property (IP) is supplied by Synopsys DesignWare and is a part of the SoC ALIF Semiconductor. It is employed for communication between the System-on-Chip (SoC) and the GT911 Touch Sensor.</p>
+</section>
+<section id="hardware-connections">
+<h3>Hardware Connections<a class="headerlink" href="#hardware-connections" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id3">
+<img alt="Rear Side Hardware Connections" src="_images/rear_hardware_connections_for_GT911.png" />
+<figcaption>
+<p><span class="caption-number">Figure 21 </span><span class="caption-text">Rear Side Hardware Connections</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<img alt="Front Side Hardware Connections" src="_images/front_hardware_connections_for_GT911.png" />
+<figcaption>
+<p><span class="caption-number">Figure 22 </span><span class="caption-text">Front Side Hardware Connections</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using a touchscreen, connect the second thinner cable to J23.</p>
+</div>
+</section>
+<section id="configuration-features-required">
+<h3>Configuration Features Required<a class="headerlink" href="#configuration-features-required" title="Link to this heading"></a></h3>
+<p>The following kernel configuration settings are required for GT911 touchscreen integration:</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Kernel Configuration Settings</span><a class="headerlink" href="#id5" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 66.7%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Configuration Option</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CONFIG_INPUT_SHELL_KBD_MATRIX_STATE</p></td>
+<td><p>n</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONFIG_INPUT_GPIO_KEYS</p></td>
+<td><p>n</p></td>
+</tr>
+<tr class="row-even"><td><p>CONFIG_STDOUT_CONSOLE</p></td>
+<td><p>y</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONFIG_I2C_TARGET</p></td>
+<td><p>y</p></td>
+</tr>
+<tr class="row-even"><td><p>CONFIG_I2C</p></td>
+<td><p>y</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONFIG_I2C_DW_CLOCK_SPEED</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>CONFIG_INPUT_GT911_INTERRUPT</p></td>
+<td><p>y</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<p>To successfully run the GT911 touchscreen application, you’ll need the following software components and drivers:</p>
+<ol class="arabic simple">
+<li><p><strong>GT911 Touchscreen Driver</strong>:
+- Input GT911 Driver</p></li>
+<li><p><strong>Input Subsystem Drivers</strong>:
+- Input Util Driver
+- Input Driver</p></li>
+</ol>
+</section>
+<section id="building-gt911-touchscreen-application-in-zephyr">
+<h2>Building GT911 Touchscreen Application in Zephyr<a class="headerlink" href="#building-gt911-touchscreen-application-in-zephyr" title="Link to this heading"></a></h2>
+<p>Follow these steps to prepare your Zephyr-based GT911 touchscreen application using the GCC compiler and the Alif Zephyr SDK:</p>
+<ol class="arabic simple">
+<li><p>For instructions on fetching the Alif Zephyr SDK and navigating to the Zephyr repository, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+<li><p>Remove the existing build directory and build the application:</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build commands shown here are specifically for the Alif E7 DevKit.
+To build the application for other boards, please modify the board name in the build command accordingly. For more information, refer to the ZAS User Guide.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Build commands for applications on the M55 HE core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_he<span class="w"> </span>samples/subsys/input/input_dump/
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Build commands for applications on the M55 HP core using the Ninja build command:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>build
+west<span class="w"> </span>build<span class="w"> </span>-b<span class="w"> </span>alif_e7_dk_rtss_hp<span class="w"> </span>samples/subsys/input/input_dump/
+</pre></div>
+</div>
+</section>
+<section id="executing-binary-on-the-devkit">
+<h2>Executing Binary on the DevKit<a class="headerlink" href="#executing-binary-on-the-devkit" title="Link to this heading"></a></h2>
+<p>To execute binaries on the DevKit follow the command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>flash
+</pre></div>
+</div>
+</section>
+<section id="sample-output">
+<h2>Sample Output<a class="headerlink" href="#sample-output" title="Link to this heading"></a></h2>
+<p>The following output is observed in the console:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build 94f6e05fad28 ***
+Input sample started
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=0
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=0
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=0
+I: input event: dev=gt911@5d             type= 3 code=  0 value=255
+I: input event: dev=gt911@5d             type= 3 code=  1 value=560
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=1
+I: input event: dev=gt911@5d             type= 3 code=  0 value=255
+I: input event: dev=gt911@5d             type= 3 code=  1 value=560
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=1
+I: input event: dev=gt911@5d             type= 3 code=  0 value=255
+I: input event: dev=gt911@5d             type= 3 code=  1 value=560
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=1
+I: input event: dev=gt911@5d             type= 3 code=  0 value=255
+I: input event: dev=gt911@5d             type= 3 code=  1 value=560
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=1
+I: input event: dev=gt911@5d             type= 3 code=  0 value=255
+I: input event: dev=gt911@5d             type= 3 code=  1 value=560
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=1
+I: input event: dev=gt911@5d             type= 3 code=  0 value=255
+I: input event: dev=gt911@5d             type=  3 code=  1 value=560
+I: input event: dev=gt911@5d         SYN type= 1 code=330 value=1
+</pre></div>
+</div>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The device is successfully communicating via the <cite>/dev/ttyACM1</cite> serial port.</p></li>
+<li><p>The Zephyr OS, with build 2d6231a778ac, is booting.</p></li>
+<li><p>The touchscreen successfully generates an interrupt when pressed and updates the coordinates accordingly.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

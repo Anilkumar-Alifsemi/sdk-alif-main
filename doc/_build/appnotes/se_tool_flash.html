@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SE Tool Flashing for Alif DevKits &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pin Configuration for Ensemble" href="ensemble_pins.html" />
+    <link rel="prev" title="Serial Display" href="serial_display.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SE Tool Flashing for Alif DevKits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-application">Building the Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#se-tool-flashing-process">SE Tool Flashing Process</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-a-json-configuration-file">Step 1: Create a JSON Configuration File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-encrypt-the-binary-optional">Step 2: Encrypt the Binary (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-copy-files-to-se-tool-directories">Step 3: Copy Files to SE Tool Directories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-run-se-tool-scripts">Step 4: Run SE Tool Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-reset-the-devkit">Step 5: Reset the DevKit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-connections-and-setup">Hardware Connections and Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-output">Sample Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble_pins.html">Pin Configuration for Ensemble</a></li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SE Tool Flashing for Alif DevKits</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/se_tool_flash.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="se-tool-flashing-for-alif-devkits">
+<h1>SE Tool Flashing for Alif DevKits<a class="headerlink" href="#se-tool-flashing-for-alif-devkits" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This application note provides a concise guide on using the Secure Execution (SE) Tool to flash application binaries onto Alif Semiconductor’s Ensemble or Balletto DevKits for secure execution. The SE Tool programs binaries into the DevKit’s memory (e.g., MRAM) by generating an Application Table of Contents (ATOC). This method supports applications running on the Real-Time Subsystem High-Performance (RTSS-HP, Cortex-M55_0) and Real-Time Subsystem High-Efficiency (RTSS-HE, Cortex-M55_1) cores, with optional AES encryption for secure booting.</p>
+<p>The note focuses on the flashing process, JSON configuration, and memory considerations, using the Bluetooth Low Energy (BLE) application as an example.</p>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The SE Tool is a Python-based utility from Alif Semiconductor for programming application binaries into Alif DevKits. Key features include:</p>
+<ul class="simple">
+<li><p>ATOC Generation: Creates an ATOC defining the binary’s metadata (e.g., version, core, memory addresses).</p></li>
+<li><p>Memory Programming: Writes the binary and ATOC to MRAM, enabling secure boot.</p></li>
+<li><p>AES Encryption Support: Optionally encrypts binaries using a 16-byte AES key.</p></li>
+<li><p>Core Targeting: Supports RTSS-HP (Cortex-M55_0) and RTSS-HE (Cortex-M55_1).</p></li>
+<li><p>Memory Flexibility: Supports execution from SRAM, TCM, or OSPI NOR flash.</p></li>
+</ul>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Alif Ensemble or Balletto DevKit: Provides RTSS-HP (Cortex-M55_0) and RTSS-HE (Cortex-M55_1) cores, with MRAM for storage.</p></li>
+<li><p>USB Connection: For communication between the DevKit and the host PC running the SE Tool.</p></li>
+</ul>
+</section>
+<section id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Alif Zephyr SDK: Clone from <a class="reference external" href="https://github.com/alifsemi/sdk-alif">https://github.com/alifsemi/sdk-alif</a>, version 1.1.0 or later.</p></li>
+<li><p>West Tool: For managing Alif Zephyr SDK builds.</p></li>
+<li><p>GCC Compiler: Included in the Alif Zephyr SDK.</p></li>
+<li><p>SE Tool: Python scripts (app-gen-toc.py, app-write-mram.py) in /home/$USER/&lt;SE tool folder&gt;.</p></li>
+<li><p>Python 3: Required to run SE Tool scripts.</p></li>
+<li><p>AES Encryption Tool (Optional): CSPI_AES128_ECB in /home/$USER/ZAS-v1.2.0-Beta/prebuilt-images/CSPI_AES128_ECB.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Replace ZAS-v1.2.0-Beta with the appropriate Alif Zephyr SDK or SE Tool version.</p>
+</div>
+</section>
+<section id="building-the-application">
+<h2>Building the Application<a class="headerlink" href="#building-the-application" title="Link to this heading"></a></h2>
+<p>Compile the application to generate the binary (zephyr.bin) using the Alif Zephyr SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The application is designed for the Alif Ensemble E7 DevKit. Modify the sample code as needed for other DevKits.</p>
+</div>
+<ol class="arabic">
+<li><p>For instructions on fetching the Alif Zephyr SDK, please refer to the <a class="reference external" href="https://github.com/alifsemi/sdk-alif/releases/download/v1.4.0/user_guide.pdf">ZAS User Guide</a></p></li>
+<li><p>Build the Application:
+- Example for BLE (RTSS-HE):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>always<span class="w"> </span>-b<span class="w"> </span>alif_b1_dk_rtss_he<span class="w"> </span>samples/bluetooth/le_periph_hr
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For other applications, use the appropriate board target (e.g., alif_e1c_dk_rtss_hp) and sample path.</p>
+<ol class="arabic simple" start="3">
+<li><p>Locate the Binary:
+- The binary (zephyr.bin) is in ./build/zephyr/.</p></li>
+</ol>
+</section>
+<section id="se-tool-flashing-process">
+<h2>SE Tool Flashing Process<a class="headerlink" href="#se-tool-flashing-process" title="Link to this heading"></a></h2>
+<p>The SE Tool flashing process involves creating a JSON configuration, copying files to the SE Tool’s directories, and running scripts to program the DevKit’s memory.</p>
+<section id="step-1-create-a-json-configuration-file">
+<h3>Step 1: Create a JSON Configuration File<a class="headerlink" href="#step-1-create-a-json-configuration-file" title="Link to this heading"></a></h3>
+<p>Create a JSON file (e.g., ble_hr.json) defining the application’s metadata. Store it in the SE Tool’s config directory.</p>
+<p>Template JSON:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```json
+{
+    &quot;DEVICE&quot;: {
+        &quot;disabled&quot;: false,
+        &quot;binary&quot;: &quot;app-device-config.json&quot;,
+        &quot;version&quot;: &quot;0.5.00&quot;,
+        &quot;signed&quot;: true
+    },
+    &quot;APP_NAME&quot;: {
+        &quot;binary&quot;: &quot;zephyr.bin&quot;,
+        &quot;version&quot;: &quot;1.0.0&quot;,
+        &quot;signed&quot;: false,
+        &quot;cpu_id&quot;: &quot;M55_HP or M55_HE&quot;,
+        &quot;mramAddress&quot;: &quot;MRAM_ADDRESS&quot;,
+        &quot;loadAddress&quot;: &quot;EXECUTION_ADDRESS&quot;,
+        &quot;flags&quot;: [&quot;load&quot;, &quot;boot&quot;]
+    }
+}
+```
+</pre></div>
+</div>
+<p>BLE Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```json
+{
+    &quot;DEVICE&quot;: {
+        &quot;disabled&quot;: false,
+        &quot;binary&quot;: &quot;app-device-config.json&quot;,
+        &quot;version&quot;: &quot;0.5.00&quot;,
+        &quot;signed&quot;: true
+    },
+    &quot;BLE-HR&quot;: {
+        &quot;binary&quot;: &quot;zephyr.bin&quot;,
+        &quot;version&quot;: &quot;1.0.0&quot;,
+        &quot;signed&quot;: false,
+        &quot;cpu_id&quot;: &quot;M55_HE&quot;,
+        &quot;mramAddress&quot;: &quot;0x80000000&quot;,
+        &quot;flags&quot;: [&quot;boot&quot;]
+    }
+}
+```
+</pre></div>
+</div>
+<p>Customization:</p>
+<ul class="simple">
+<li><p>APP_NAME: Application identifier (e.g., BLE-HR).</p></li>
+<li><p>cpu_id: M55_HP for RTSS-HP, M55_HE for RTSS-HE.</p></li>
+<li><p>mramAddress: Typically 0x80000000 for MRAM storage.</p></li>
+<li><p>signed: Set to true if encrypted, false otherwise.</p></li>
+</ul>
+</section>
+<section id="step-2-encrypt-the-binary-optional">
+<h3>Step 2: Encrypt the Binary (Optional)<a class="headerlink" href="#step-2-encrypt-the-binary-optional" title="Link to this heading"></a></h3>
+<p>Encrypt the binary for secure applications using a 16-byte AES key.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/<span class="nv">$USER</span>/ZAS-v1.2.0-Beta/prebuilt-images/CSPI_AES128_ECB<span class="w"> </span>-i<span class="w"> </span>build/zephyr/zephyr.bin<span class="w"> </span>-o<span class="w"> </span>build/zephyr/zephyr_en.bin<span class="w"> </span>-k<span class="w"> </span>0123456789ABCDEF<span class="w"> </span>-d<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Replace the key with your 16-byte AES key.</p></li>
+<li><p>Update the JSON to use “binary”: “zephyr_en.bin” and “signed”: true.</p></li>
+</ul>
+</section>
+<section id="step-3-copy-files-to-se-tool-directories">
+<h3>Step 3: Copy Files to SE Tool Directories<a class="headerlink" href="#step-3-copy-files-to-se-tool-directories" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Copy the Binary:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>./build/zephyr/zephyr.bin<span class="w"> </span>&lt;SE<span class="w"> </span>tool<span class="w"> </span>folder&gt;/build/images/
+</pre></div>
+</div>
+</li>
+<li><p>Copy the JSON Configuration:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>ble_hr.json<span class="w"> </span>&lt;SE<span class="w"> </span>tool<span class="w"> </span>folder&gt;/build/config/
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="step-4-run-se-tool-scripts">
+<h3>Step 4: Run SE Tool Scripts<a class="headerlink" href="#step-4-run-se-tool-scripts" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Generate ATOC:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;SE<span class="w"> </span>tool<span class="w"> </span>folder&gt;
+python3<span class="w"> </span>app-gen-toc.py<span class="w"> </span>--filename<span class="w"> </span>build/config/ble_hr.json
+</pre></div>
+</div>
+</li>
+<li><p>Write to MRAM:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>app-write-mram.py
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="step-5-reset-the-devkit">
+<h3>Step 5: Reset the DevKit<a class="headerlink" href="#step-5-reset-the-devkit" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Reset the DevKit using the reset button or a software command.</p></li>
+<li><p>Verify execution:
+- For BLE, use a mobile app to detect the ALIF_HR device.
+- Monitor UART output via a terminal emulator (e.g., minicom).</p></li>
+</ul>
+</section>
+</section>
+<section id="hardware-connections-and-setup">
+<h2>Hardware Connections and Setup<a class="headerlink" href="#hardware-connections-and-setup" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>USB Connection: Connect the DevKit to the host PC for flashing and UART.</p></li>
+<li><p>UART for Debugging: Configure a terminal emulator to the DevKit’s UART port (consult DevKit documentation for port and baud rate, typically 115200).</p></li>
+<li><p>Application-Specific Setup: For BLE, no additional connections are needed; other applications may require specific pin connections.</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Binary Fails to Boot:
+- Ensure cpu_id matches the build target (e.g., M55_HE for alif_b1_dk_rtss_he).
+- Verify mramAddress aligns with the DevKit’s memory map.</p></li>
+<li><p>SE Tool Script Errors:
+- Confirm Python 3 is installed and the SE Tool path is correct.
+- Check JSON syntax and file paths in build/images and build/config.</p></li>
+<li><p>No Console Output:
+- Verify UART settings in the terminal emulator.
+- Ensure the DevKit is powered and reset correctly.</p></li>
+<li><p>Encryption Issues:
+- If “signed”: true, ensure the binary is encrypted with the correct AES key.</p></li>
+</ul>
+</section>
+<section id="sample-output">
+<h2>Sample Output<a class="headerlink" href="#sample-output" title="Link to this heading"></a></h2>
+<p>For the BLE application</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Device<span class="w"> </span>ALIF_HR<span class="w"> </span>appears<span class="w"> </span><span class="k">in</span><span class="w"> </span>BLE<span class="w"> </span>scanner<span class="w"> </span>apps.
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>The SE Tool flashing method enables secure programming of Alif DevKit applications. By configuring a JSON file, copying files to the SE Tool’s directories, and running the provided scripts, users can flash binaries to MRAM for execution on RTSS-HP or RTSS-HE cores. The BLE example demonstrates the process, which can be adapted for other applications by adjusting core and memory settings. For further assistance, contact Alif Semiconductor support or refer to the Alif Zephyr SDK documentation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

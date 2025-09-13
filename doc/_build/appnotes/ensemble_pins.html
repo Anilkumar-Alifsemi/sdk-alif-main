@@ -1,0 +1,2124 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pin Configuration for Ensemble &mdash; Zephyr Alif SDK Appnotes - v1.4</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0ed52906"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/js/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pin Configuration for Balletto" href="balletto_pins.html" />
+    <link rel="prev" title="SE Tool Flashing for Alif DevKits" href="se_tool_flash.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980b9" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="clock_control.html">Clock Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helloworld_ospi.html">Building Hello World for OSPI NOR Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utimer_counter.html">UTimer Counter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdmmc.html">SDMMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qdec.html">QDEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="can.html">CAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u55.html">Ethos U-55 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ethos_u85.html">Ethos-U85 NPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_timer.html">Low Power Timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_i2c.html">LPI2C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i3c.html">I3C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lp_rtc.html">LPRTC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pwm.html">PWM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="touchscreen.html">GT911 Touchscreen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uart.html">UART</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble.html">BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmp_lpcmp.html">CMP/LPCMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lc3.html">LC3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">ADC12/24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crc.html">CRC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dma.html">DMA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi.html">SPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdm.html">PDM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mipi_camera.html">MIPI Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_camera.html">Parallel Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ospi_flash.html">OSPI Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel_display.html">Parallel Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serial_display.html">Serial Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="se_tool_flash.html">SE Tool Flashing for Alif DevKits</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pin Configuration for Ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#gpio-pin-setup">GPIO Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adc-pin-setup">ADC Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adc12-internal-channels">ADC12 Internal Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc12-external-channels">ADC12 External Channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adc24-pin-setup">ADC24 Pin Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#can-pin-setup">CAN Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pin-configuration">Pin Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connector-mappings">Connector Mappings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#comparator-pin-setup">Comparator Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmp-configuration">CMP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lpcmp-configuration">LPCMP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-connections">Testing Connections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dac-pin-setup">DAC Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Pin Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-setup">Hardware Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#i2c-pin-setup">I2C Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Pin Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-connections">Hardware Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lpi2c-connections">LPI2C Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i3c-connector-mappings">I3C Connector Mappings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#i2s-and-lpi2s-pin-setup">I2S and LPI2S Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Pin Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Hardware Connections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pdm-and-lppdm-pin-setup">PDM and LPPDM Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Pin Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#camera-pin-setup">Camera Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Pin Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mipi-dsi-pin-setup">MIPI DSI Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spi-pin-setup">SPI Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Pin Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lpspi-and-spi0-demo-connections">LPSPI and SPI0 Demo Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi0-and-spi1-demo-connections">SPI0 and SPI1 Demo Connections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ethernet-pin-setup">Ethernet Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sd-pin-setup">SD Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analog-pin-setup">Analog Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qec-pin-setup">QEC Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qdec-pin-setup">QDEC Pin Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Hardware Connections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fault-pin-setup">Fault Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jtag-pin-setup">JTAG Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cdc-pin-setup">CDC Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gnss-pin-setup">GNSS Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#esim-pin-setup">ESIM Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scp-pin-setup">SCP Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utility-timer-ut-pin-setup">Utility Timer (UT) Pin Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debug-and-miscellaneous-pin-setup">Debug and Miscellaneous Pin Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="balletto_pins.html">Pin Configuration for Balletto</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980b9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zephyr Alif SDK Application Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pin Configuration for Ensemble</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ensemble_pins.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pin-configuration-for-ensemble">
+<h1>Pin Configuration for Ensemble<a class="headerlink" href="#pin-configuration-for-ensemble" title="Link to this heading"></a></h1>
+<p>This document provides a comprehensive guide to pinmux configuration and hardware setup for peripherals on Alif Semiconductor Ensemble DevKit (E7 and E1C variants). Organized by peripheral, it details pin assignments, hardware connections, and setup instructions in tabulated format for clarity.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><strong>Variant Suffixes</strong>: A, B, C, D indicate different pinmux configurations for the same peripheral instance.</p></li>
+</ul>
+</div>
+<section id="gpio-pin-setup">
+<h2>GPIO Pin Setup<a class="headerlink" href="#gpio-pin-setup" title="Link to this heading"></a></h2>
+<p>All pins can be configured as GPIO unless assigned to a specific peripheral.</p>
+<table class="docutils align-left" id="id9">
+<caption><span class="caption-number">Table 17 </span><span class="caption-text">GPIO Pins</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Port</p></th>
+<th class="head"><p>Pins</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>P0</p></td>
+<td><p>P0_0 to P0_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P1</p></td>
+<td><p>P1_0 to P1_7</p></td>
+</tr>
+<tr class="row-even"><td><p>P2</p></td>
+<td><p>P2_0 to P2_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P3</p></td>
+<td><p>P3_0 to P3_7</p></td>
+</tr>
+<tr class="row-even"><td><p>P4</p></td>
+<td><p>P4_0 to P4_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P5</p></td>
+<td><p>P5_0 to P5_7</p></td>
+</tr>
+<tr class="row-even"><td><p>P6</p></td>
+<td><p>P6_0 to P6_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P7</p></td>
+<td><p>P7_0 to P7_7</p></td>
+</tr>
+<tr class="row-even"><td><p>P8</p></td>
+<td><p>P8_0 to P8_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P9</p></td>
+<td><p>P9_0 to P9_7</p></td>
+</tr>
+<tr class="row-even"><td><p>P10</p></td>
+<td><p>P10_0 to P10_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P11</p></td>
+<td><p>P11_0 to P11_7</p></td>
+</tr>
+<tr class="row-even"><td><p>P12</p></td>
+<td><p>P12_0 to P12_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P13</p></td>
+<td><p>P13_0 to P13_7</p></td>
+</tr>
+<tr class="row-even"><td><p>P14</p></td>
+<td><p>P14_0 to P14_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>P15 (LPGPIO)</p></td>
+<td><p>P15_0 to P15_7</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>LPGPIO Port</strong>: P15 supports only LPGPIO functions (P15_0 to P15_7).</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Pinmux Encoding</strong>: Bits 0-2 denote the pin function (0 to 7), bits 3-9 denote the port number. The <code class="docutils literal notranslate"><span class="pre">PINMUX_PIN</span></code> macro combines these.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="adc-pin-setup">
+<h2>ADC Pin Setup<a class="headerlink" href="#adc-pin-setup" title="Link to this heading"></a></h2>
+<p>ADC interfaces include ADC12 (internal and external channels) and ADC24 (differential channels).</p>
+<section id="adc12-internal-channels">
+<h3>ADC12 Internal Channels<a class="headerlink" href="#adc12-internal-channels" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id10">
+<caption><span class="caption-number">Table 18 </span><span class="caption-text">ADC12 Internal Channels</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Channel</p></th>
+<th class="head"><p>Connected to</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Temperature Sensor</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>Reference Voltage</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adc12-external-channels">
+<h3>ADC12 External Channels<a class="headerlink" href="#adc12-external-channels" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id11">
+<caption><span class="caption-number">Table 19 </span><span class="caption-text">ADC12 External Channels</span><a class="headerlink" href="#id11" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 16.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Channel 0</p></th>
+<th class="head"><p>Channel 1</p></th>
+<th class="head"><p>Channel 2</p></th>
+<th class="head"><p>Channel 3</p></th>
+<th class="head"><p>Channel 4</p></th>
+<th class="head"><p>Channel 5</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>P0_0</p></td>
+<td><p>P0_0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P0_1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P0_1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>P0_2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P0_2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P0_3</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P0_3</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>P0_4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P0_4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P0_5</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P0_5</p></td>
+</tr>
+<tr class="row-even"><td><p>P0_6</p></td>
+<td><p>P0_6</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P0_7</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P0_7</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>P1_0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P1_0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P1_1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P1_1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>P1_2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P1_2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P1_3</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P1_3</p></td>
+</tr>
+<tr class="row-even"><td><p>P1_4</p></td>
+<td><p>P1_4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P1_5</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P1_5</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>P1_6</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P1_6</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P1_7</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P1_7</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>P2_0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P2_0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>P2_1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P2_1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adc24-pin-setup">
+<h3>ADC24 Pin Setup<a class="headerlink" href="#adc24-pin-setup" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id12">
+<caption><span class="caption-number">Table 20 </span><span class="caption-text">ADC24 Pin Setup</span><a class="headerlink" href="#id12" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Channel</p></th>
+<th class="head"><p>Pin Pair</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>P0_0 and P0_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>P0_1 and P0_5</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>P0_2 and P0_6</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>P0_3 and P0_7</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pins P0_0 to P2_1 support analog functions (ANA_S0 to ANA_S17) as listed in the Analog Pins section.</p>
+</div>
+</section>
+</section>
+<section id="can-pin-setup">
+<h2>CAN Pin Setup<a class="headerlink" href="#can-pin-setup" title="Link to this heading"></a></h2>
+<p>CAN interfaces support RXD, TXD, and STBY signals.</p>
+<section id="pin-configuration">
+<h3>Pin Configuration<a class="headerlink" href="#pin-configuration" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id13">
+<caption><span class="caption-number">Table 21 </span><span class="caption-text">CAN Pins</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>RXD</p></th>
+<th class="head"><p>TXD</p></th>
+<th class="head"><p>STBY</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CAN0</p></td>
+<td><p>P7_0 (A), P0_4 (B), P12_4 (C)</p></td>
+<td><p>P7_1 (A), P0_5 (B), P12_5 (C)</p></td>
+<td><p>P7_3 (A), P0_6 (B), P12_6 (C)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="connector-mappings">
+<h3>Connector Mappings<a class="headerlink" href="#connector-mappings" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id14">
+<caption><span class="caption-number">Table 22 </span><span class="caption-text">CAN Connector Mappings</span><a class="headerlink" href="#id14" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>Tx</p></th>
+<th class="head"><p>Rx</p></th>
+<th class="head"><p>Standby</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CAN0</p></td>
+<td><p>J12-12</p></td>
+<td><p>J12-14</p></td>
+<td><p>J15-5</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No pin connections or transceiver are required for the loopback test.</p>
+</div>
+</section>
+</section>
+<section id="comparator-pin-setup">
+<h2>Comparator Pin Setup<a class="headerlink" href="#comparator-pin-setup" title="Link to this heading"></a></h2>
+<p>Comparator interfaces include CMP (standard) and LPCMP (low-power).</p>
+<section id="cmp-configuration">
+<h3>CMP Configuration<a class="headerlink" href="#cmp-configuration" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id15">
+<caption><span class="caption-number">Table 23 </span><span class="caption-text">CMP Pin Setup</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>CMP0</p></th>
+<th class="head"><p>CMP1</p></th>
+<th class="head"><p>CMP2</p></th>
+<th class="head"><p>CMP3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Input</p></td>
+<td><p>P0_0</p></td>
+<td><p>P0_2</p></td>
+<td><p>P0_1</p></td>
+<td><p>P0_3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Input</p></td>
+<td><p>P0_6</p></td>
+<td><p>P0_7</p></td>
+<td><p>P0_7</p></td>
+<td><p>P0_6</p></td>
+</tr>
+<tr class="row-even"><td><p>Input</p></td>
+<td><p>P1_4</p></td>
+<td><p>P1_5</p></td>
+<td><p>P1_3</p></td>
+<td><p>P1_6</p></td>
+</tr>
+<tr class="row-odd"><td><p>Input</p></td>
+<td><p>P0_4</p></td>
+<td><p>P0_5</p></td>
+<td><p>P0_5</p></td>
+<td><p>P0_4</p></td>
+</tr>
+<tr class="row-even"><td><p>Output Pin</p></td>
+<td><p>P7_3 (A), P14_7 (B)</p></td>
+<td><p>P7_2 (A), P14_6 (B)</p></td>
+<td><p>P7_1 (A), P14_5 (B)</p></td>
+<td><p>P7_0 (A), P14_4 (B)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Input pins P0_8, P0_9, P0_10, P0_11, P0_13, P0_14, P0_15 were invalid and replaced with valid pins (P0_0 to P0_7, P1_0 to P1_7) based on proximity and pinmux compatibility.</p>
+</div>
+</section>
+<section id="lpcmp-configuration">
+<h3>LPCMP Configuration<a class="headerlink" href="#lpcmp-configuration" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id16">
+<caption><span class="caption-number">Table 24 </span><span class="caption-text">LPCMP Pin Setup</span><a class="headerlink" href="#id16" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>LPCMP</p></th>
+<th class="head"><p>Pins</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Input</p></td>
+<td><p>P2_4, P2_5, P2_6, P2_7</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>LPCMP has no output pins.</p>
+</div>
+</section>
+<section id="testing-connections">
+<h3>Testing Connections<a class="headerlink" href="#testing-connections" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id17">
+<caption><span class="caption-number">Table 25 </span><span class="caption-text">CMP Testing Connections</span><a class="headerlink" href="#id17" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Connection</p></th>
+<th class="head"><p>Pins</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Positive Input</p></td>
+<td><p>P12_3 to P0_0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Output Observation</p></td>
+<td><p>P14_7 (Logic Analyzer)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dac-pin-setup">
+<h2>DAC Pin Setup<a class="headerlink" href="#dac-pin-setup" title="Link to this heading"></a></h2>
+<p>DAC interfaces (DAC0 and DAC1) provide 12-bit analog output.</p>
+<section id="id1">
+<h3>Pin Configuration<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id18">
+<caption><span class="caption-number">Table 26 </span><span class="caption-text">DAC Output Configuration</span><a class="headerlink" href="#id18" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33.0%" />
+<col style="width: 33.0%" />
+<col style="width: 34.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Board Variant</p></th>
+<th class="head"><p>DAC0 Pin</p></th>
+<th class="head"><p>DAC1 Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ensemble E7</p></td>
+<td><p>P2_2</p></td>
+<td><p>P2_3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ensemble E1C</p></td>
+<td><p>P2_3</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id19">
+<caption><span class="caption-number">Table 27 </span><span class="caption-text">DAC Hardware Setup</span><a class="headerlink" href="#id19" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Channel</p></th>
+<th class="head"><p>Setup</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DAC0</p></td>
+<td><p>Connect logic analyzer to P2_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>DAC1</p></td>
+<td><p>Connect logic analyzer to P2_3</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><strong>Input</strong>: Provided to DAC registers.</p></li>
+<li><p><strong>Resolution</strong>: 12-bit, accepting values up to 4095.</p></li>
+<li><p><strong>Operation</strong>: Input of 0 gives 0 output; increments by 1000 are observable; inputs exceeding 4095 reset to 0.</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="i2c-pin-setup">
+<h2>I2C Pin Setup<a class="headerlink" href="#i2c-pin-setup" title="Link to this heading"></a></h2>
+<p>I2C interfaces include I2C0 to I2C3, LPI2C, and I3C.</p>
+<section id="id2">
+<h3>Pin Configuration<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id20">
+<caption><span class="caption-number">Table 28 </span><span class="caption-text">I2C Pins</span><a class="headerlink" href="#id20" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>SDA</p></th>
+<th class="head"><p>SCL</p></th>
+<th class="head"><p>Variant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I2C0</p></td>
+<td><p>P0_2 (A), P3_5 (B), P7_0 (C), P10_4 (D)</p></td>
+<td><p>P0_3 (A), P3_4 (B), P7_1 (C), P10_5 (D)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2C1</p></td>
+<td><p>P0_4 (A), P3_6 (B), P7_2 (C), P10_6 (D)</p></td>
+<td><p>P0_5 (A), P3_7 (B), P7_3 (C), P10_7 (D)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-even"><td><p>I2C2</p></td>
+<td><p>P0_7 (A), P5_0 (B), P5_7 (C)</p></td>
+<td><p>P0_6 (A), P5_1 (B), P5_6 (C)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2C3</p></td>
+<td><p>P1_0 (A), P9_6 (B), P9_4 (C)</p></td>
+<td><p>P1_1 (A), P9_7 (B), P9_5 (C)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-even"><td><p>LPI2C</p></td>
+<td><p>P7_5 (A), P5_3 (B)</p></td>
+<td><p>P7_4 (A), P5_2 (B)</p></td>
+<td><p>Low-Power</p></td>
+</tr>
+<tr class="row-odd"><td><p>I3C</p></td>
+<td><p>P0_0 (A), P1_2 (B), P3_2 (C), P7_6 (D)</p></td>
+<td><p>P0_1 (A), P1_3 (B), P3_3 (C), P7_7 (D)</p></td>
+<td><p>Standard</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hardware-connections">
+<h3>Hardware Connections<a class="headerlink" href="#hardware-connections" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id21">
+<caption><span class="caption-number">Table 29 </span><span class="caption-text">I2C Hardware Connections</span><a class="headerlink" href="#id21" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>I2C1 Pin</p></th>
+<th class="head"><p>I2C0 Pin</p></th>
+<th class="head"><p>Connection</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SDA</p></td>
+<td><p>P7_2 (J15-3)</p></td>
+<td><p>P3_5 (J11-29)</p></td>
+<td><p>J15-3 to J11-29</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCL</p></td>
+<td><p>P7_3 (J15-5)</p></td>
+<td><p>P3_4 (J11-27)</p></td>
+<td><p>J15-5 to J11-27</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lpi2c-connections">
+<h3>LPI2C Connections<a class="headerlink" href="#lpi2c-connections" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id22">
+<caption><span class="caption-number">Table 30 </span><span class="caption-text">LPI2C Connections</span><a class="headerlink" href="#id22" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>I2C0 Pin</p></th>
+<th class="head"><p>LPI2C Pin</p></th>
+<th class="head"><p>Connection</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SDA</p></td>
+<td><p>P3_5 (J11-29)</p></td>
+<td><p>P5_3 (J14_5)</p></td>
+<td><p>J11-29 to J14_5</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCL</p></td>
+<td><p>P3_4 (J11-27)</p></td>
+<td><p>P5_2 (J12_17)</p></td>
+<td><p>J11-27 to J12_17</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i3c-connector-mappings">
+<h3>I3C Connector Mappings<a class="headerlink" href="#i3c-connector-mappings" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id23">
+<caption><span class="caption-number">Table 31 </span><span class="caption-text">I3C Pin Connections</span><a class="headerlink" href="#id23" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33.0%" />
+<col style="width: 33.0%" />
+<col style="width: 34.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>SDA</p></th>
+<th class="head"><p>SCL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I3C-0</p></td>
+<td><p>J15-8</p></td>
+<td><p>J15-10</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="i2s-and-lpi2s-pin-setup">
+<h2>I2S and LPI2S Pin Setup<a class="headerlink" href="#i2s-and-lpi2s-pin-setup" title="Link to this heading"></a></h2>
+<p>I2S interfaces include I2S0 to I2S3 and LPI2S.</p>
+<section id="id3">
+<h3>Pin Configuration<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id24">
+<caption><span class="caption-number">Table 32 </span><span class="caption-text">I2S and LPI2S Pins</span><a class="headerlink" href="#id24" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>SDI</p></th>
+<th class="head"><p>SDO</p></th>
+<th class="head"><p>SCLK</p></th>
+<th class="head"><p>WS</p></th>
+<th class="head"><p>Variant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I2S0</p></td>
+<td><p>P1_6 (A), P4_1 (B)</p></td>
+<td><p>P1_7 (A), P4_2 (B)</p></td>
+<td><p>P3_0 (A), P4_3 (B)</p></td>
+<td><p>P3_1 (A), P4_4 (B)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2S1</p></td>
+<td><p>P3_2 (A), P12_0 (B)</p></td>
+<td><p>P3_3 (A), P12_1 (B)</p></td>
+<td><p>P3_4 (A), P12_2 (B)</p></td>
+<td><p>P4_0 (A), P12_3 (B)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-even"><td><p>I2S2</p></td>
+<td><p>P8_1 (A), P10_5 (B)</p></td>
+<td><p>P8_2 (A), P10_6 (B)</p></td>
+<td><p>P8_3 (A), P10_7 (B)</p></td>
+<td><p>P8_4 (A), P11_0 (B)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2S3</p></td>
+<td><p>P9_2 (A), P9_0 (B)</p></td>
+<td><p>P9_3 (A), P9_1 (B)</p></td>
+<td><p>P9_4 (A), P8_6 (B)</p></td>
+<td><p>P9_5 (A), P8_7 (B)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-even"><td><p>LPI2S</p></td>
+<td><p>P2_4 (A), P10_1 (B), P13_4 (C)</p></td>
+<td><p>P2_5 (A), P10_2 (B), P13_5 (C)</p></td>
+<td><p>P2_6 (A), P10_3 (B), P13_6 (C)</p></td>
+<td><p>P2_7 (A), P10_4 (B), P13_7 (C)</p></td>
+<td><p>Low-Power</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h3>Hardware Connections<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id25">
+<caption><span class="caption-number">Table 33 </span><span class="caption-text">I2S and LPI2S Pin Connections</span><a class="headerlink" href="#id25" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 16.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Interface</p></th>
+<th class="head"><p>WS</p></th>
+<th class="head"><p>Clock</p></th>
+<th class="head"><p>SDO</p></th>
+<th class="head"><p>VA</p></th>
+<th class="head"><p>VB</p></th>
+<th class="head"><p>GND</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LPI2S</p></td>
+<td><p>J14_40</p></td>
+<td><p>J14_38</p></td>
+<td><p>J14_39</p></td>
+<td><p>1.8</p></td>
+<td><p>3.3</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2S</p></td>
+<td><p>J11_32</p></td>
+<td><p>J11_27</p></td>
+<td><p>J11_25</p></td>
+<td><p>1.8</p></td>
+<td><p>3.3</p></td>
+<td><p>GND</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Ensemble DevKit includes two I2S microphones for stereo audio but lacks a headphone jack or speaker. Connect an external speaker using a 3.3V level shifter circuit.</p>
+</div>
+</section>
+</section>
+<section id="pdm-and-lppdm-pin-setup">
+<h2>PDM and LPPDM Pin Setup<a class="headerlink" href="#pdm-and-lppdm-pin-setup" title="Link to this heading"></a></h2>
+<p>PDM and LPPDM interfaces support data and clock signals.</p>
+<section id="id5">
+<h3>Pin Configuration<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id26">
+<caption><span class="caption-number">Table 34 </span><span class="caption-text">PDM and LPPDM Pins</span><a class="headerlink" href="#id26" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>Data</p></th>
+<th class="head"><p>Clock</p></th>
+<th class="head"><p>Variant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PDM</p></td>
+<td><p>P0_4 (A), P0_6 (A), P5_0 (A), P5_1 (A), P6_0 (C), P6_2 (C), P3_0 (B), P3_2 (B), P5_4 (B), P5_5 (B)</p></td>
+<td><p>P0_5 (A), P0_7 (A), P5_2 (A), P6_1 (C), P6_3 (C), P6_7 (A), P11_4 (B), P11_5 (B), P3_1 (B), P3_3 (B)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>LPPDM</p></td>
+<td><p>P2_0 (A), P2_2 (A), P7_5 (A), P7_7 (A), P3_5 (B), P3_7 (B), P11_6 (B), P11_7 (B)</p></td>
+<td><p>P2_1 (A), P2_3 (A), P3_4 (B), P7_4 (A), P7_6 (A), P11_2 (B), P11_3 (B)</p></td>
+<td><p>Low-Power</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="camera-pin-setup">
+<h2>Camera Pin Setup<a class="headerlink" href="#camera-pin-setup" title="Link to this heading"></a></h2>
+<p>Camera interfaces include CAM and LPCAM.</p>
+<section id="id6">
+<h3>Pin Configuration<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id27">
+<caption><span class="caption-number">Table 35 </span><span class="caption-text">Camera Pins</span><a class="headerlink" href="#id27" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 14.0%" />
+<col style="width: 16.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>Data</p></th>
+<th class="head"><p>HSYNC</p></th>
+<th class="head"><p>VSYNC</p></th>
+<th class="head"><p>PCLK</p></th>
+<th class="head"><p>XVCLK</p></th>
+<th class="head"><p>Variant</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CAM</p></td>
+<td><p>P2_4 to P2_7 (A), P8_0 to P8_7 (B), P9_0 to P9_7 (B), P3_0 to P3_5 (A)</p></td>
+<td><p>P0_0 (A), P10_0 (B)</p></td>
+<td><p>P0_1 (A), P10_1 (B)</p></td>
+<td><p>P0_2 (A), P10_2 (B)</p></td>
+<td><p>P0_3 (A), P10_3 (B)</p></td>
+<td><p>Standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>LPCAM</p></td>
+<td><p>P1_4 to P1_7 (C), P2_0 to P2_3 (C), P8_0 to P8_7 (A)</p></td>
+<td><p>P0_0 (B), P1_0 (C), P10_0 (A)</p></td>
+<td><p>P0_1 (B), P1_1 (C), P10_1 (A)</p></td>
+<td><p>P0_2 (B), P1_2 (C), P10_2 (A)</p></td>
+<td><p>P0_3 (B), P1_3 (C), P10_3 (A)</p></td>
+<td><p>Low-Power</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="mipi-dsi-pin-setup">
+<h2>MIPI DSI Pin Setup<a class="headerlink" href="#mipi-dsi-pin-setup" title="Link to this heading"></a></h2>
+<p>MIPI DSI interface supports display connectivity.</p>
+<table class="docutils align-left" id="id28">
+<caption><span class="caption-number">Table 36 </span><span class="caption-text">MIPI DSI Pins</span><a class="headerlink" href="#id28" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>D0P</p></td>
+<td><p>P6_0</p></td>
+</tr>
+<tr class="row-odd"><td><p>D0N</p></td>
+<td><p>P6_1</p></td>
+</tr>
+<tr class="row-even"><td><p>D1P</p></td>
+<td><p>P6_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>D1N</p></td>
+<td><p>P6_3</p></td>
+</tr>
+<tr class="row-even"><td><p>CLKP</p></td>
+<td><p>P6_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>CLKN</p></td>
+<td><p>P6_5</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-pin-setup">
+<h2>SPI Pin Setup<a class="headerlink" href="#spi-pin-setup" title="Link to this heading"></a></h2>
+<p>SPI interfaces include SPI0 to SPI3 and LPSPI.</p>
+<section id="id7">
+<h3>Pin Configuration<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id29">
+<caption><span class="caption-number">Table 37 </span><span class="caption-text">SPI Pins</span><a class="headerlink" href="#id29" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>MISO</p></th>
+<th class="head"><p>MOSI</p></th>
+<th class="head"><p>SCLK</p></th>
+<th class="head"><p>SS</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SPI0</p></td>
+<td><p>P1_0 (A), P5_0 (B), P7_0 (C)</p></td>
+<td><p>P1_1 (A), P5_1 (B), P7_1 (C)</p></td>
+<td><p>P1_2 (A), P5_3 (B), P7_2 (C)</p></td>
+<td><p>P1_3 (A), P5_2 (B), P7_3 (C), P1_4 (A), P1_5 (A), P5_4 (A), P8_2 (B)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI1</p></td>
+<td><p>P2_4 (A), P8_3 (B), P14_4 (C)</p></td>
+<td><p>P2_5 (A), P8_4 (B), P14_5 (C)</p></td>
+<td><p>P2_6 (A), P8_5 (B), P14_6 (C)</p></td>
+<td><p>P2_7 (A), P14_7 (C), P3_7 (A), P4_0 (A), P4_1 (A), P4_6 (A), P6_4 (B), P6_5 (B), P6_6 (B), P6_7 (B)</p></td>
+</tr>
+<tr class="row-even"><td><p>SPI2</p></td>
+<td><p>P4_2 (A), P9_2 (B)</p></td>
+<td><p>P4_3 (A), P9_3 (B)</p></td>
+<td><p>P4_4 (A), P9_4 (B)</p></td>
+<td><p>P4_5 (A), P9_5 (B), P13_3 (A), P4_6 (A), P4_7 (A), P10_0 (B), P9_6 (B), P9_7 (B)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI3</p></td>
+<td><p>P12_4 (A), P10_5 (B)</p></td>
+<td><p>P12_5 (A), P10_6 (B)</p></td>
+<td><p>P12_6 (A), P10_7 (B)</p></td>
+<td><p>P12_7 (A), P13_0 (A), P13_1 (A), P13_2 (A), P11_0 (B), P11_1 (B), P11_2 (B), P11_3 (B)</p></td>
+</tr>
+<tr class="row-even"><td><p>LPSPI</p></td>
+<td><p>P7_4 (A), P11_4 (B)</p></td>
+<td><p>P7_5 (A), P11_5 (B)</p></td>
+<td><p>P7_6 (A), P11_6 (B)</p></td>
+<td><p>P7_7 (A), P11_7 (B)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lpspi-and-spi0-demo-connections">
+<h3>LPSPI and SPI0 Demo Connections<a class="headerlink" href="#lpspi-and-spi0-demo-connections" title="Link to this heading"></a></h3>
+<p>For data transmission between LPSPI (master) and SPI0 (slave) with DMA, connect using jumper wires:</p>
+<table class="docutils align-left" id="id30">
+<caption><span class="caption-number">Table 38 </span><span class="caption-text">LPSPI and SPI0 Pin Connections</span><a class="headerlink" href="#id30" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>LPSPI Pin</p></th>
+<th class="head"><p>SPI0 Pin</p></th>
+<th class="head"><p>Connection</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MISO</p></td>
+<td><p>P7_4</p></td>
+<td><p>P5_0</p></td>
+<td><p>P7_4 (J12-27) to P5_0 (J12-13)</p></td>
+</tr>
+<tr class="row-odd"><td><p>MOSI</p></td>
+<td><p>P7_5</p></td>
+<td><p>P5_1</p></td>
+<td><p>P7_5 (J15-9) to P5_1 (J12-15)</p></td>
+</tr>
+<tr class="row-even"><td><p>SCLK</p></td>
+<td><p>P7_6</p></td>
+<td><p>P5_3</p></td>
+<td><p>P7_6 (J15-8) to P5_3 (J14_5)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SS</p></td>
+<td><p>P7_7</p></td>
+<td><p>P5_2</p></td>
+<td><p>P7_7 (J15-10) to P5_2 (J12-17)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi0-and-spi1-demo-connections">
+<h3>SPI0 and SPI1 Demo Connections<a class="headerlink" href="#spi0-and-spi1-demo-connections" title="Link to this heading"></a></h3>
+<p>For data transmission between SPI0 (master) and SPI1 (slave), connect using jumper wires:</p>
+<table class="docutils align-left" id="id31">
+<caption><span class="caption-number">Table 39 </span><span class="caption-text">SPI0 and SPI1 Pin Connections</span><a class="headerlink" href="#id31" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>SPI0 Pin</p></th>
+<th class="head"><p>SPI0 Pin Header</p></th>
+<th class="head"><p>SPI1 Pin</p></th>
+<th class="head"><p>SPI1 Pin Header</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MISO</p></td>
+<td><p>P5_0</p></td>
+<td><p>J12-13</p></td>
+<td><p>P8_3</p></td>
+<td><p>J14-15</p></td>
+</tr>
+<tr class="row-odd"><td><p>MOSI</p></td>
+<td><p>P5_1</p></td>
+<td><p>J12-15</p></td>
+<td><p>P8_4</p></td>
+<td><p>J14-17</p></td>
+</tr>
+<tr class="row-even"><td><p>SCLK</p></td>
+<td><p>P5_3</p></td>
+<td><p>J14_5</p></td>
+<td><p>P8_5</p></td>
+<td><p>J14-19</p></td>
+</tr>
+<tr class="row-odd"><td><p>SS</p></td>
+<td><p>P5_2</p></td>
+<td><p>J12-17</p></td>
+<td><p>P6_4</p></td>
+<td><p>J12-22</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="ethernet-pin-setup">
+<h2>Ethernet Pin Setup<a class="headerlink" href="#ethernet-pin-setup" title="Link to this heading"></a></h2>
+<p>Ethernet interfaces support various signals.</p>
+<table class="docutils align-left" id="id32">
+<caption><span class="caption-number">Table 40 </span><span class="caption-text">Ethernet Pins</span><a class="headerlink" href="#id32" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 16.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>RXD0/RXD1</p></th>
+<th class="head"><p>TXD0/TXD1</p></th>
+<th class="head"><p>TXEN</p></th>
+<th class="head"><p>REFCLK/IRQ</p></th>
+<th class="head"><p>MDIO/MDC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ETH</p></td>
+<td><p>P1_0 (C), P1_1 (C), P5_5 (A), P5_6 (A), P11_3 (B), P11_4 (B)</p></td>
+<td><p>P1_3 (C), P1_4 (C), P6_0 (A), P6_1 (A), P10_4 (B), P10_5 (B)</p></td>
+<td><p>P1_5 (C), P6_2 (A), P10_6 (B)</p></td>
+<td><p>P1_7 (C), P6_3 (A), P1_6 (C), P11_0 (B), P11_6 (B)</p></td>
+<td><p>P2_0 (C), P2_1 (C), P6_5 (A), P6_6 (A), P11_1 (B), P11_2 (B)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETH (Reset/CRS_DV)</p></td>
+<td><p>P1_2 (C), P11_5 (B), P5_7 (A), P6_7 (A), P2_2 (C)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sd-pin-setup">
+<h2>SD Pin Setup<a class="headerlink" href="#sd-pin-setup" title="Link to this heading"></a></h2>
+<p>SD interfaces support data, command, clock, and reset signals.</p>
+<table class="docutils align-left" id="id33">
+<caption><span class="caption-number">Table 41 </span><span class="caption-text">SD Pins</span><a class="headerlink" href="#id33" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>Data (D0-D7)</p></th>
+<th class="head"><p>CMD</p></th>
+<th class="head"><p>CLK</p></th>
+<th class="head"><p>RST</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SD</p></td>
+<td><p>P5_0 to P5_7 (A), P6_0 to P6_7 (D), P8_0 to P8_7 (C), P13_0 to P13_7 (B)</p></td>
+<td><p>P7_0 (A), P9_0 (C), P14_0 (B)</p></td>
+<td><p>P7_1 (A), P9_1 (C), P14_1 (B)</p></td>
+<td><p>P7_2 (A), P9_2 (C), P14_2 (B)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SD (Additional)</p></td>
+<td><p>P4_1 (D), P4_2 (D)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>P4_3 (D)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="analog-pin-setup">
+<h2>Analog Pin Setup<a class="headerlink" href="#analog-pin-setup" title="Link to this heading"></a></h2>
+<p>Analog signals (ANA_S0 to ANA_S23) are supported on specific pins.</p>
+<table class="docutils align-left" id="id34">
+<caption><span class="caption-number">Table 42 </span><span class="caption-text">Analog Pins</span><a class="headerlink" href="#id34" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ANA_S0</p></td>
+<td><p>P0_0</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S1</p></td>
+<td><p>P0_1</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S2</p></td>
+<td><p>P0_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S3</p></td>
+<td><p>P0_3</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S4</p></td>
+<td><p>P0_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S5</p></td>
+<td><p>P0_5</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S6</p></td>
+<td><p>P0_6</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S7</p></td>
+<td><p>P0_7</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S8</p></td>
+<td><p>P1_0</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S9</p></td>
+<td><p>P1_1</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S10</p></td>
+<td><p>P1_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S11</p></td>
+<td><p>P1_3</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S12</p></td>
+<td><p>P1_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S13</p></td>
+<td><p>P1_5</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S14</p></td>
+<td><p>P1_6</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S15</p></td>
+<td><p>P1_7</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S16</p></td>
+<td><p>P2_0</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S17</p></td>
+<td><p>P2_1</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S18</p></td>
+<td><p>P2_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S19</p></td>
+<td><p>P2_3</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S20</p></td>
+<td><p>P2_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S21</p></td>
+<td><p>P2_5</p></td>
+</tr>
+<tr class="row-even"><td><p>ANA_S22</p></td>
+<td><p>P2_6</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANA_S23</p></td>
+<td><p>P2_7</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qec-pin-setup">
+<h2>QEC Pin Setup<a class="headerlink" href="#qec-pin-setup" title="Link to this heading"></a></h2>
+<p>Quadrature Encoder (QEC0 to QEC3) interfaces support X, Y, and Z signals.</p>
+<table class="docutils align-left" id="id35">
+<caption><span class="caption-number">Table 43 </span><span class="caption-text">QEC Pins</span><a class="headerlink" href="#id35" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+<th class="head"><p>Z</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>QEC0</p></td>
+<td><p>P3_0 (A), P8_4 (B), P13_0 (C)</p></td>
+<td><p>P3_1 (A), P8_5 (B), P13_1 (C)</p></td>
+<td><p>P3_2 (A), P8_6 (B), P13_2 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>QEC1</p></td>
+<td><p>P3_3 (A), P8_7 (B), P13_3 (C)</p></td>
+<td><p>P3_4 (A), P9_0 (B), P13_4 (C)</p></td>
+<td><p>P3_5 (A), P9_1 (B), P13_5 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>QEC2</p></td>
+<td><p>P3_6 (A), P9_2 (B), P13_6 (C)</p></td>
+<td><p>P3_7 (A), P9_3 (B), P13_7 (C)</p></td>
+<td><p>P4_0 (A), P9_4 (B), P14_0 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>QEC3</p></td>
+<td><p>P4_1 (A), P9_5 (B), P14_1 (C)</p></td>
+<td><p>P4_2 (A), P9_6 (B), P14_2 (C)</p></td>
+<td><p>P4_3 (A), P9_7 (B), P14_3 (C)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qdec-pin-setup">
+<h2>QDEC Pin Setup<a class="headerlink" href="#qdec-pin-setup" title="Link to this heading"></a></h2>
+<p>Quadrature Decoder (QDEC) testing uses the Zephyr QDEC sample application emulator.</p>
+<section id="id8">
+<h3>Hardware Connections<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<table class="docutils align-left" id="id36">
+<caption><span class="caption-number">Table 44 </span><span class="caption-text">QDEC Jumper Connections</span><a class="headerlink" href="#id36" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Board Variant</p></th>
+<th class="head"><p>Jumper Connections</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>E7 DevKit</p></td>
+<td><p>Phase A: J11_3 to J11_2, Phase B: J11_5 to J11_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>E1C DevKit</p></td>
+<td><p>Phase A: J10_13 to J9_7, Phase B: J10_15 to J9_9</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Ensure the encoder’s ground is connected to the DevKit’s ground.</p></li>
+<li><p>Verify the encoder’s supply voltage matches the DevKit’s I/O voltage (typically 3.3V).</p></li>
+<li><p>Refer to the Alif SDK documentation for exact pinmux mappings to UTIMER channels.</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="fault-pin-setup">
+<h2>Fault Pin Setup<a class="headerlink" href="#fault-pin-setup" title="Link to this heading"></a></h2>
+<p>Fault signals (FAULT0 to FAULT3) are supported on specific pins.</p>
+<table class="docutils align-left" id="id37">
+<caption><span class="caption-number">Table 45 </span><span class="caption-text">Fault Pins</span><a class="headerlink" href="#id37" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FAULT0</p></td>
+<td><p>P4_4 (A), P8_0 (B), P14_4 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>FAULT1</p></td>
+<td><p>P4_5 (A), P8_1 (B), P14_5 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>FAULT2</p></td>
+<td><p>P4_6 (A), P8_2 (B), P14_6 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>FAULT3</p></td>
+<td><p>P4_7 (A), P8_3 (B), P14_7 (C)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="jtag-pin-setup">
+<h2>JTAG Pin Setup<a class="headerlink" href="#jtag-pin-setup" title="Link to this heading"></a></h2>
+<p>JTAG interfaces (JTAG0 and JTAG1) support trace, clock, and data signals.</p>
+<table class="docutils align-left" id="id38">
+<caption><span class="caption-number">Table 46 </span><span class="caption-text">JTAG Pins</span><a class="headerlink" href="#id38" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>TCK</p></th>
+<th class="head"><p>TMS</p></th>
+<th class="head"><p>TDI</p></th>
+<th class="head"><p>TDO</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>JTAG0</p></td>
+<td><p>P4_4</p></td>
+<td><p>P4_5</p></td>
+<td><p>P4_6</p></td>
+<td><p>P4_7</p></td>
+</tr>
+<tr class="row-odd"><td><p>JTAG1</p></td>
+<td><p>P8_5</p></td>
+<td><p>P8_6</p></td>
+<td><p>P8_7</p></td>
+<td><p>P9_0</p></td>
+</tr>
+<tr class="row-even"><td><p>JTAG0 (Trace)</p></td>
+<td><p>P3_7 (TRACECLK), P4_0 (TDATA0), P4_1 (TDATA1), P4_2 (TDATA2), P4_3 (TDATA3)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cdc-pin-setup">
+<h2>CDC Pin Setup<a class="headerlink" href="#cdc-pin-setup" title="Link to this heading"></a></h2>
+<p>Camera Display Controller (CDC) signals include data, sync, and clock signals.</p>
+<table class="docutils align-left" id="id39">
+<caption><span class="caption-number">Table 47 </span><span class="caption-text">CDC Pins</span><a class="headerlink" href="#id39" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>Data (D0-D23)</p></th>
+<th class="head"><p>HSYNC</p></th>
+<th class="head"><p>VSYNC</p></th>
+<th class="head"><p>PCLK/DE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDC</p></td>
+<td><p>P11_0 to P11_7 (B), P12_0 to P12_7 (B), P13_0 to P13_7 (B), P8_0 to P8_7 (A), P9_0 to P9_7 (A), P10_0 to P10_7 (A)</p></td>
+<td><p>P5_5 (A), P4_1 (B)</p></td>
+<td><p>P5_6 (A), P4_0 (B)</p></td>
+<td><p>P5_3 (A), P0_7 (B), P5_4 (A), P2_3 (B)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gnss-pin-setup">
+<h2>GNSS Pin Setup<a class="headerlink" href="#gnss-pin-setup" title="Link to this heading"></a></h2>
+<p>GNSS signals include ADC and clock signals.</p>
+<table class="docutils align-left" id="id40">
+<caption><span class="caption-number">Table 48 </span><span class="caption-text">GNSS Pins</span><a class="headerlink" href="#id40" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GNSS_ADCI0</p></td>
+<td><p>P6_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>GNSS_ADCI1</p></td>
+<td><p>P6_3</p></td>
+</tr>
+<tr class="row-even"><td><p>GNSS_ADCQ0</p></td>
+<td><p>P6_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>GNSS_ADCQ1</p></td>
+<td><p>P6_5</p></td>
+</tr>
+<tr class="row-even"><td><p>GNSS_CLK</p></td>
+<td><p>P6_6</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="esim-pin-setup">
+<h2>ESIM Pin Setup<a class="headerlink" href="#esim-pin-setup" title="Link to this heading"></a></h2>
+<p>ESIM signals include clock, IO, and reset.</p>
+<table class="docutils align-left" id="id41">
+<caption><span class="caption-number">Table 49 </span><span class="caption-text">ESIM Pins</span><a class="headerlink" href="#id41" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>CLK</p></th>
+<th class="head"><p>IO</p></th>
+<th class="head"><p>RST</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ESIM</p></td>
+<td><p>P4_0 (A), P7_5 (B), P14_1 (C)</p></td>
+<td><p>P4_2 (A), P7_6 (B), P14_2 (C)</p></td>
+<td><p>P4_3 (A), P7_7 (B), P14_3 (C)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scp-pin-setup">
+<h2>SCP Pin Setup<a class="headerlink" href="#scp-pin-setup" title="Link to this heading"></a></h2>
+<p>SCP signals (SCP0 to SCP3) are supported on specific pins.</p>
+<table class="docutils align-left" id="id42">
+<caption><span class="caption-number">Table 50 </span><span class="caption-text">SCP Pins</span><a class="headerlink" href="#id42" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SCP0</p></td>
+<td><p>P7_0 (A), P7_4 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCP1</p></td>
+<td><p>P7_1 (A), P7_5 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>SCP2</p></td>
+<td><p>P7_2 (A), P7_6 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCP3</p></td>
+<td><p>P7_3 (A), P7_7 (C)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utility-timer-ut-pin-setup">
+<h2>Utility Timer (UT) Pin Setup<a class="headerlink" href="#utility-timer-ut-pin-setup" title="Link to this heading"></a></h2>
+<p>Utility Timer signals (UT0 to UT11) support T0 and T1 signals.</p>
+<table class="docutils align-left" id="id43">
+<caption><span class="caption-number">Table 51 </span><span class="caption-text">Utility Timer Pins</span><a class="headerlink" href="#id43" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33.0%" />
+<col style="width: 33.0%" />
+<col style="width: 34.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance</p></th>
+<th class="head"><p>T0</p></th>
+<th class="head"><p>T1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>UT0</p></td>
+<td><p>P0_0 (A), P5_0 (B), P10_0 (C)</p></td>
+<td><p>P0_1 (A), P5_1 (B), P10_1 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>UT1</p></td>
+<td><p>P0_2 (A), P5_2 (B), P10_2 (C)</p></td>
+<td><p>P0_3 (A), P5_3 (B), P10_3 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>UT2</p></td>
+<td><p>P0_4 (A), P5_4 (B), P10_4 (C)</p></td>
+<td><p>P0_5 (A), P5_5 (B biens), P10_5 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>UT3</p></td>
+<td><p>P0_6 (A), P5_6 (B), P10_6 (C)</p></td>
+<td><p>P0_7 (A), P5_7 (B), P10_7 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>UT4</p></td>
+<td><p>P1_0 (A), P6_0 (B), P11_0 (C)</p></td>
+<td><p>P1_1 (A), P6_1 (B), P11_1 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>UT5</p></td>
+<td><p>P1_2 (A), P6_2 (B), P11_2 (C)</p></td>
+<td><p>P1_3 (A), P6_3 (B), P11_3 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>UT6</p></td>
+<td><p>P1_4 (A), P6_4 (B), P11_4 (C)</p></td>
+<td><p>P1_5 (A), P6_5 (B), P11_5 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>UT7</p></td>
+<td><p>P1_6 (A), P6_6 (B), P11_6 (C)</p></td>
+<td><p>P1_7 (A), P6_7 (B), P11_7 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>UT8</p></td>
+<td><p>P2_0 (A), P7_0 (B), P12_0 (C)</p></td>
+<td><p>P2_1 (A), P7_1 (B), P12_1 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>UT9</p></td>
+<td><p>P2_2 (A), P7_2 (B), P12_2 (C)</p></td>
+<td><p>P2_3 (A), P7_3 (B), P12_3 (C)</p></td>
+</tr>
+<tr class="row-even"><td><p>UT10</p></td>
+<td><p>P2_4 (A), P7_4 (B), P12_4 (C)</p></td>
+<td><p>P2_5 (A), P7_5 (B), P12_5 (C)</p></td>
+</tr>
+<tr class="row-odd"><td><p>UT11</p></td>
+<td><p>P2_6 (A), P7_6 (B), P12_6 (C)</p></td>
+<td><p>P2_7 (A), P7_7 (B), P12_7 (C)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="debug-and-miscellaneous-pin-setup">
+<h2>Debug and Miscellaneous Pin Setup<a class="headerlink" href="#debug-and-miscellaneous-pin-setup" title="Link to this heading"></a></h2>
+<p>Debug and miscellaneous signals include debug ports, clock outputs, and audio clocks.</p>
+<table class="docutils align-left" id="id44">
+<caption><span class="caption-number">Table 52 </span><span class="caption-text">Debug and Miscellaneous Pins</span><a class="headerlink" href="#id44" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Pin</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DEBUG_PORT0</p></td>
+<td><p>P12_0</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEBUG_PORT1</p></td>
+<td><p>P12_1</p></td>
+</tr>
+<tr class="row-even"><td><p>DEBUG_PORT2</p></td>
+<td><p>P12_2</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEBUG_PORT3</p></td>
+<td><p>P12_3</p></td>
+</tr>
+<tr class="row-even"><td><p>DEBUG_PORT4</p></td>
+<td><p>P12_4</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEBUG_PORT5</p></td>
+<td><p>P12_5</p></td>
+</tr>
+<tr class="row-even"><td><p>DEBUG_PORT6</p></td>
+<td><p>P12_6</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEBUG_PORT7</p></td>
+<td><p>P12_7</p></td>
+</tr>
+<tr class="row-even"><td><p>HFXO_OUT</p></td>
+<td><p>P3_6 (A), P9_3 (B)</p></td>
+</tr>
+<tr class="row-odd"><td><p>AUDIO_CLK</p></td>
+<td><p>P8_0 (A), P9_6 (B), P12_0 (C)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024-2025, Alif Semiconductor.
+      <span class="lastupdated">Last updated on Sep 12, 2025.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
