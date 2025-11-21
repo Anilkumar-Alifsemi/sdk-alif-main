@@ -144,7 +144,7 @@ System Resources
    * - GPIO
      - General-purpose I/O pins controllable by software as inputs or outputs.
    * - MHU
-     - Message Handling Units for interrupt-driven inter-subsystem communication. MHU channels for communication between cores.
+     - Message Handling Units for interrupt-driven inter-subsystem communication.
    * - HWSEM
      - Hardware semaphores for shared resource synchronization across subsystems.
    * - RTC
@@ -155,10 +155,8 @@ System Resources
      - Clock control module manages peripheral clock generation and its gating.
    * - PinMUX
      - Pin multiplexer controlling GPIO pin function selection and routing of peripheral signals to physical pins, enabling flexible I/O configuration.
-   * - Touch Screen
-     - Touchscreen controller interface supporting resistive and capacitive touch panels, providing coordinate tracking, gesture detection, and interrupt-driven reporting to the application processor.
    * - System Power Management (suspend to ram)
-     - Power management framework supporting deep sleep states including Suspend-to-RAM (STR), where core power is retained while peripherals are gated, enabling fast resume and ultra-low power idle operation.
+     - Power management framework supporting deep sleep states including Suspend-to-RAM (S2RAM), where SRAM is retained, enabling fast resume and ultra-low power idle operation.
    * -  LP-GPIO
      - Low-power GPIO controller that maintains state and wake-up capability during system sleep modes, allowing external events to trigger resume from low-power states.
 
@@ -205,8 +203,6 @@ Security and Data Integrity
 
    * - **Peripheral**
      - **Description**
-   * - AES
-     - Advanced Encryption Standard for on-the-fly decryption of XIP data from external memory.
    * - CRC
      - Supports CRC-8-CCITT, CRC-16-CCITT, CRC-32, and CRC-32C with flexible data processing via AHB.
    * - Entropy
@@ -275,6 +271,9 @@ Known Issues
 - **BLE** audio Unicast initiator fails to open 2nd channel when using Ceva host stack
 - **BLE** Auracast sink does not receive an encryption key sent by Auracast assistant when using Ceva host stack
 - **BLE** Connection param update does not work with Ceva host stack, works fine with Zephyr host stack.
+- SPI1 with DMA Operation Inconsistent.
+- Touch Screen Event Drops Occurring.
+
 
 External References
 -------------------
