@@ -33,27 +33,42 @@ Follow these steps to build the `fade_led` and `blinky_pwm` applications using t
 
 2. Build commands for fade_led applications on the M55 HP core:
 
-.. code-block:: bash
+.. code-block:: console
 
-   west build -p always -b alif_e7_dk/ae722f80f55d5xx/rtss_hp samples/basic/fade_led
+   west build -p always \
+     -b alif_e7_dk/ae722f80f55d5xx/rtss_hp \
+     samples/basic/fade_led/ \
+     -S alif-fade-led
+
 
 3. Build commands for blinky_pwm applications on the M55 HP core:
 
-.. code-block:: bash
+.. code-block:: console
 
-   west build -p always -b alif_e7_dk/ae722f80f55d5xx/rtss_hp samples/basic/blinky_pwm
+   west build -p always \
+     -b alif_e7_dk/ae722f80f55d5xx/rtss_hp \
+     samples/basic/blinky_pwm/ \
+     -S alif-blinky-pwm
+
 
 4. Build commands for fade_led applications on the M55 HE core:
 
-.. code-block:: bash
+.. code-block:: console
 
-   west build -p always -b alif_e7_dk/ae722f80f55d5xx/rtss_he samples/basic/fade_led
+   west build -p always \
+     -b alif_e7_dk/ae722f80f55d5xx/rtss_he \
+     samples/basic/fade_led/ \
+     -S alif-fade-led
+
 
 5. Build commands for blinky_pwm applications on the M55 HE core:
 
-.. code-block:: bash
+.. code-block:: console
 
-   west build -p always -b alif_e7_dk/ae722f80f55d5xx/rtss_he samples/basic/blinky_pwm
+   west build -p always \
+     -b alif_e7_dk/ae722f80f55d5xx/rtss_he \
+     samples/basic/blinky_pwm/ \
+     -S alif-blinky-pwm
 
 
 Once the build command completes successfully, executable images will be generated and placed in the `build/zephyr` directory. Both `.bin` (binary) and `.elf` (Executable and Linkable Format) files will be available.
